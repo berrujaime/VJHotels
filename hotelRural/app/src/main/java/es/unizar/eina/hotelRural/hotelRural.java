@@ -31,7 +31,7 @@ public class hotelRural extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.note_edit);
+        setContentView(R.layout.activity_hotelrural);
 
         mDbHelper = new NotesDbAdapter(this);
         mDbHelper.open();
