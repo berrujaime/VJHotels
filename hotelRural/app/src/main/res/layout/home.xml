@@ -5,38 +5,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="match_parent"
+            android:layout_height="146dp"
+            android:background="#949497" />
+    </LinearLayout>
+
     <Button
-        android:id="@+id/button"
-        android:layout_width="162dp"
-        android:layout_height="68dp"
+        android:id="@+id/button3"
+        android:layout_width="232dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="164dp"
+        android:backgroundTint="#11185B"
+        android:fontFamily="sans-serif-black"
         android:text="HABITACIONES"
-        app:cornerRadius="10dp"
-        tools:layout_editor_absoluteX="124dp"
-        tools:layout_editor_absoluteY="331dp" />
+        android:textSize="24sp"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:strokeColor="#000000"
+        app:strokeWidth="3dp" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="162dp"
-        android:layout_height="68dp"
+        android:layout_width="232dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="#11185B"
+        android:fontFamily="sans-serif-black"
         android:text="RESERVAS"
-        app:cornerRadius="10dp"
-        tools:layout_editor_absoluteX="124dp"
-        tools:layout_editor_absoluteY="446dp" />
+        android:textSize="24sp"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:strokeColor="#000000"
+        app:strokeWidth="3dp" />
 
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="413dp"
-        android:layout_height="115dp"
-        android:background="#949497"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:layout_editor_absoluteY="-1dp" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="262dp"
+        android:layout_height="42dp"
         android:text="¿Qué quieres gestionar?"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="183dp" />
+        android:textColor="#11185B"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="320dp"
+        android:layout_height="28dp"
+        android:text="La tranquilidad es lo que mas se busca"
+        android:textColor="#11185B"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
