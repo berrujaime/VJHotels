@@ -32,7 +32,16 @@
         <com.google.android.material.navigation.NavigationView
             android:layout_width="match_parent"
             android:layout_height="146dp"
-            android:background="#949497" />
+            android:background="#949497">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="500dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40px"
+                app:srcCompat="@drawable/logo_transparent" />
+        </com.google.android.material.navigation.NavigationView>
     </LinearLayout>
 
     <TextView
@@ -77,10 +86,10 @@
         android:layout_width="214dp"
         android:layout_height="17dp"
         android:text="Número máximo ocupantes"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="@+id/spinner"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/spinner"
-        tools:layout_editor_absoluteY="297dp" />
+        app:layout_constraintStart_toStartOf="@+id/spinner" />
 
     <TextView
         android:id="@+id/textView5"
@@ -157,13 +166,13 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="296dp"
-        android:layout_height="44dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="297dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.467" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

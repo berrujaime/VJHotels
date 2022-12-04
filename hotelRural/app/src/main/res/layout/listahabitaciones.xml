@@ -9,6 +9,7 @@
         android:id="@+id/button5"
         android:layout_width="333dp"
         android:layout_height="64dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#11185B"
         android:fontFamily="sans-serif-black"
         android:text="CREAR HABITACION"
@@ -28,11 +29,19 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="411dp">
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="500dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40px"
+            app:srcCompat="@drawable/logo_transparent" />
     </com.google.android.material.navigation.NavigationView>
+
 
     <LinearLayout
         android:layout_width="409dp"
-        android:layout_height="585dp"
+        android:layout_height="490dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/navigationView">
@@ -48,7 +57,7 @@
 
                 <TabWidget
                     android:id="@android:id/tabs"
-                    android:layout_width="399dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF" />
 

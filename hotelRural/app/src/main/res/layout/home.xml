@@ -15,7 +15,16 @@
         <com.google.android.material.navigation.NavigationView
             android:layout_width="match_parent"
             android:layout_height="146dp"
-            android:background="#949497" />
+            android:background="#949497">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="500dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40px"
+                app:srcCompat="@drawable/logo_transparent" />
+        </com.google.android.material.navigation.NavigationView>
     </LinearLayout>
 
     <Button
