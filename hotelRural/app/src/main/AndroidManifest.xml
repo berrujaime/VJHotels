@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.hotelRural">
         <activity
-            android:name=".hotelRural"
+            android:name=".Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +20,9 @@
         </activity>
         <activity
             android:name=".NoteEdit">
+        </activity>
+        <activity
+            android:name=".HabitationsList">
         </activity>
 
         <meta-data

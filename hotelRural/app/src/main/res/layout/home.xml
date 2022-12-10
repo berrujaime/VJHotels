@@ -14,38 +14,37 @@
 
         <com.google.android.material.navigation.NavigationView
             android:layout_width="match_parent"
-            android:layout_height="146dp"
+            android:layout_height="100dp"
             android:background="#949497">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="500dp"
-                android:layout_height="300dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="40px"
+                android:layout_marginTop="20px"
                 app:srcCompat="@drawable/logo_transparent" />
         </com.google.android.material.navigation.NavigationView>
     </LinearLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_hab"
         android:layout_width="232dp"
         android:layout_height="105dp"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="92dp"
         android:backgroundTint="#11185B"
         android:fontFamily="sans-serif-black"
         android:text="HABITACIONES"
         android:textSize="24sp"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:strokeColor="#000000"
         app:strokeWidth="3dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_res"
         android:layout_width="232dp"
         android:layout_height="105dp"
         android:layout_marginTop="52dp"
@@ -57,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/button_hab"
         app:strokeColor="#000000"
         app:strokeWidth="3dp" />
 
@@ -68,10 +67,11 @@
         android:text="¿Qué quieres gestionar?"
         android:textColor="#11185B"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/button_hab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.311" />
 
     <TextView
         android:id="@+id/textView2"
@@ -83,6 +83,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/button_res"
+        app:layout_constraintVertical_bias="0.328" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

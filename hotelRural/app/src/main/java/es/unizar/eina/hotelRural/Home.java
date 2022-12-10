@@ -10,20 +10,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-public class hotelRural extends AppCompatActivity {
-
+public class Home extends AppCompatActivity {
+/*
     private static final int ACTIVITY_CREATE=0;
     private static final int ACTIVITY_EDIT=1;
 
     private static final int INSERT_ID = Menu.FIRST;
     private static final int DELETE_ID = Menu.FIRST + 1;
     private static final int EDIT_ID = Menu.FIRST + 2;
-
+*/
     private NotesDbAdapter mDbHelper;
     private ListView mList;
+
+
+    private Button btn_reserva;
+    private Button btn_habitaciones;
 
 
     /** Called when the activity is first created. */
@@ -31,17 +36,29 @@ public class hotelRural extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hotelrural);
+        setContentView(R.layout.home);
 
+        btn_habitaciones = findViewById(R.id.button_hab);
+        btn_reserva = findViewById(R.id.button_res);
+
+        btn_habitaciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this, HabitationsList.class);
+                startActivity(i);
+            }
+        });
+        /*
         mDbHelper = new NotesDbAdapter(this);
         mDbHelper.open();
-        mList = (ListView)findViewById(R.id.list);
+        //mList = (ListView)findViewById(R.id.list);
         fillData();
 
-        registerForContextMenu(mList);
-
+        //registerForContextMenu(mList);
+        */
     }
 
+    /*
     private void fillData() {
         // Get all of the notes from the database and create the item list
         Cursor notesCursor = mDbHelper.fetchAllNotes();
@@ -118,5 +135,7 @@ public class hotelRural extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
         fillData();
     }
+
+     */
 
 }
