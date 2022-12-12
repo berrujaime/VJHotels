@@ -1,16 +1,16 @@
 package es.unizar.eina.hotelRural;
 
-import android.database.Cursor;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 public class HabitationsList extends AppCompatActivity {
+    private Button btn_crear_habitaciones;
 
     private HotelDbAdapter mDbHelper;
     private ListView HabsList;
@@ -26,8 +26,16 @@ public class HabitationsList extends AppCompatActivity {
        mDbHelper.open();
 
        setContentView(R.layout.listahabitaciones);
-       HabsList = findViewById(R.id.list_ID);
 
+       btn_crear_habitaciones = findViewById(R.id.crear_habitacion);
+
+       btn_crear_habitaciones.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent i = new Intent(getApplicationContext(), CrearHabitacion.class);
+               startActivity(i);
+           }
+       });
    }
 
     //Obtiene las habitaciones para mostrarlas en la lista
