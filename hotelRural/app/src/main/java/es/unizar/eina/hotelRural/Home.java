@@ -5,11 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -23,7 +19,7 @@ public class Home extends AppCompatActivity {
     private static final int DELETE_ID = Menu.FIRST + 1;
     private static final int EDIT_ID = Menu.FIRST + 2;
 */
-    private NotesDbAdapter mDbHelper;
+    private HotelDbAdapter mDbHelper;
     private ListView mList;
 
 
@@ -34,8 +30,12 @@ public class Home extends AppCompatActivity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
+        mDbHelper = new HotelDbAdapter(this);
+        mDbHelper.open();
+        //long id = mDbHelper.createHabitacion(1,"primera habitacion", 3,10.0f, 6);
+
         setContentView(R.layout.home);
 
         btn_habitaciones = findViewById(R.id.button_hab);
@@ -44,10 +44,13 @@ public class Home extends AppCompatActivity {
         btn_habitaciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent i = new Intent(Home.this, HabitationsList.class);
                 startActivity(i);
             }
         });
+
+
         /*
         mDbHelper = new NotesDbAdapter(this);
         mDbHelper.open();

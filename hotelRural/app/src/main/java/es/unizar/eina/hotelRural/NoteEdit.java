@@ -14,13 +14,13 @@ public class NoteEdit extends AppCompatActivity {
     private EditText mTitleText;
     private EditText mBodyText;
     private Long mRowId;
-    private NotesDbAdapter mDbHelper;
+    private HotelDbAdapter mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mDbHelper = new NotesDbAdapter (this);
+        mDbHelper = new HotelDbAdapter(this);
         mDbHelper.open();
 
         setContentView(R.layout.note_edit);
@@ -32,11 +32,11 @@ public class NoteEdit extends AppCompatActivity {
         Button confirmButton = (Button) findViewById(R.id.confirm);
 
         mRowId = (savedInstanceState == null) ? null :
-            (Long) savedInstanceState.getSerializable(NotesDbAdapter.KEY_ROWID);
+            (Long) savedInstanceState.getSerializable(HotelDbAdapter.KEY_ROWID);
         if ( mRowId == null ) {
             Bundle extras = getIntent().getExtras();
             mRowId = (extras != null) ?
-                extras.getLong(NotesDbAdapter.KEY_ROWID) : null;
+                extras.getLong(HotelDbAdapter.KEY_ROWID) : null;
         }
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -44,10 +44,10 @@ public class NoteEdit extends AppCompatActivity {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
 
-                bundle.putString(NotesDbAdapter.KEY_TITLE, mTitleText.getText().toString());
-                bundle.putString(NotesDbAdapter.KEY_BODY, mBodyText.getText().toString());
+                bundle.putString(HotelDbAdapter.KEY_TITLE, mTitleText.getText().toString());
+                bundle.putString(HotelDbAdapter.KEY_BODY, mBodyText.getText().toString());
                 if (mRowId != null) {
-                    bundle.putLong(NotesDbAdapter.KEY_ROWID, mRowId);
+                    bundle.putLong(HotelDbAdapter.KEY_ROWID, mRowId);
                 }
 
                 Intent mIntent = new Intent();
@@ -63,9 +63,9 @@ public class NoteEdit extends AppCompatActivity {
             Cursor note = mDbHelper.fetchNote( mRowId );
             startManagingCursor(note);
             mTitleText.setText(note .getString(
-                    note.getColumnIndexOrThrow(NotesDbAdapter.KEY_TITLE)));
+                    note.getColumnIndexOrThrow(HotelDbAdapter.KEY_TITLE)));
             mBodyText.setText(note.getString(
-                    note.getColumnIndexOrThrow (NotesDbAdapter.KEY_BODY)));
+                    note.getColumnIndexOrThrow (HotelDbAdapter.KEY_BODY)));
         }
     }
 
@@ -78,7 +78,7 @@ public class NoteEdit extends AppCompatActivity {
     protected void onSaveInstanceState (Bundle outState) {
         super.onSaveInstanceState(outState);
         saveState();
-        outState.putSerializable(NotesDbAdapter.KEY_ROWID,mRowId);
+        outState.putSerializable(HotelDbAdapter.KEY_ROWID,mRowId);
     }
 
     @Override

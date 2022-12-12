@@ -22,7 +22,7 @@ public class hotelRuralBackup extends AppCompatActivity {
     private static final int DELETE_ID = Menu.FIRST + 1;
     private static final int EDIT_ID = Menu.FIRST + 2;
 
-    private NotesDbAdapter mDbHelper;
+    private HotelDbAdapter mDbHelper;
     private ListView mList;
 
 
@@ -33,7 +33,7 @@ public class hotelRuralBackup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotelrural);
 
-        mDbHelper = new NotesDbAdapter(this);
+        mDbHelper = new HotelDbAdapter(this);
         mDbHelper.open();
         mList = (ListView)findViewById(R.id.list);
         fillData();
@@ -47,7 +47,7 @@ public class hotelRuralBackup extends AppCompatActivity {
         Cursor notesCursor = mDbHelper.fetchAllNotes();
 
         // Create an array to specify the fields we want to display in the list (only TITLE)
-        String[] from = new String[] { NotesDbAdapter.KEY_TITLE };
+        String[] from = new String[] { HotelDbAdapter.KEY_TITLE };
 
         // and an array of the fields we want to bind those fields to (in this case just text1)
         int[] to = new int[] { R.id.text1 };
@@ -108,7 +108,7 @@ public class hotelRuralBackup extends AppCompatActivity {
 
     protected void editNote(int position, long id) {
         Intent i = new Intent(this, NoteEdit.class);
-        i.putExtra(NotesDbAdapter.KEY_ROWID, id);
+        i.putExtra(HotelDbAdapter.KEY_ROWID, id);
         startActivityForResult(i, ACTIVITY_EDIT);
     }
 

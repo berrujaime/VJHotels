@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 /**
  * Simple notes database access helper class. Defines the basic CRUD operations
@@ -18,11 +16,17 @@ import android.util.Log;
  * of using a collection of inner classes (which is less scalable and not
  * recommended).
  */
-public class NotesDbAdapter {
+public class HotelDbAdapter {
 
     public static final String KEY_TITLE = "title";
     public static final String KEY_BODY = "body";
     public static final String KEY_ROWID = "_id";
+
+    public static final String HAB_ID = "id";
+    public static final String HAB_DESC = "descripcion";
+    public static final String HAB_OCUP = "nummaxocupantes";
+    public static final String HAB_PRECIO = "precioocupante";
+    public static final String HAB_REC = "porcentajerecargo";
 
     private DatabaseHelper mDbHelper;
     private SQLiteDatabase mDb;
@@ -37,7 +41,7 @@ public class NotesDbAdapter {
      *
      * @param ctx the Context within which to work
      */
-    public NotesDbAdapter(Context ctx) {
+    public HotelDbAdapter(Context ctx) {
         this.mCtx = ctx;
     }
 
@@ -50,9 +54,12 @@ public class NotesDbAdapter {
      *         initialization call)
      * @throws SQLException if the database could be neither opened or created
      */
-    public NotesDbAdapter open() throws SQLException {
+    public HotelDbAdapter open() throws SQLException {
+        System.out.println("Entro a open");
         mDbHelper = new DatabaseHelper(mCtx);
         mDb = mDbHelper.getWritableDatabase();
+        //mDbHelper.onCreate(mDb); // ESTO ESTA BIEN??
+        System.out.println("Salgo de open");
         return this;
     }
 
@@ -78,6 +85,16 @@ public class NotesDbAdapter {
         return mDb.insert(DATABASE_TABLE, null, initialValues);
     }
 
+    public long createHabitacion(int id, String desc, int ocups, float precio , float porcentaje) {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(HAB_ID, id);
+        initialValues.put(HAB_DESC, desc);
+        initialValues.put(HAB_OCUP, ocups);
+        initialValues.put(HAB_PRECIO, precio);
+        initialValues.put(HAB_REC, porcentaje);
+
+        return mDb.insert("Habitacion", null, initialValues);
+    }
     /**
      * Delete the note with the given rowId
      *
@@ -100,6 +117,12 @@ public class NotesDbAdapter {
                 KEY_BODY}, null, null, null, null, null);
     }
 
+
+    public Cursor fetchAllHabitaciones() {
+
+        return mDb.query(DATABASE_TABLE, new String[] {HAB_ID, HAB_DESC, HAB_OCUP, HAB_PRECIO,
+                HAB_REC}, null, null, null, null, null);
+    }
     /**
      * Return a Cursor positioned at the note that matches the given rowId
      *
