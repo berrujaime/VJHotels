@@ -34,6 +34,7 @@ public class HabitationsList extends AppCompatActivity {
 
        mDbHelper = new HotelDbAdapter(this);
        mDbHelper.open();
+       mDbHelper.createHabitacion(1,"desc", 2, (float)5.3, (float)3.4);
 
        setContentView(R.layout.listahabitaciones);
 

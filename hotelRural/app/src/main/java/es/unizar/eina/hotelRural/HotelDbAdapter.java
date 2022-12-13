@@ -58,7 +58,6 @@ public class HotelDbAdapter {
         System.out.println("Entro a open");
         mDbHelper = new DatabaseHelper(mCtx);
         mDb = mDbHelper.getWritableDatabase();
-        //mDbHelper.onCreate(mDb); // ESTO ESTA BIEN??
         System.out.println("Salgo de open");
         return this;
     }
