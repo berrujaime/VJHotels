@@ -12,6 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
+
 
 
 import java.util.ArrayList;
@@ -34,7 +38,7 @@ public class HabitationsList extends AppCompatActivity {
 
        mDbHelper = new HotelDbAdapter(this);
        mDbHelper.open();
-       mDbHelper.createHabitacion(1,"desc", 2, (float)5.3, (float)3.4);
+       mDbHelper.createHabitacion(1,"desc", 2,(float)5.3, (float)3.4);
 
        setContentView(R.layout.listahabitaciones);
 
@@ -47,6 +51,13 @@ public class HabitationsList extends AppCompatActivity {
                startActivity(i);
            }
        });
+
+
+       mDbHelper = new HotelDbAdapter(this);
+       mDbHelper.open();
+       HabsList = (ListView)findViewById(R.id.list_ID);
+       fillData();
+       registerForContextMenu(HabsList);
    }
 
     //Obtiene las habitaciones para mostrarlas en la lista
@@ -57,7 +68,8 @@ public class HabitationsList extends AppCompatActivity {
 
         ArrayList<String> habsString = new ArrayList<String>();
         while(!habsCursor.isAfterLast()){
-            habsString.add(habsCursor.getString(habsCursor.getColumnIndex("id")));
+            //Se muestra la palabra habitacion junto al id de la misma
+            habsString.add("Habitación " + habsCursor.getString(habsCursor.getColumnIndex("id")));
             habsCursor.moveToNext();
         }
         habsCursor.close();
@@ -74,6 +86,7 @@ public class HabitationsList extends AppCompatActivity {
         HabsList.setAdapter(notes);
 
          */
+
         ArrayAdapter<String> habsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, habsString);
         HabsList.setAdapter(habsAdapter);
     }

@@ -32,6 +32,7 @@ public class HotelDbAdapter {
     private SQLiteDatabase mDb;
 
     private static final String DATABASE_TABLE = "notes";
+    private static final String DATABASE_HAB = "Habitacion";
 
     private final Context mCtx;
 
@@ -119,7 +120,7 @@ public class HotelDbAdapter {
 
     public Cursor fetchAllHabitaciones() {
 
-        return mDb.query(DATABASE_TABLE, new String[] {HAB_ID, HAB_DESC, HAB_OCUP, HAB_PRECIO,
+        return mDb.query(DATABASE_HAB, new String[] {HAB_ID, HAB_DESC, HAB_OCUP, HAB_PRECIO,
                 HAB_REC}, null, null, null, null, null);
     }
     /**
