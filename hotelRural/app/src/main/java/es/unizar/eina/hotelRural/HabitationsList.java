@@ -62,6 +62,8 @@ public class HabitationsList extends AppCompatActivity {
 
     //Obtiene las habitaciones para mostrarlas en la lista
     private void fillData() {
+
+
         // Get all of the notes from the database and create the item list
         Cursor habsCursor = mDbHelper.fetchAllHabitaciones();
         habsCursor.moveToFirst();
@@ -73,21 +75,29 @@ public class HabitationsList extends AppCompatActivity {
             habsCursor.moveToNext();
         }
         habsCursor.close();
-        /*
+
+
+
+        //ArrayAdapter<String> habsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, habsString);
+        //HabsList.setAdapter(habsAdapter);
+
+        ArrayAdapter<String> habsAdapter = new ArrayAdapter<String>(this,R.layout.list_itemhab, R.id.textCelda, habsString);
+        HabsList.setAdapter(habsAdapter);
+
+    /*
+        Cursor notesCursor = mDbHelper.fetchAllHabitaciones();
+
         // Create an array to specify the fields we want to display in the list (only TITLE)
         String[] from = new String[] { HotelDbAdapter.HAB_ID };
 
         // and an array of the fields we want to bind those fields to (in this case just text1)
-        int[] to = new int[] { R.id.text1 };
+        int[] to = new int[] { R.id.textCelda };
 
         // Now create an array adapter and set it to display using our row
-        SimpleCursorAdapter notes =
-                new SimpleCursorAdapter(this, R.layout.notes_row, notesCursor, from, to);
-        HabsList.setAdapter(notes);
+        SimpleCursorAdapter habs =
+                new SimpleCursorAdapter(this, R.layout.list_itemhab, notesCursor, from, to);
+        HabsList.setAdapter(habs);
+        */
 
-         */
-
-        ArrayAdapter<String> habsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, habsString);
-        HabsList.setAdapter(habsAdapter);
     }
 }

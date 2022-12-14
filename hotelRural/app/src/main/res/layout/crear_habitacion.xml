@@ -45,7 +45,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textCelda"
         android:layout_width="360dp"
         android:layout_height="46dp"
         android:text="Introduce los datos de la habitación"

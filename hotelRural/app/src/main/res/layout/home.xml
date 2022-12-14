@@ -61,7 +61,7 @@
         app:strokeWidth="3dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textCelda"
         android:layout_width="262dp"
         android:layout_height="42dp"
         android:text="¿Qué quieres gestionar?"
