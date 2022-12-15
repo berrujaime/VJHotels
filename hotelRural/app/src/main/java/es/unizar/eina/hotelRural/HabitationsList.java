@@ -15,7 +15,7 @@ import android.widget.SimpleCursorAdapter;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.widget.TabHost;
 
 
 import java.util.ArrayList;
@@ -52,6 +52,11 @@ public class HabitationsList extends AppCompatActivity {
                startActivity(i);
            }
        });
+
+        //Se configuran los tabs
+
+       TabHost mTabHost = (TabHost) findViewById(R.id.tabs);
+
 
 
        mDbHelper = new HotelDbAdapter(this);
