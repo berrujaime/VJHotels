@@ -47,6 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/navigationView">
 
         <TabHost
+            android:id="@android:id/tabhost"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -66,9 +67,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#0FFFFFFF">
-
+                    <!--elemento 1 del tab host -->
                     <LinearLayout
-                        android:id="@+id/ID"
+                        android:id="@+id/tabID"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
@@ -78,17 +79,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                     </LinearLayout>
-
+                    <!--elemento 2 del tab host -->
                     <LinearLayout
-                        android:id="@+id/MaxOcup"
+                        android:id="@+id/tabMaxOcup"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
                     </LinearLayout>
-
+                    <!--elemento 3 del tab host -->
                     <LinearLayout
-                        android:id="@+id/Precio"
+                        android:id="@+id/tabPrecio"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">

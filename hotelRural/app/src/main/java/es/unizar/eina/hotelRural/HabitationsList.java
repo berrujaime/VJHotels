@@ -1,9 +1,11 @@
 package es.unizar.eina.hotelRural;
 
+import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
 
 
 import android.database.Cursor;
@@ -23,14 +25,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class HabitationsList extends AppCompatActivity {
+
+
+public class HabitationsList extends TabActivity {
     private Button btn_crear_habitaciones;
 
     private HotelDbAdapter mDbHelper;
     private ListView HabsList;
 
 
-   @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState){
 
 
@@ -38,12 +42,24 @@ public class HabitationsList extends AppCompatActivity {
 
        mDbHelper = new HotelDbAdapter(this);
        mDbHelper.open();
-       mDbHelper.createHabitacion(2,"desc", 5,(float)5.3, (float)3.4);
-       mDbHelper.createHabitacion(5,"desc", 5,(float)5.3, (float)3.4);
+       //mDbHelper.createHabitacion(2,"desc", 5,(float)5.3, (float)3.4);
+       //mDbHelper.createHabitacion(5,"desc", 5,(float)5.3, (float)3.4);
 
        setContentView(R.layout.listahabitaciones);
 
-       btn_crear_habitaciones = findViewById(R.id.crear_habitacion);
+        TabHost tabHost = getTabHost();
+        tabHost.addTab(
+                tabHost.newTabSpec("tab1ID").setIndicator("ID", null).setContent(R.id.tabID)
+        );
+        tabHost.addTab(
+                tabHost.newTabSpec("tab2Ocup").setIndicator("MaxOcup").setContent(R.id.tabMaxOcup)
+        );
+        tabHost.addTab(
+                tabHost.newTabSpec("tab3Precio").setIndicator("Precio").setContent(R.id.tabPrecio)
+        );
+
+
+        btn_crear_habitaciones = findViewById(R.id.crear_habitacion);
 
        btn_crear_habitaciones.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -53,14 +69,7 @@ public class HabitationsList extends AppCompatActivity {
            }
        });
 
-        //Se configuran los tabs
 
-       TabHost mTabHost = (TabHost) findViewById(R.id.tabs);
-
-
-
-       mDbHelper = new HotelDbAdapter(this);
-       mDbHelper.open();
        HabsList = (ListView)findViewById(R.id.list_ID);
        fillData();
        registerForContextMenu(HabsList);
