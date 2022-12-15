@@ -32,6 +32,8 @@ public class HabitationsList extends TabActivity {
 
     private HotelDbAdapter mDbHelper;
     private ListView HabsList;
+    private ListView OcupsList;
+    private ListView PrecioList;
 
 
     @Override
@@ -71,16 +73,20 @@ public class HabitationsList extends TabActivity {
 
 
        HabsList = (ListView)findViewById(R.id.list_ID);
+       OcupsList = (ListView)findViewById(R.id.list_Ocups);
+       PrecioList = (ListView)findViewById(R.id.list_Precio);
        fillData();
        registerForContextMenu(HabsList);
+       registerForContextMenu(OcupsList);
+       registerForContextMenu(PrecioList);
    }
 
     //Obtiene las habitaciones para mostrarlas en la lista
     private void fillData() {
 
 
-        // Get all of the notes from the database and create the item list
-        Cursor habsCursor = mDbHelper.fetchAllHabitaciones();
+        // Get all of the habs ordered by "id"
+        Cursor habsCursor = mDbHelper.fetchAllHabitacionesBy("id");
         habsCursor.moveToFirst();
 
         ArrayList<String> habsString = new ArrayList<String>();
@@ -91,28 +97,41 @@ public class HabitationsList extends TabActivity {
         }
         habsCursor.close();
 
-
-
-        //ArrayAdapter<String> habsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, habsString);
-        //HabsList.setAdapter(habsAdapter);
-
         ArrayAdapter<String> habsAdapter = new ArrayAdapter<String>(this,R.layout.list_itemhab, R.id.textCelda, habsString);
         HabsList.setAdapter(habsAdapter);
 
-    /*
-        Cursor notesCursor = mDbHelper.fetchAllHabitaciones();
 
-        // Create an array to specify the fields we want to display in the list (only TITLE)
-        String[] from = new String[] { HotelDbAdapter.HAB_ID };
+        // Get all of the habs ordered by "maxocupantes"
+        habsCursor = mDbHelper.fetchAllHabitacionesBy("nummaxocupantes");
+        habsCursor.moveToFirst();
 
-        // and an array of the fields we want to bind those fields to (in this case just text1)
-        int[] to = new int[] { R.id.textCelda };
+        ArrayList<String> habsOcupsString = new ArrayList<String>();
+        while(!habsCursor.isAfterLast()){
+            //Se muestra la palabra habitacion junto al id de la misma
+            habsOcupsString.add("Habitación " + habsCursor.getString(habsCursor.getColumnIndex("id")));
+            habsCursor.moveToNext();
+        }
+        habsCursor.close();
 
-        // Now create an array adapter and set it to display using our row
-        SimpleCursorAdapter habs =
-                new SimpleCursorAdapter(this, R.layout.list_itemhab, notesCursor, from, to);
-        HabsList.setAdapter(habs);
-        */
+        habsAdapter = new ArrayAdapter<String>(this,R.layout.list_itemhab, R.id.textCelda, habsOcupsString);
+        OcupsList.setAdapter(habsAdapter);
+
+
+
+        // Get all of the habs ordered by "precioocupante"
+         habsCursor = mDbHelper.fetchAllHabitacionesBy("precioocupante");
+        habsCursor.moveToFirst();
+
+        ArrayList<String> habsPrecioString = new ArrayList<String>();
+        while(!habsCursor.isAfterLast()){
+            //Se muestra la palabra habitacion junto al id de la misma
+            habsPrecioString.add("Habitación " + habsCursor.getString(habsCursor.getColumnIndex("id")));
+            habsCursor.moveToNext();
+        }
+        habsCursor.close();
+
+        habsAdapter = new ArrayAdapter<String>(this,R.layout.list_itemhab, R.id.textCelda, habsPrecioString);
+        PrecioList.setAdapter(habsAdapter);
 
     }
 }

@@ -118,10 +118,12 @@ public class HotelDbAdapter {
     }
 
 
-    public Cursor fetchAllHabitaciones() {
-
-        return mDb.query(DATABASE_HAB, new String[] {HAB_ID, HAB_DESC, HAB_OCUP, HAB_PRECIO,
-                HAB_REC}, null, null, null, null, null);
+    public Cursor fetchAllHabitacionesBy(String method) {
+        if(method == "id" || method == "nummaxocupantes" || method == "precioocupante"){
+            return mDb.query(DATABASE_HAB, new String[] {HAB_ID, HAB_DESC, HAB_OCUP, HAB_PRECIO,
+                    HAB_REC}, null, null, null, null, method);
+        }
+        return null;
     }
     /**
      * Return a Cursor positioned at the note that matches the given rowId
