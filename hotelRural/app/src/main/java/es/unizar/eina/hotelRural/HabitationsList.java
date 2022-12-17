@@ -25,17 +25,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-
-
+/** Clase para la actividad listar habitaciones
+ * @author Víctor Gallardo y Jaime Berruete
+ */
 public class HabitationsList extends TabActivity {
+
+    /* Boton que al clicarlo lleva a la actividad de crear una habitación */
     private Button btn_crear_habitaciones;
 
+    /* Adaptador de la base de datos */
     private HotelDbAdapter mDbHelper;
+
+    /* Listas de habitaciones según distintos métodos de listado */
     private ListView HabsList;
     private ListView OcupsList;
     private ListView PrecioList;
 
-
+    /** Se llama cuando se crea la actividad
+     * Esta función crea las tablas con las listas de habitaciones ordenadas según los distintos
+     * métodos.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
@@ -81,7 +90,7 @@ public class HabitationsList extends TabActivity {
        registerForContextMenu(PrecioList);
    }
 
-    //Obtiene las habitaciones para mostrarlas en la lista
+    /** Función que obtiene las habitaciones para mostrarlas en la lista */
     private void fillData() {
 
 

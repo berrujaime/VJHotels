@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+/** Clase para la actividad de la pantalla de inicio
+ * @author Víctor Gallardo y Jaime Berruete
+ */
 public class Home extends AppCompatActivity {
 /*
     private static final int ACTIVITY_CREATE=0;
@@ -19,15 +22,17 @@ public class Home extends AppCompatActivity {
     private static final int DELETE_ID = Menu.FIRST + 1;
     private static final int EDIT_ID = Menu.FIRST + 2;
 */
+    //Adaptador de la base de datos
     private HotelDbAdapter mDbHelper;
+
     private ListView mList;
 
-
+    //Botones para pasar a la pantalla de listar reservas o listar habitaciones
     private Button btn_reserva;
     private Button btn_habitaciones;
 
 
-    /** Called when the activity is first created. */
+    /** Se llama cuando se crea la actividad */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,7 @@ public class Home extends AppCompatActivity {
         btn_habitaciones = findViewById(R.id.button_hab);
         btn_reserva = findViewById(R.id.button_res);
 
+        /** Función que se ejecuta cuando se clica el botón de gestionar habitaciones */
         btn_habitaciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
