@@ -27,6 +27,9 @@
         <activity
             android:name=".CrearHabitacion">
         </activity>
+        <activity
+            android:name=".ConsultarHabitacion">
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

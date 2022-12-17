@@ -120,6 +120,10 @@ public class HotelDbAdapter {
         return mDb.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
+    public Cursor fetchHabitacion(int id){
+        return mDb.query(DATABASE_HAB, new String[] {HAB_ID, HAB_DESC, HAB_OCUP, HAB_PRECIO,
+                HAB_REC}, HAB_ID+"="+id, null, null, null, null);
+    }
     /**
      * Devuelve un cursor sobre la lista de habitación de la base de datos
      * @param method indica el método a listar las habitaciones que puede ser:
@@ -173,5 +177,9 @@ public class HotelDbAdapter {
         args.put(KEY_BODY, body);
 
         return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
+    }
+
+    public Cursor fetchAllNotes() {
+        return null;
     }
 }
