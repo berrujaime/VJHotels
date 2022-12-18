@@ -12,6 +12,8 @@ import android.database.sqlite.SQLiteDatabase;
  * o una reserva.
  *
  * Está hecho usando cursores en vez de inner classes.
+ *
+ * @author Víctor Gallardo y Jaime Berruete
  */
 public class HotelDbAdapter {
 
