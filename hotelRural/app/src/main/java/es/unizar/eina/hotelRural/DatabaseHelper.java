@@ -29,8 +29,8 @@ class DatabaseHelper extends SQLiteOpenHelper {
     /** Creación de la tabla habitaciones reservadas */
     /* private static final String DATABASE_CREATE_HAB_RES =
             "create table HabitacionesReservadas (reserva integer, FOREIGN KEY('reserva') REFERENCES " + DATABASE_CREATE_RES + "('id')" +
-                    ", habitacion integer FOREIGN KEY('habitacion') REFERENCES " + DATABASE_CREATE_HAB + "('id')" +
-                    ", ocupantes integer);";
+                    "ON UPDATE CASCADE ON DELETE CASCADE, habitacion integer, FOREIGN KEY('habitacion') REFERENCES " + DATABASE_CREATE_HAB + "('id')" +
+                    "ON UPDATE CASCADE ON DELETE CASCADE, ocupantes integer);";
 */
 
     /** Constructor

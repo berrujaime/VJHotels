@@ -107,7 +107,28 @@ public class HotelDbAdapter {
         initialValues.put(HAB_PRECIO, precio);
         initialValues.put(HAB_REC, porcentaje);
 
-        return mDb.insert("Habitacion", null, initialValues);
+        return mDb.insert(DATABASE_HAB, null, initialValues);
+    }
+
+    /**
+     * Actualiza los parámetros de una Habitación en la base de datos. La habitación que se
+     * actualiza es la especificada utilizando el id (su clave primaria).
+     *
+     * @param id el id de la habitación
+     * @param desc la descripción de la habitación
+     * @param ocups número máximo de ocupantes de la habitación
+     * @param precio precio por ocupante de la habitación
+     * @param porcentaje porcentaje de recargo de la habitación
+     */
+    public boolean updateHabitacion(int id, String desc, int ocups, float precio , float porcentaje) {
+        ContentValues args = new ContentValues();
+        args.put(HAB_ID, id);
+        args.put(HAB_DESC, desc);
+        args.put(HAB_OCUP, ocups);
+        args.put(HAB_PRECIO, precio);
+        args.put(HAB_REC, porcentaje);
+
+        return mDb.update(DATABASE_HAB, args, HAB_ID + "=" + id, null) > 0;
     }
     /**
      * Delete the note with the given rowId

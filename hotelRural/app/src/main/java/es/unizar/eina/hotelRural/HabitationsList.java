@@ -76,7 +76,7 @@ public class HabitationsList extends TabActivity {
            @Override
            public void onClick(View view) {
                //Intent i = new Intent(getApplicationContext(), CrearHabitacion.class);
-               Intent i = new Intent(getApplicationContext(), ConsultarHabitacion.class);
+               Intent i = new Intent(getApplicationContext(), ModificarHabitacion.class);
                startActivity(i);
            }
        });
