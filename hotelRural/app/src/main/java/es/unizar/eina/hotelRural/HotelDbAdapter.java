@@ -120,7 +120,7 @@ public class HotelDbAdapter {
      * @param precio precio por ocupante de la habitación
      * @param porcentaje porcentaje de recargo de la habitación
      */
-    public boolean updateHabitacion(int id, String desc, int ocups, float precio , float porcentaje) {
+    public boolean updateHabitacion(String idAntes, int id, String desc, int ocups, float precio , float porcentaje) {
         ContentValues args = new ContentValues();
         args.put(HAB_ID, id);
         args.put(HAB_DESC, desc);
@@ -128,7 +128,7 @@ public class HotelDbAdapter {
         args.put(HAB_PRECIO, precio);
         args.put(HAB_REC, porcentaje);
 
-        return mDb.update(DATABASE_HAB, args, HAB_ID + "=" + id, null) > 0;
+        return mDb.update(DATABASE_HAB, args, HAB_ID + "=" + idAntes, null) > 0;
     }
     /**
      * Delete the note with the given rowId

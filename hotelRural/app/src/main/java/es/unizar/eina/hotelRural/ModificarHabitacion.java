@@ -62,7 +62,7 @@ public class ModificarHabitacion extends AppCompatActivity {
         numMaxOcupEdit = (Spinner)findViewById(R.id.numMaxOcupantesForm);
 
         //recoger datos de la base de datos
-        Cursor cursor = mDbHelper.fetchHabitacion(1); //se piden siempre los de la 1 para ver si funciona
+        Cursor cursor = mDbHelper.fetchHabitacion(3); //se piden siempre los de la 3 para ver si funciona
         cursor.moveToFirst();
 
         //meter datos en cada casilla de texto
@@ -102,7 +102,7 @@ public class ModificarHabitacion extends AppCompatActivity {
                         precioNoche = Float.parseFloat(precioEdit.getText().toString());
                         numMaxOcupantes = Integer.parseInt(numMaxOcupEdit.getSelectedItem().toString());
 
-                        haIdoBien = mDbHelper.updateHabitacion(id,desc, numMaxOcupantes,precioNoche, porcentajeRecarga);
+                        haIdoBien = mDbHelper.updateHabitacion(idAntes, id, desc, numMaxOcupantes, precioNoche, porcentajeRecarga);
                         if(haIdoBien){
                             Intent i = new Intent(getApplicationContext(), HabitationsList.class);
                             startActivity(i);
