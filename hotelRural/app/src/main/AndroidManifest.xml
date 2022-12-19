@@ -25,13 +25,18 @@
             android:name=".HabitationsList">
         </activity>
         <activity
-            android:name=".CrearHabitacion">
+            android:name=".CrearHabitacion"
+            android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
             android:name=".ConsultarHabitacion">
         </activity>
         <activity
             android:name=".ModificarHabitacion">
+        </activity>
+        <activity
+            android:name=".CrearReserva"
+            android:windowSoftInputMode="adjustNothing" >
         </activity>
 
         <meta-data

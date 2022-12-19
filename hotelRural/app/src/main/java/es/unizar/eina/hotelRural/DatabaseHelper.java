@@ -22,16 +22,16 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
     /** Creación de la tabla reservas */
     private static final String DATABASE_CREATE_RES =
-            "create table Reserva (id integer primary key, "
+            "create table Reserva (id integer primary key autoincrement, "
                     + "nombrecliente text, movilcliente text, fechaentrada text,"
                     + "fechasalida text);";
 
     /** Creación de la tabla habitaciones reservadas */
-    /* private static final String DATABASE_CREATE_HAB_RES =
-            "create table HabitacionesReservadas (reserva integer, FOREIGN KEY('reserva') REFERENCES " + DATABASE_CREATE_RES + "('id')" +
-                    "ON UPDATE CASCADE ON DELETE CASCADE, habitacion integer, FOREIGN KEY('habitacion') REFERENCES " + DATABASE_CREATE_HAB + "('id')" +
-                    "ON UPDATE CASCADE ON DELETE CASCADE, ocupantes integer);";
-*/
+    private static final String DATABASE_CREATE_HAB_RES =
+            "CREATE TABLE HabitacionesReservadas(reserva INTEGER, habitacion INTEGER, ocupantes INTEGER," +
+                    "FOREIGN KEY(reserva) REFERENCES Reserva(id) ON UPDATE CASCADE ON DELETE CASCADE," +
+                    "FOREIGN KEY(habitacion) REFERENCES Habitacion(id) ON UPDATE CASCADE ON DELETE CASCADE," +
+                    "PRIMARY KEY(reserva, habitacion));";
 
     /** Constructor
      * @param context el contexto con el que se va a trabajar */
@@ -47,7 +47,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
         //db.execSQL(DATABASE_CREATE);
         db.execSQL(DATABASE_CREATE_HAB);
         db.execSQL(DATABASE_CREATE_RES);
-        //db.execSQL(DATABASE_CREATE_HAB_RES);
+        db.execSQL(DATABASE_CREATE_HAB_RES);
         System.out.println("Ya las he creado");
     }
 
