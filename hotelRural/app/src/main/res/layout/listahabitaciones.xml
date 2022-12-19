@@ -30,7 +30,7 @@
         tools:layout_editor_absoluteX="411dp">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/logo"
             android:layout_width="500dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
