@@ -1,5 +1,6 @@
 package es.unizar.eina.hotelRural;
 
+import android.app.ActivityGroup;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,11 +24,13 @@ import android.widget.TabHost;
 import java.util.ArrayList;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
 
 
 
-public class HabitationsList extends TabActivity {
+public class HabitationsList extends AppCompatActivity {
     private Button btn_crear_habitaciones;
 
     private HotelDbAdapter mDbHelper;
@@ -35,6 +38,35 @@ public class HabitationsList extends TabActivity {
     private ListView OcupsList;
     private ListView PrecioList;
 
+
+    private TabHost mtab;
+   // private LayoutTab tabs;
+
+
+    /*
+    protected class LayoutTab extends TabActivity{
+        TabHost mtab;
+
+        public void LayoutTab(){
+            setContentView(R.layout.listahabitaciones);
+            TabHost mtab = getTabHost();
+            mtab.addTab(
+                    mtab.newTabSpec("tab1ID").setIndicator("ID", null).setContent(R.id.tabID)
+            );
+            mtab.addTab(
+                    mtab.newTabSpec("tab2Ocup").setIndicator("MaxOcup").setContent(R.id.tabMaxOcup)
+            );
+            mtab.addTab(
+                    mtab.newTabSpec("tab3Precio").setIndicator("Precio").setContent(R.id.tabPrecio)
+            );
+
+        }
+
+        public TabHost getMtab() {
+            return mtab;
+        }
+    }
+*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -49,17 +81,20 @@ public class HabitationsList extends TabActivity {
 
        setContentView(R.layout.listahabitaciones);
 
-        TabHost tabHost = getTabHost();
-        tabHost.addTab(
-                tabHost.newTabSpec("tab1ID").setIndicator("ID", null).setContent(R.id.tabID)
-        );
-        tabHost.addTab(
-                tabHost.newTabSpec("tab2Ocup").setIndicator("MaxOcup").setContent(R.id.tabMaxOcup)
-        );
-        tabHost.addTab(
-                tabHost.newTabSpec("tab3Precio").setIndicator("Precio").setContent(R.id.tabPrecio)
-        );
+       //tabs = new LayoutTab();
+       //TabHost mtab = tabs.getMtab();
 
+        mtab = new TabHost(this);
+        mtab = (TabHost) findViewById(R.id.tabhost);
+        mtab.addTab(
+                mtab.newTabSpec("tab1ID").setIndicator("ID", null).setContent(R.id.tabID)
+        );
+        mtab.addTab(
+                mtab.newTabSpec("tab2Ocup").setIndicator("MaxOcup").setContent(R.id.tabMaxOcup)
+        );
+        mtab.addTab(
+                mtab.newTabSpec("tab3Precio").setIndicator("Precio").setContent(R.id.tabPrecio)
+        );
 
         btn_crear_habitaciones = findViewById(R.id.crear_habitacion);
 
