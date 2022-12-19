@@ -7,14 +7,13 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Simple notes database access helper class. Defines the basic CRUD operations
- * for the hotelRural example, and gives the ability to list all notes as well as
- * retrieve or modify a specific note.
+ * Clase que ayuda a acceder a la base de datos de HotelRural. Define las operaciones CRUD básicas
+ * para el  HotelRural, y proporciona funciones para listar, recuperar y modificar una habitación
+ * o una reserva.
  *
- * This has been improved from the first version of this tutorial through the
- * addition of better error handling and also using returning a Cursor instead
- * of using a collection of inner classes (which is less scalable and not
- * recommended).
+ * Está hecho usando cursores en vez de inner classes.
+ *
+ * @author Víctor Gallardo y Jaime Berruete
  */
 public class HotelDbAdapter {
 
@@ -22,38 +21,39 @@ public class HotelDbAdapter {
     public static final String KEY_BODY = "body";
     public static final String KEY_ROWID = "_id";
 
+    //Campos de la tabla habitación
     public static final String HAB_ID = "id";
     public static final String HAB_DESC = "descripcion";
     public static final String HAB_OCUP = "nummaxocupantes";
     public static final String HAB_PRECIO = "precioocupante";
     public static final String HAB_REC = "porcentajerecargo";
 
+    //Base de datos
     private DatabaseHelper mDbHelper;
     private SQLiteDatabase mDb;
 
+    //Nombres de las tablas
     private static final String DATABASE_TABLE = "notes";
     private static final String DATABASE_HAB = "Habitacion";
 
+    //Contexto para crear la base de datos
     private final Context mCtx;
 
     /**
-     * Constructor - takes the context to allow the database to be
-     * opened/created
+     * Constructor - utiliza el Context para abrir o crear la base de datos.
      *
-     * @param ctx the Context within which to work
+     * @param ctx el Context con el que se va a trabajar
      */
     public HotelDbAdapter(Context ctx) {
         this.mCtx = ctx;
     }
 
     /**
-     * Open the notes database. If it cannot be opened, try to create a new
-     * instance of the database. If it cannot be created, throw an exception to
-     * signal the failure
+     * Abre la base de datos de HotelRural. Si no se puede abrir, intenta crear una
+     * instancia de la base de datos. Si no se puede crear, lanza una excepción.
      *
-     * @return this (self reference, allowing this to be chained in an
-     *         initialization call)
-     * @throws SQLException if the database could be neither opened or created
+     * @return this (referencia a sí mismo)
+     * @throws SQLException si la base de datos no se puede ni abrir ni crear
      */
     public HotelDbAdapter open() throws SQLException {
         System.out.println("Entro a open");
@@ -63,6 +63,9 @@ public class HotelDbAdapter {
         return this;
     }
 
+    /**
+     * Función que cierra la conexión con la base de datos.
+     */
     public void close() {
         mDbHelper.close();
     }
@@ -85,6 +88,19 @@ public class HotelDbAdapter {
         return mDb.insert(DATABASE_TABLE, null, initialValues);
     }
 
+    /**
+     * Crea una nueva habitación con los valores proprocionados. Si la habitación
+     * se crea correctamente devuelve su rowId, en caso contrario devuelve un -1 indicando
+     * que ha fallado.
+     *
+     * @param id el id de la habitación
+     * @param desc la descripción de la habitación
+     * @param ocups número máximo de ocupantes de la habitación
+     * @param precio precio por ocupante de la habitación
+     * @param porcentaje porcentaje de recargo de la habitación
+     *
+     * @return rowId o -1 si falla
+     */
     public long createHabitacion(int id, String desc, int ocups, float precio , float porcentaje) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(HAB_ID, id);
@@ -93,7 +109,28 @@ public class HotelDbAdapter {
         initialValues.put(HAB_PRECIO, precio);
         initialValues.put(HAB_REC, porcentaje);
 
-        return mDb.insert("Habitacion", null, initialValues);
+        return mDb.insert(DATABASE_HAB, null, initialValues);
+    }
+
+    /**
+     * Actualiza los parámetros de una Habitación en la base de datos. La habitación que se
+     * actualiza es la especificada utilizando el id (su clave primaria).
+     *
+     * @param id el id de la habitación
+     * @param desc la descripción de la habitación
+     * @param ocups número máximo de ocupantes de la habitación
+     * @param precio precio por ocupante de la habitación
+     * @param porcentaje porcentaje de recargo de la habitación
+     */
+    public boolean updateHabitacion(String idAntes, int id, String desc, int ocups, float precio , float porcentaje) {
+        ContentValues args = new ContentValues();
+        args.put(HAB_ID, id);
+        args.put(HAB_DESC, desc);
+        args.put(HAB_OCUP, ocups);
+        args.put(HAB_PRECIO, precio);
+        args.put(HAB_REC, porcentaje);
+
+        return mDb.update(DATABASE_HAB, args, HAB_ID + "=" + idAntes, null) > 0;
     }
     /**
      * Delete the note with the given rowId
@@ -106,18 +143,18 @@ public class HotelDbAdapter {
         return mDb.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
-    /**
-     * Return a Cursor over the list of all notes in the database
-     *
-     * @return Cursor over all notes
-     */
-    public Cursor fetchAllNotes() {
-
-        return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_TITLE,
-                KEY_BODY}, null, null, null, null, null);
+    public Cursor fetchHabitacion(int id){
+        return mDb.query(DATABASE_HAB, new String[] {HAB_ID, HAB_DESC, HAB_OCUP, HAB_PRECIO,
+                HAB_REC}, HAB_ID+"="+id, null, null, null, null);
     }
-
-
+    /**
+     * Devuelve un cursor sobre la lista de habitación de la base de datos
+     * @param method indica el método a listar las habitaciones que puede ser:
+     *               por id, por número máximo de ocupantes o por precio por ocupante.
+     *
+     * @return Si el método de listar es uno de los permitidos devuelve un cursor sobre la lista
+     *               de habitaciones, en caso contrario devuelve null.
+     */
     public Cursor fetchAllHabitacionesBy(String method) {
         if(method == "id" || method == "nummaxocupantes" || method == "precioocupante"){
             return mDb.query(DATABASE_HAB, new String[] {HAB_ID, HAB_DESC, HAB_OCUP, HAB_PRECIO,
@@ -125,6 +162,7 @@ public class HotelDbAdapter {
         }
         return null;
     }
+
     /**
      * Return a Cursor positioned at the note that matches the given rowId
      *
@@ -162,5 +200,9 @@ public class HotelDbAdapter {
         args.put(KEY_BODY, body);
 
         return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
+    }
+
+    public Cursor fetchAllNotes() {
+        return null;
     }
 }

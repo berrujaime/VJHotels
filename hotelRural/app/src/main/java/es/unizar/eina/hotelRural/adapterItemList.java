@@ -51,7 +51,7 @@ public class adapterItemList extends BaseAdapter {
         // Referenciamos el elemento a modificar y lo rellenamos
         TextView textView = (TextView) v.findViewById(R.id.textCelda);
         textView.setText(currentName);
-//Devolvemos la vista inflada
+        //Devolvemos la vista inflada
         return v;
     }
 }

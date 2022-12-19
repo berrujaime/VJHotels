@@ -9,18 +9,29 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/** Clase para la actividad crear habitacion
+ * @author Víctor Gallardo y Jaime Berruete
+ */
 public class CrearHabitacion extends AppCompatActivity {
+
+    /* Boton que al clicarlo crea la habitacion en la base de datos */
     private Button btn_crear;
+
+    /* Adaptador de la base de datos */
     private HotelDbAdapter mDbHelper;
+
+    /* Campos de texto en la aplicación */
     private EditText idEdit, descEdit, porcentajeEdit, precioEdit;
+
+    /* Spinner que permite elegir el numero maximo de ocupantes en la aplicacion */
     private Spinner numMaxOcupEdit;
 
-
+    /* Valores recogidos de los campos de texto y del spinner de la aplicacion */
     private String desc;
     private float precioNoche, porcentajeRecarga;
     private int id, numMaxOcupantes;
 
-    /** Called when the activity is first created. */
+    /** Se llama cuando se crea la actividad */
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -32,9 +43,11 @@ public class CrearHabitacion extends AppCompatActivity {
 
         btn_crear = findViewById(R.id.crear);
 
+        /** Funcion que se activa cuando el botón de crear habitación se pulsa  */
         btn_crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //recoger datos de los campos de texto y el spinner
                 idEdit = (EditText)findViewById(R.id.idForm);
                 descEdit = (EditText)findViewById(R.id.descForm);
                 porcentajeEdit = (EditText)findViewById(R.id.porcentajeForm);
@@ -47,6 +60,7 @@ public class CrearHabitacion extends AppCompatActivity {
                     System.out.println("Algun campo vacio");
                 }
                 else{
+                    //se crea la habitacion en la base de datos
                     id = Integer.parseInt(idEdit.getText().toString());
                     desc = descEdit.getText().toString();
                     porcentajeRecarga = Float.parseFloat(porcentajeEdit.getText().toString());

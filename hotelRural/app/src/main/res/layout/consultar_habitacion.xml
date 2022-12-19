@@ -6,11 +6,11 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/crear"
+        android:id="@+id/salir"
         android:layout_width="233dp"
         android:layout_height="55dp"
         android:layout_marginBottom="4dp"
-        android:backgroundTint="#2C0A0A"
+        android:backgroundTint="#11185B"
         android:fontFamily="sans-serif-black"
         android:text="SALIR"
         android:textSize="24sp"
@@ -18,7 +18,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabHost"
+        app:layout_constraintTop_toBottomOf="@+id/porcentajeForm"
         app:strokeColor="#000000"
         app:strokeWidth="3dp" />
 
@@ -31,13 +31,13 @@
 
         <com.google.android.material.navigation.NavigationView
             android:layout_width="match_parent"
-            android:layout_height="146dp"
+            android:layout_height="100dp"
             android:background="#949497">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="500dp"
-                android:layout_height="300dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="40px"
                 app:srcCompat="@drawable/logo_transparent" />
@@ -49,14 +49,13 @@
         android:layout_width="297dp"
         android:layout_height="52dp"
         android:ems="10"
-        android:hint="ID: XXXX"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:focusable="false"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.346" />
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView3"
@@ -66,7 +65,9 @@
         app:layout_constraintBottom_toTopOf="@+id/idForm"
         app:layout_constraintEnd_toEndOf="@+id/idForm"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/idForm" />
+        app:layout_constraintStart_toStartOf="@+id/idForm"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView4"
@@ -113,53 +114,51 @@
         android:layout_width="291dp"
         android:layout_height="80dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:focusable="false"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.599" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/porcentajeForm"
         android:layout_width="277dp"
         android:layout_height="53dp"
         android:ems="10"
-        android:hint="XX,XX%"
-        android:inputType="numberDecimal"
+        android:focusable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.417"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.879" />
+        app:layout_constraintVertical_bias="0.896" />
 
     <EditText
         android:id="@+id/precioForm"
         android:layout_width="282dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="38dp"
         android:ems="10"
-        android:hint="XX,XX€"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/porcentajeForm"
+        android:focusable="false"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descForm"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Spinner
+    <EditText
         android:id="@+id/numMaxOcupantesForm"
         android:layout_width="297dp"
         android:layout_height="55dp"
-        app:layout_constraintBottom_toBottomOf="@+id/crear"
+        android:ems="10"
+        android:focusable="false"
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.467" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
