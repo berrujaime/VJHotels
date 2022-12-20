@@ -63,4 +63,8 @@ class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS HabitacionesReservadas");
         onCreate(db);
     }
+
+    public void deleteByID(SQLiteDatabase db,int habID) {
+       db.execSQL("DELETE FROM Habitacion WHERE id = "  + habID);
+    }
 }

@@ -53,6 +53,7 @@ public class HabitationsList extends TabActivity {
      */
 
     private TabHost mtab;
+    private int currentLayout;
    // private LayoutTab tabs;
 
 
@@ -67,11 +68,12 @@ public class HabitationsList extends TabActivity {
        //mDbHelper.createHabitacion(2,"desc", 5,(float)5.3, (float)3.4);
        //mDbHelper.createHabitacion(5,"desc", 5,(float)5.3, (float)3.4);
 
+        currentLayout = R.layout.listahabitaciones;
        setContentView(R.layout.listahabitaciones);
 
-       ImageView logo = findViewById(R.id.logo);
-       Drawable drawable = getResources().getDrawable(R.drawable.logo_transparent);
-       logo.setImageDrawable(drawable);
+       //ImageView logo = findViewById(R.id.logo);
+       //Drawable drawable = getResources().getDrawable(R.drawable.logo_transparent);
+       //logo.setImageDrawable(drawable);
 
 
 
@@ -82,15 +84,22 @@ public class HabitationsList extends TabActivity {
 
         //mtab = new TabHost(this);
         //mtab = (TabHost) findViewById(R.id.tabhost);
-        mtab.addTab(
-                mtab.newTabSpec("tab1ID").setIndicator("ID", null).setContent(R.id.tabID)
-        );
-        mtab.addTab(
-                mtab.newTabSpec("tab2Ocup").setIndicator("MaxOcup").setContent(R.id.tabMaxOcup)
-        );
-        mtab.addTab(
-                mtab.newTabSpec("tab3Precio").setIndicator("Precio").setContent(R.id.tabPrecio)
-        );
+
+
+        TabHost.TabSpec spec1 =
+                mtab.newTabSpec("tab1ID").setIndicator("ID", null).setContent(R.id.tabID);
+
+        getTabHost().addTab(spec1);
+        TabHost.TabSpec spec2 =
+                mtab.newTabSpec("tab2Ocup").setIndicator("MaxOcup").setContent(R.id.tabMaxOcup);
+
+        getTabHost().addTab(spec2);
+
+        TabHost.TabSpec spec3 =
+                mtab.newTabSpec("tab3Precio").setIndicator("Precio").setContent(R.id.tabPrecio);
+
+        getTabHost().addTab(spec3);
+
 
         btn_crear_habitaciones = findViewById(R.id.crear_habitacion);
 
