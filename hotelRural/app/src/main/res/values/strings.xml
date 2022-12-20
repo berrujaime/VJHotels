@@ -10,4 +10,10 @@
     <string name="confirm">Confirm</string>
     <string name="edit_note">Edit Note</string>
     <string name="title_activity_note_edit">EditNote</string>
+    <string name="title_activity_tabs_hab">TabsHabActivity</string>
+    <string name="tab_text_1">ID</string>
+    <string name="tab_text_2">MaxOcup</string>
+    <string name="tab_text_3">Precio</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -3,12 +3,10 @@ package es.unizar.eina.hotelRural;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
 /** Clase para la actividad de la pantalla de inicio
  * @author Víctor Gallardo y Jaime Berruete
@@ -39,6 +37,8 @@ public class Home extends AppCompatActivity {
 
         mDbHelper = new HotelDbAdapter(this);
         mDbHelper.open();
+
+        //mDbHelper.createHabitacion(1,"hola", 2,5, 10.1f);
         //long id = mDbHelper.createHabitacion(1,"primera habitacion", 3,10.0f, 6);
 
         setContentView(R.layout.home);

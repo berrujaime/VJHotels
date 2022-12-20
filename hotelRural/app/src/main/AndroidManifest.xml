@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.hotelRural">
         <activity
+            android:name=".HabitationsList"
+            android:exported="false"
+            android:label="@string/title_activity_tabs_hab"
+            android:theme="@style/Theme.hotelRural.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Home"
             android:exported="true">
             <intent-filter>
@@ -18,26 +27,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".NoteEdit">
-        </activity>
-        <activity
-            android:name=".HabitationsList">
-        </activity>
+        <activity android:name=".NoteEdit"></activity>
         <activity
             android:name=".CrearHabitacion"
-            android:windowSoftInputMode="adjustNothing" >
-        </activity>
-        <activity
-            android:name=".ConsultarHabitacion">
-        </activity>
-        <activity
-            android:name=".ModificarHabitacion">
-        </activity>
+            android:windowSoftInputMode="adjustNothing"></activity>
+        <activity android:name=".ConsultarHabitacion"></activity>
+        <activity android:name=".ModificarHabitacion"></activity>
         <activity
             android:name=".CrearReserva"
-            android:windowSoftInputMode="adjustNothing" >
-        </activity>
+            android:windowSoftInputMode="adjustNothing"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
