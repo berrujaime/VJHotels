@@ -28,6 +28,13 @@ public class HotelDbAdapter {
     public static final String HAB_PRECIO = "precioocupante";
     public static final String HAB_REC = "porcentajerecargo";
 
+    //Campos de la tabla reserva
+    public static final String RES_ID = "id";
+    public static final String RES_NOMBRE = "nombrecliente";
+    public static final String RES_MOVIL = "movilcliente";
+    public static final String RES_FENT = "fechaentrada";
+    public static final String RES_FSAL = "fechasalida";
+
     //Base de datos
     private DatabaseHelper mDbHelper;
     private SQLiteDatabase mDb;
@@ -35,6 +42,7 @@ public class HotelDbAdapter {
     //Nombres de las tablas
     private static final String DATABASE_TABLE = "notes";
     private static final String DATABASE_HAB = "Habitacion";
+    private static final String DATABASE_RES = "Reserva";
 
     //Contexto para crear la base de datos
     private final Context mCtx;
@@ -132,6 +140,20 @@ public class HotelDbAdapter {
 
         return mDb.update(DATABASE_HAB, args, HAB_ID + "=" + idAntes, null) > 0;
     }
+
+    public long createReserva(String nombre, String telefono, String fechaEntrada, String fechaSalida) {
+        ContentValues initialValues = new ContentValues();
+        //ID AUTOINCREMENT
+        initialValues.put(RES_NOMBRE, nombre);
+        initialValues.put(RES_MOVIL, telefono);
+        initialValues.put(RES_FENT, fechaEntrada);
+        initialValues.put(RES_FSAL, fechaSalida);
+
+        return mDb.insert(DATABASE_RES, null, initialValues);
+    }
+
+
+
     /**
      * Delete the note with the given rowId
      *

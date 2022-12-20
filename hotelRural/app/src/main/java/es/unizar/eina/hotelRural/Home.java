@@ -56,6 +56,16 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        /** Función que se ejecuta cuando se clica el botón de gestionar habitaciones */
+        btn_reserva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Intent i = new Intent(Home.this, ListaReservas.class);
+                Intent i = new Intent(Home.this, CrearReserva.class);
+                startActivity(i);
+            }
+        });
 
         /*
         mDbHelper = new NotesDbAdapter(this);

@@ -106,8 +106,8 @@ public class HabitationsList extends TabActivity {
        btn_crear_habitaciones.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               //Intent i = new Intent(getApplicationContext(), CrearHabitacion.class);
-               Intent i = new Intent(getApplicationContext(), ModificarHabitacion.class);
+               Intent i = new Intent(getApplicationContext(), CrearHabitacion.class);
+               //Intent i = new Intent(getApplicationContext(), ModificarHabitacion.class);
                startActivity(i);
            }
        });
