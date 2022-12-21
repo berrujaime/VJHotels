@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
+import es.unizar.eina.hotelRural.ui.main.PlaceholderFragment;
 import es.unizar.eina.hotelRural.ui.main.SectionsPagerAdapter;
 import es.unizar.eina.hotelRural.databinding.ActivityTabsHabBinding;
 

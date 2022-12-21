@@ -12,9 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import es.unizar.eina.hotelRural.R;
 import es.unizar.eina.hotelRural.databinding.FragmentTabsHabBinding;
-import es.unizar.eina.hotelRural.fragmentHab;
+import es.unizar.eina.hotelRural.fragments.fragmentHab;
+import es.unizar.eina.hotelRural.fragments.fragmentHabOcup;
+import es.unizar.eina.hotelRural.fragments.fragmentHabPrecio;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -23,17 +24,30 @@ public class PlaceholderFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    private PageViewModel pageViewModel;
+    private static PageViewModel pageViewModel;
     private FragmentTabsHabBinding binding;
 
     public static Fragment newInstance(int index) {
         Fragment fragment=null;
-
+        System.out.printf("El valor de index es %d\n", index);
         switch (index){
-            case 1:fragment=new fragmentHab();
+            case 0:fragment=new fragmentHab();return fragment;
+            case 1:fragment=new fragmentHabOcup();return fragment;
+            case 2:fragment=new fragmentHabPrecio();return fragment;
         }
-        fragment=new fragmentHab();
         return fragment;
+
+        /*
+        int index2 = pageViewModel.getIndex();
+        Fragment fragment=null;
+        System.out.printf("El valor de index es %d\n", index2);
+        switch (index){
+            case 1:fragment=new fragmentHab();return fragment;
+            case 2:fragment=new fragmentHabOcup();return fragment;
+        }
+        return fragment;
+
+         */
     }
 
     @Override
