@@ -66,20 +66,6 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
                 startActivity(i);
             }
         });
-        /*
-        ImageButton edit_hab = (ImageButton)itemListView.findViewById(R.id.ButtonEdit);
-
-        edit_hab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(getActivity(), ModificarHabitacion.class);
-                startActivity(i);
-            }
-        });
-        HabsList.setOnItemClickListener(this);
-
-         */
     }
 
     @Override
