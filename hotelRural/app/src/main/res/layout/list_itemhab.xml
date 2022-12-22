@@ -4,7 +4,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:shape="rectangle">
+    android:shape="rectangle"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/textCelda"
