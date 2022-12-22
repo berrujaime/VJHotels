@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,9 +122,11 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
 
     private class MyListAdapter extends ArrayAdapter<String> {
         private int layout;
+        private ArrayList<String> habsString;
         private MyListAdapter(Context context, int resource, List<String> objects) {
             super(context,resource,objects);
             layout = resource;
+            habsString = (ArrayList<String>) objects;
         }
 
         @Override
@@ -135,6 +138,8 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
                 convertView = inflater.inflate(layout,parent,false);
                 ViewHolder viewHolder = new ViewHolder();
                 viewHolder.title = (TextView)convertView.findViewById(R.id.textCelda);
+
+                viewHolder.title.setText(habsString.get(position));
                 viewHolder.editButton = (ImageButton)convertView.findViewById(R.id.ButtonEdit);
                 viewHolder.deleteButton = (ImageButton)convertView.findViewById(R.id.ButtonDelete);
                 viewHolder.editButton.setOnClickListener(new View.OnClickListener() {
