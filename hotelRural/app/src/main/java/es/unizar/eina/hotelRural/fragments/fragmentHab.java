@@ -33,10 +33,7 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
 
     /* Listas de habitaciones según distintos métodos de listado */
     private ListView HabsList;
-
     private View itemListView;
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceFor){
@@ -48,19 +45,9 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
-
-
         mDbHelper = new HotelDbAdapter(getActivity());
         mDbHelper.open();
-
-
-
-
         HabsList=(ListView)view.findViewById(R.id.lst);
-
-
-
-
         fillData();
 
         ImageButton edit_hab = (ImageButton)itemListView.findViewById(R.id.ButtonEdit);
