@@ -2,17 +2,24 @@ package es.unizar.eina.hotelRural.fragments;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +35,8 @@ import android.widget.Toast;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.crypto.AEADBadTagException;
 
 import es.unizar.eina.hotelRural.ConsultarHabitacion;
 import es.unizar.eina.hotelRural.HabitationsList;
@@ -135,6 +145,21 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
                         startActivity(i);
                     }
                 });
+                //PopupMenu popupBorrar = new PopupMenu(getActivity(),convertView);
+                //popupBorrar.setOnMenuItemClickListener((PopupMenu.OnMenuItemClickListener) getActivity());
+                //popupBorrar.inflate(R.layout.popup_borrarhab);
+
+                View finalConvertView = convertView;
+                viewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        //AlertDialog dialog = builder.create();
+                       adapterPopUp apop = new adapterPopUp();
+                       apop.openDialog(finalConvertView);
+                    }
+                });
+
                 convertView.setTag(viewHolder);
             }else{
                 mainViewHolder = (ViewHolder) convertView.getTag();
@@ -142,6 +167,7 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
             }
             return convertView;
         }
+
     }
 
 
@@ -150,6 +176,43 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
         TextView title;
         ImageButton editButton;
         ImageButton deleteButton;
+    }
+
+
+    public class adapterPopUp extends AppCompatActivity {
+        public void openDialog(View convertView){
+            setContentView(convertView);
+            BorrarDialogFragment borrarpop = new BorrarDialogFragment();
+            borrarpop.show(getSupportFragmentManager(), "borrar_dialog");
+        }
+    }
+
+
+
+    public static class BorrarDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            // Get the layout inflater
+            LayoutInflater inflater = requireActivity().getLayoutInflater();
+
+            // Inflate and set the layout for the dialog
+            // Pass null as the parent view because its going in the dialog layout
+            builder.setView(inflater.inflate(R.layout.popup_borrarhab, null))
+                    // Add action buttons
+                    .setPositiveButton(R.string.eliminar, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            // sign in the user ...
+                        }
+                    })
+                    .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            BorrarDialogFragment.this.getDialog().cancel();
+                        }
+                    });
+            return builder.create();
+        }
     }
 
 

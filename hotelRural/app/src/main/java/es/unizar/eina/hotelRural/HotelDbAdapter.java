@@ -178,10 +178,16 @@ public class HotelDbAdapter {
      *               de habitaciones, en caso contrario devuelve null.
      */
     public Cursor fetchAllHabitacionesBy(String method) {
-        if(method == "id" || method == "nummaxocupantes" || method == "precioocupante"){
+        if(method == "id"){
             return mDb.query(DATABASE_HAB, new String[] {HAB_ID, HAB_DESC, HAB_OCUP, HAB_PRECIO,
                     HAB_REC}, null, null, null, null, method);
+        }else if(method=="nummaxocupantes" || method == "precioocupante"){
+            return mDb.query(DATABASE_HAB, new String[] {HAB_ID, HAB_DESC, HAB_OCUP, HAB_PRECIO,
+                    HAB_REC}, null, null, null, null, method + " DESC");
+        }else{
+            System.err.println("ERROR FETCHING HABS");
         }
+
         return null;
     }
 

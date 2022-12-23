@@ -37,17 +37,6 @@ public class PlaceholderFragment extends Fragment {
         }
         return fragment;
 
-        /*
-        int index2 = pageViewModel.getIndex();
-        Fragment fragment=null;
-        System.out.printf("El valor de index es %d\n", index2);
-        switch (index){
-            case 1:fragment=new fragmentHab();return fragment;
-            case 2:fragment=new fragmentHabOcup();return fragment;
-        }
-        return fragment;
-
-         */
     }
 
     @Override

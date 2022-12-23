@@ -34,14 +34,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
 
         return PlaceholderFragment.newInstance(position);
-        /*System.out.printf("La posicion es %d\n", position);
-        Fragment fragment= null;
-        switch (position){
-            case 0:fragment=new fragmentHab();return fragment;
-            case 1:fragment=new fragmentHabOcup();return fragment;
-        }
-        return null;
-        */
+        //System.out.printf("La posicion es %d\n", position);
 
     }
 
