@@ -233,4 +233,11 @@ public class HotelDbAdapter {
     public Cursor fetchAllNotes() {
         return null;
     }
+
+
+    public boolean deleteHab(long rowId) {
+
+        return mDb.delete(DATABASE_HAB, KEY_ROWID + "=" + rowId, null) > 0;
+    }
+
 }

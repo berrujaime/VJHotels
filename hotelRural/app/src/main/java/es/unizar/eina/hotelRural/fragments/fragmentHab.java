@@ -51,6 +51,7 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
 
     /* Listas de habitaciones según distintos métodos de listado */
     ArrayList<String> habsString;
+    ArrayList<Integer> habsInt;
     private ListView HabsList;
     private View itemListView;
     @Nullable
@@ -99,8 +100,10 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
         habsCursor.moveToFirst();
 
         habsString = new ArrayList<String>();
+        habsInt = new ArrayList<Integer>();
         while(!habsCursor.isAfterLast()){
             //Se muestra la palabra habitacion junto al id de la misma
+            habsInt.add(habsCursor.getInt(habsCursor.getColumnIndex("id")));
             habsString.add("Habitación " + habsCursor.getString(habsCursor.getColumnIndex("id")));
             habsCursor.moveToNext();
         }
@@ -135,7 +138,7 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
                 ViewHolder viewHolder = new ViewHolder();
                 viewHolder.title = (TextView)convertView.findViewById(R.id.textCelda);
 
-                viewHolder.title.setText(habsString.get(position));
+                viewHolder.title.setText("Habitación "+ habsInt.get(position));
                 viewHolder.editButton = (ImageButton)convertView.findViewById(R.id.ButtonEdit);
                 viewHolder.deleteButton = (ImageButton)convertView.findViewById(R.id.ButtonDelete);
                 viewHolder.editButton.setOnClickListener(new View.OnClickListener() {
@@ -155,8 +158,9 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
                     public void onClick(View v) {
                         //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         //AlertDialog dialog = builder.create();
-                       adapterPopUp apop = new adapterPopUp();
-                       apop.openDialog(finalConvertView);
+                        Intent i = new Intent(getActivity(), adapterPopUp.class);
+                        i.putExtra("idHab", habsInt.get(position));
+                        startActivity(i);
                     }
                 });
 
@@ -179,41 +183,6 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
     }
 
 
-    public class adapterPopUp extends AppCompatActivity {
-        public void openDialog(View convertView){
-            setContentView(convertView);
-            BorrarDialogFragment borrarpop = new BorrarDialogFragment();
-            borrarpop.show(getSupportFragmentManager(), "borrar_dialog");
-        }
-    }
-
-
-
-    public static class BorrarDialogFragment extends DialogFragment {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            // Get the layout inflater
-            LayoutInflater inflater = requireActivity().getLayoutInflater();
-
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
-            builder.setView(inflater.inflate(R.layout.popup_borrarhab, null))
-                    // Add action buttons
-                    .setPositiveButton(R.string.eliminar, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            // sign in the user ...
-                        }
-                    })
-                    .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            BorrarDialogFragment.this.getDialog().cancel();
-                        }
-                    });
-            return builder.create();
-        }
-    }
 
 
 
