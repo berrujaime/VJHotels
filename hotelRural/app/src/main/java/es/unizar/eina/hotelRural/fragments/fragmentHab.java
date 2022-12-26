@@ -46,7 +46,7 @@ import es.unizar.eina.hotelRural.ModificarHabitacion;
 import es.unizar.eina.hotelRural.R;
 
 
-public class fragmentHab extends Fragment implements AdapterView.OnItemClickListener {
+public class fragmentHab extends Fragment  {
     private HotelDbAdapter mDbHelper;
 
     /* Listas de habitaciones según distintos métodos de listado */
@@ -74,20 +74,12 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getActivity(), ConsultarHabitacion.class);
+                i.putExtra("idHab", habsInt.get(position));
                 startActivity(i);
             }
         });
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
-        if(position == 0){
-            Toast.makeText(getActivity(),"Paris",Toast.LENGTH_SHORT).show();
-        }else if(position == 1){
-            Toast.makeText(getActivity(),"Paris",Toast.LENGTH_SHORT).show();
-        }
-    }
 
 
     /** Función que obtiene las habitaciones para mostrarlas en la lista */
@@ -145,6 +137,7 @@ public class fragmentHab extends Fragment implements AdapterView.OnItemClickList
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(getActivity(), ModificarHabitacion.class);
+                        i.putExtra("idHab", habsInt.get(position));
                         startActivity(i);
                     }
                 });

@@ -62,7 +62,9 @@ public class ModificarHabitacion extends AppCompatActivity {
         numMaxOcupEdit = (Spinner)findViewById(R.id.numMaxOcupantesForm);
 
         //recoger datos de la base de datos
-        Cursor cursor = mDbHelper.fetchHabitacion(7); //se piden siempre los de la 3 para ver si funciona
+        Bundle extras = getIntent().getExtras();
+        int idHab = extras.getInt("idHab");
+        Cursor cursor = mDbHelper.fetchHabitacion(idHab); //se piden siempre los de la 3 para ver si funciona
         cursor.moveToFirst();
 
         //meter datos en cada casilla de texto

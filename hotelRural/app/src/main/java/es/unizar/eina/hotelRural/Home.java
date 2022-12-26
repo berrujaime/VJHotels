@@ -37,7 +37,8 @@ public class Home extends AppCompatActivity {
 
         mDbHelper = new HotelDbAdapter(this);
         mDbHelper.open();
-        //mDbHelper.createHabitacion(3,"hola", 5,120, 10.1f);
+        mDbHelper.createHabitacion(3,"hola", 2,20, 10.1f);
+        //mDbHelper.createHabitacion(5,"hola", 1,40, 10.1f);
         //long id = mDbHelper.createHabitacion(7,"primera habitacion", 1,10.0f, 6);
 
         setContentView(R.layout.home);

@@ -32,7 +32,6 @@ public class adapterPopUp extends AppCompatActivity {
 
 
             idHab = extras.getInt("idHab");
-            System.out.println("Entro aqui y el id es " + idHab);
 
 
             BorrarDialogFragment borrarpop = new BorrarDialogFragment();
@@ -50,7 +49,7 @@ public class adapterPopUp extends AppCompatActivity {
             // Get the layout inflater
             LayoutInflater inflater = requireActivity().getLayoutInflater();
 
-            System.out.println("Entro en la parte 1 y el id es " + idHab);
+
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
             builder.setView(inflater.inflate(R.layout.popup_borrarhab, null))
@@ -58,7 +57,7 @@ public class adapterPopUp extends AppCompatActivity {
                     .setPositiveButton(R.string.eliminar, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
-                            System.out.println("Entro la parte 2 y el id es " + idHab);
+
                             mDbHelper.deleteHab(idHab);
                             Intent i = new Intent(getActivity(), HabitationsList.class);
                             startActivity(i);
