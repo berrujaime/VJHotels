@@ -1,4 +1,4 @@
-package es.unizar.eina.hotelRural;
+/*package es.unizar.eina.hotelRural;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -26,12 +26,12 @@ public class hotelRuralBackup extends AppCompatActivity {
     private ListView mList;
 
 
-    /** Called when the activity is first created. */
+     Called when the activity is first created.
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hotelrural);
+        //setContentView(R.layout.activity_hotelrural);
 
         mDbHelper = new HotelDbAdapter(this);
         mDbHelper.open();
@@ -120,3 +120,5 @@ public class hotelRuralBackup extends AppCompatActivity {
     }
 
 }
+
+ */

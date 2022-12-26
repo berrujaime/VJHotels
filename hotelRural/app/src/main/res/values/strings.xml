@@ -14,8 +14,12 @@
     <string name="tab_text_1">ID</string>
     <string name="tab_text_2">MaxOcup</string>
     <string name="tab_text_3">Precio</string>
+    <string name="tab_text_res1">Nombre</string>
+    <string name="tab_text_res2">Móvil</string>
+    <string name="tab_text_res3">FechaEntrada</string>
     <string name="cancelar">Cancelar</string>
     <string name="eliminar">Eliminar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_tabs_res">activity_tabs_res</string>
 </resources>

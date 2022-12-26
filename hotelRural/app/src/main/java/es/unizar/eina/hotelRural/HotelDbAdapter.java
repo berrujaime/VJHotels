@@ -191,6 +191,22 @@ public class HotelDbAdapter {
         return null;
     }
 
+    //Metodo que devuelve un Cursor con los datos de las resevas del sistema. Los ordena según el
+    //campo method
+    public Cursor fetchAllReservasBy(String method) {
+        if(method == RES_NOMBRE){
+            return mDb.query(DATABASE_RES, new String[] {RES_ID, RES_NOMBRE, RES_MOVIL, RES_FENT,
+                    RES_FSAL}, null, null, null, null, method);
+        }else if(method== RES_MOVIL || method == RES_FENT){
+            return mDb.query(DATABASE_RES, new String[] {RES_ID, RES_NOMBRE, RES_MOVIL, RES_FENT,
+                    RES_FSAL}, null, null, null, null, method + " DESC");
+        }else{
+            System.err.println("ERROR FETCHING RESERVAS");
+        }
+
+        return null;
+    }
+
     /**
      * Return a Cursor positioned at the note that matches the given rowId
      *
