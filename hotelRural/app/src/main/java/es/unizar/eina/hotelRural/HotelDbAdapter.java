@@ -5,8 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Pair;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -202,16 +202,26 @@ public class HotelDbAdapter {
         return null;
     }
 
-    public List<String> fetchHabitacionesReservadas(String id) {
-        List<AbstractMap.SimpleEntry<String, String>> list = new ArrayList<>();
-        List<String> habitaciones = new ArrayList<>();
-        Cursor cursor = mDb.query(DATABASE_HAB_RES, new String[] {HAB_RES_HAB}, "reserva="+id, null, null, null, null);
+    public List<Pair<Integer, Integer>> fetchHabitacionesReservadas(String id) {
+        List<Pair<Integer, Integer>> habitaciones = new ArrayList<>();
+        // Especifica la consulta SQL
+        String query = "SELECT " + HAB_RES_HAB + "," + HAB_RES_OCUP + " FROM " + DATABASE_HAB_RES + " WHERE " + HAB_RES_RES + "=" + id;
+
+        // Ejecuta la consulta y obtiene el cursor con los resultados
+        Cursor cursor = mDb.rawQuery(query, null);
+
+        // Recorre el cursor y procesa los resultados
         while (cursor.moveToNext()) {
-            habitaciones.add(cursor.getString(0));
+            int hab = cursor.getInt(cursor.getColumnIndex(HAB_RES_HAB));
+            int ocup = cursor.getInt(cursor.getColumnIndex(HAB_RES_OCUP));
+            habitaciones.add(new Pair<Integer, Integer>(hab, ocup));
         }
+
+        // Cierra el cursor y la base de datos
         cursor.close();
         return habitaciones;
     }
+
     //Metodo que devuelve un Cursor con los datos de las resevas del sistema. Los ordena según el
     //campo method
     public Cursor fetchAllReservasBy(String method) {

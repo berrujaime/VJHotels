@@ -1,16 +1,16 @@
 package es.unizar.eina.hotelRural;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** Clase para la actividad consultar habitacion
@@ -39,13 +39,16 @@ public class ConsultarReserva2 extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.listaHabitaciones);
         //aquí habría que pasarle la reserva que se haya pulsado, ponemos la 1 para probar
-        List<String> elementos = mDbHelper.fetchHabitacionesReservadas("1");
+        List<Pair<Integer,Integer>> elementos = mDbHelper.fetchHabitacionesReservadas("1");
+        List<String> habitaciones = new ArrayList<>();
+        List<String>  ocupantes = new ArrayList<>();
         String prefix = "Habitación ";
-        for (int i = 0; i < elementos.size(); i++) {
-            elementos.set(i, prefix.concat(elementos.get(i)));
+        for (Pair<Integer, Integer> pair : elementos) {
+            habitaciones.add(prefix.concat(pair.first.toString()));
+            ocupantes.add(pair.second.toString().concat(" ocupantes"));
         }
         //recoger datos de la base de datos
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, elementos);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, habitaciones);
         listView.setAdapter(adapter);
 
         /** Funcion que se activa cuando el botón de salir se pulsa  */
