@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Clase que ayuda a acceder a la base de datos de HotelRural. Define las operaciones CRUD básicas
  * para el  HotelRural, y proporciona funciones para listar, recuperar y modificar una habitación
@@ -35,6 +39,12 @@ public class HotelDbAdapter {
     public static final String RES_FENT = "fechaentrada";
     public static final String RES_FSAL = "fechasalida";
 
+    //Campos de la tabla HabitacionesReservadas
+    public static final String HAB_RES_RES = "reserva";
+    public static final String HAB_RES_HAB = "habitacion";
+    public static final String HAB_RES_OCUP = "ocupantes";
+
+
     //Base de datos
     private DatabaseHelper mDbHelper;
     private SQLiteDatabase mDb;
@@ -43,6 +53,7 @@ public class HotelDbAdapter {
     private static final String DATABASE_TABLE = "notes";
     private static final String DATABASE_HAB = "Habitacion";
     private static final String DATABASE_RES = "Reserva";
+    private static final String DATABASE_HAB_RES = "HabitacionesReservadas";
 
     //Contexto para crear la base de datos
     private final Context mCtx;
@@ -191,6 +202,16 @@ public class HotelDbAdapter {
         return null;
     }
 
+    public List<String> fetchHabitacionesReservadas(String id) {
+        List<AbstractMap.SimpleEntry<String, String>> list = new ArrayList<>();
+        List<String> habitaciones = new ArrayList<>();
+        Cursor cursor = mDb.query(DATABASE_HAB_RES, new String[] {HAB_RES_HAB}, "reserva="+id, null, null, null, null);
+        while (cursor.moveToNext()) {
+            habitaciones.add(cursor.getString(0));
+        }
+        cursor.close();
+        return habitaciones;
+    }
     //Metodo que devuelve un Cursor con los datos de las resevas del sistema. Los ordena según el
     //campo method
     public Cursor fetchAllReservasBy(String method) {
