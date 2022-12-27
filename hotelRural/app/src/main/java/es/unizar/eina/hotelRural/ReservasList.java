@@ -14,11 +14,11 @@ import android.view.View;
 
 import es.unizar.eina.hotelRural.ui.main.PlaceholderFragment;
 import es.unizar.eina.hotelRural.ui.main.SectionsPagerAdapterRes;
-import es.unizar.eina.hotelRural.databinding.ActivityTabsHabBinding;
+import es.unizar.eina.hotelRural.databinding.ActivityTabsResBinding;
 
 public class ReservasList extends AppCompatActivity{
 
-    private ActivityTabsHabBinding binding;
+    private ActivityTabsResBinding binding;
 
 
 
@@ -27,7 +27,7 @@ public class ReservasList extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityTabsHabBinding.inflate(getLayoutInflater());
+        binding = ActivityTabsResBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         SectionsPagerAdapterRes sectionsPagerAdapter = new SectionsPagerAdapterRes(this, getSupportFragmentManager());
@@ -42,7 +42,7 @@ public class ReservasList extends AppCompatActivity{
             public void onClick(View view) {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //      .setAction("Action", null).show();
-                Intent i = new Intent(getApplicationContext(),CrearHabitacion.class);
+                Intent i = new Intent(getApplicationContext(),CrearReserva.class);
                 startActivity(i);
             }
         });

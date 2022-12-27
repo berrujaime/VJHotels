@@ -82,7 +82,7 @@ public class fragmentRes extends Fragment  {
             resCursor = mDbHelper.fetchAllReservasBy("nombrecliente");
         }else if(tabPosition == 1){
             resCursor = mDbHelper.fetchAllReservasBy("movilcliente");
-        }else if(tabPosition == 0){
+        }else if(tabPosition == 2){
             resCursor = mDbHelper.fetchAllReservasBy("fechaentrada");
         }
         resCursor.moveToFirst();
@@ -147,7 +147,7 @@ public class fragmentRes extends Fragment  {
                     public void onClick(View v) {
                         //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         //AlertDialog dialog = builder.create();
-                        Intent i = new Intent(getActivity(), adapterPopUp.class);
+                        Intent i = new Intent(getActivity(), adapterPopUpRes.class);
                         i.putExtra("idRes", resInt.get(position));
                         startActivity(i);
                     }
