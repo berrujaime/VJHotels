@@ -49,7 +49,7 @@ public class ComprobarSolapes {
 
     //este es el método comprobar solapes como tal
     //tendrá que recibir mdbhelper y la reserva que se han guardado como atrib privados
-    public bool execute(){
+    public boolean execute(){
         List<Pair<Integer,Integer>> elementos = mDbHelper.fetchHabitacionesReservadas(String.valueOf(reserva));
         List<String> habitaciones = new ArrayList<>();
         List<String> reservas = new ArrayList<>();
@@ -84,8 +84,13 @@ public class ComprobarSolapes {
         fent = cursor.getString(cursor.getColumnIndex(RES_FENT));
         fsal = cursor.getString(cursor.getColumnIndex(RES_FSAL));
         //se comprueba si hay solapes
-        hayIntervaloOcupado()
+        boolean ocupado = false;
+        try {
+            ocupado = hayIntervaloOcupado(fent,fsal,fechasAComprobar);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //false si no hay solapes, true si hay solapes
+        return ocupado;
     }
-
-
 }
