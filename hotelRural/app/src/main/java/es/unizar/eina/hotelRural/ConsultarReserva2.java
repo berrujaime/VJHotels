@@ -18,7 +18,7 @@ import java.util.List;
 import es.unizar.eina.send.SMSImplementor;
 import es.unizar.eina.send.SendAbstraction;
 import es.unizar.eina.send.SendAbstractionImpl;
-
+import es.unizar.eina.hotelRural.ui.main.ComprobarSolapes;
 /** Clase para la actividad consultar habitacion
  * @author Víctor Gallardo y Jaime Berruete
  */
@@ -99,6 +99,17 @@ public class ConsultarReserva2 extends AppCompatActivity {
         TextView campoPrecio = (TextView)findViewById(R.id.textPrecio);
         campoPrecio.setText("Precio total: " + String.format("%.2f", precio) + "€");
 
+
+        //comprobacion de comprobar solapes, borrar antes de entregar
+        ComprobarSolapes func = new ComprobarSolapes(mDbHelper,1);
+        boolean haySolapes = func.execute();
+        if(haySolapes){
+            System.out.println("########################Hay solapes");
+        }
+        else{
+            System.out.println("########################No hay solapes");
+        }
+        /////////////////////////////////////////////////////////////
         btn_mensaje.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

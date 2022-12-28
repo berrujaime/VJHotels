@@ -20,7 +20,7 @@ public class ComprobarSolapes {
     private HotelDbAdapter mDbHelper;
     private int reserva;
 
-    ComprobarSolapes(HotelDbAdapter db, int res){
+    public ComprobarSolapes(HotelDbAdapter db, int res){
         mDbHelper = db;
         reserva = res;
     }
@@ -36,6 +36,11 @@ public class ComprobarSolapes {
         for (String[] parFechas : paresFechas) {
             Date inicio = FORMATO_FECHA.parse(parFechas[0]);
             Date fin = FORMATO_FECHA.parse(parFechas[1]);
+
+            //
+            System.out.println("Fechas de reserva: " + fechaInicio + " " + fechaFin +
+                    ". Fechas a las que se compara: " + inicio + " " + fin);
+            //
 
             // Si hay un intervalo ocupado, devuelve true
             if ((inicio.before(fechaInicio) && fin.after(fechaInicio)) || (inicio.before(fechaFin) && fin.after(fechaFin)) || (inicio.equals(fechaInicio) || fin.equals(fechaFin))) {
@@ -54,7 +59,7 @@ public class ComprobarSolapes {
         List<String> habitaciones = new ArrayList<>();
         List<String> reservas = new ArrayList<>();
         String fent, fsal;
-        List<String[]> fechasAComprobar = new String[][];
+        List<String[]> fechasAComprobar = new ArrayList<>();
 
         //Se crea la lista de habitaciones asociadas a la reserva
         for (Pair<Integer, Integer> pair : elementos) {
@@ -63,12 +68,12 @@ public class ComprobarSolapes {
 
         //Por cada habitación asociada a la reserva
         for (String habitacion : habitaciones){
-            reservas = mDbHelper.fetchResevasDeHabitacion();
+            reservas = mDbHelper.fetchResevasDeHabitacion(habitacion);
             if(!reservas.isEmpty()){
                 //Por cada reserva que tenga asociada esa habitación sin incluir la actual
                 for(String res : reservas){
                     if(!res.equals(String.valueOf(reserva))){
-                        Cursor cursor = mDbHelper.fetchReserva(reserva);
+                        Cursor cursor = mDbHelper.fetchReserva(Integer.parseInt(res));
                         cursor.moveToFirst();
                         fent = cursor.getString(cursor.getColumnIndex(RES_FENT));
                         fsal = cursor.getString(cursor.getColumnIndex(RES_FSAL));
