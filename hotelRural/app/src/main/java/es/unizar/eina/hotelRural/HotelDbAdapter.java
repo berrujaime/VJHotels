@@ -287,4 +287,9 @@ public class HotelDbAdapter {
         return mDb.delete(DATABASE_HAB, HAB_ID + "=" + rowId, null) > 0;
     }
 
+
+    public boolean deleteRes(long rowId) {
+
+        return mDb.delete(DATABASE_RES, RES_ID + "=" + rowId, null) > 0;
+    }
 }

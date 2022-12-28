@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="350dp"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/titulopopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="¿Seguro que quieres eliminar la reserva?"
+        android:textSize="50px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.323" />
+
+    <!-- <Button
+        android:id="@+id/button_canc"
+        android:layout_width="166dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#11185B"
+        android:fontFamily="sans-serif-black"
+        android:text="CANCELAR"
+        android:textSize="16sp"
+        android:layout_below="@id/titulopopup"
+        android:layout_marginTop="30dp"
+
+        app:cornerRadius="15dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.502"
+        app:strokeColor="#000000"
+        app:strokeWidth="3dp" />
+
+    <Button
+        android:id="@+id/button_eliminarpop"
+        android:layout_width="166dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#F44336"
+        android:fontFamily="sans-serif-black"
+        android:text="ELIMINAR"
+        android:textSize="16sp"
+        android:layout_below="@id/titulopopup"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="180dp"
+
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.934"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#000000"
+        app:strokeWidth="3dp" />
+        -->
+</RelativeLayout>

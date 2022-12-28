@@ -62,8 +62,8 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(Home.this, ConsultarReserva2.class);
-                //Intent i = new Intent(Home.this, ReservasList.class);
+                //Intent i = new Intent(Home.this, ConsultarReserva2.class);
+                Intent i = new Intent(Home.this, ReservasList.class);
                 startActivity(i);
             }
         });

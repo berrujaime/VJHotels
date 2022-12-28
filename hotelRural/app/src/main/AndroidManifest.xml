@@ -37,6 +37,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".fragments.adapterPopUp" />
+        <activity android:name=".fragments.adapterPopUpRes" />
         <activity android:name=".NoteEdit" />
         <activity
             android:name=".CrearHabitacion"
