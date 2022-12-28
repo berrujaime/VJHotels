@@ -15,17 +15,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.unizar.eina.send.SMSImplementor;
+import es.unizar.eina.send.SendAbstraction;
+import es.unizar.eina.send.SendAbstractionImpl;
+
 /** Clase para la actividad consultar habitacion
  * @author Víctor Gallardo y Jaime Berruete
  */
 public class ConsultarReserva2 extends AppCompatActivity {
     public static final String HAB_PRECIO = "precioocupante";
     public static final String HAB_REC = "porcentajerecargo";
-    public static final String HAB_OCUP = "nummaxocupantes";
+
+    //Campos de la tabla reserva
+    public static final String RES_ID = "id";
+    public static final String RES_NOMBRE = "nombrecliente";
+    public static final String RES_MOVIL = "movilcliente";
+    public static final String RES_FENT = "fechaentrada";
+    public static final String RES_FSAL = "fechasalida";
 
     private Button btn_mensaje;
     /* Boton que al clicarlo sale de esta pantalla y vuelve a la lista de habitaciones */
     private Button btn_salir;
+
+    private double precio=0.0;
 
     /* Adaptador de la base de datos */
     private HotelDbAdapter mDbHelper;
@@ -83,9 +95,31 @@ public class ConsultarReserva2 extends AppCompatActivity {
         //recoger datos de la base de datos
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mostrar);
         listView.setAdapter(adapter);
-        double precio = calcularPrecio(mDbHelper, elementos);
+        precio = calcularPrecio(mDbHelper, elementos);
         TextView campoPrecio = (TextView)findViewById(R.id.textPrecio);
         campoPrecio.setText("Precio total: " + String.format("%.2f", precio) + "€");
+
+        btn_mensaje.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String telefono, datos, fent, fsal, nombre;
+                mDbHelper = new HotelDbAdapter(ConsultarReserva2.this);
+                mDbHelper.open();
+
+                Cursor cursor = mDbHelper.fetchReserva(1); //se piden siempre los de la 1 para ver si funciona
+                cursor.moveToFirst();
+                nombre = cursor.getString(cursor.getColumnIndex(RES_NOMBRE));
+                fent = cursor.getString(cursor.getColumnIndex(RES_FENT));
+                fsal = cursor.getString(cursor.getColumnIndex(RES_FSAL));
+                telefono = cursor.getString(cursor.getColumnIndex(RES_MOVIL));
+
+                datos = "Hola, " + nombre + ". Su reserva con entrada el día " + fent + " y salida el día " +
+                        fsal + " tiene un precio de " + String.format("%.2f", precio) + "€." + " Deseamos que pase una agradable estancia en VJHotels.";
+
+                SendAbstraction sa = new SendAbstractionImpl(ConsultarReserva2.this, "SMS");
+                sa.send(telefono,datos);
+            }
+        });
 
         /** Funcion que se activa cuando el botón de salir se pulsa  */
         btn_salir.setOnClickListener(new View.OnClickListener() {

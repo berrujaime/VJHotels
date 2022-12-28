@@ -53,7 +53,7 @@ public class ConsultarHabitacion extends AppCompatActivity {
         //recoger datos de la base de datos
         Bundle extras = getIntent().getExtras();
         int idHab = extras.getInt("idHab");
-        Cursor cursor = mDbHelper.fetchHabitacion(idHab); //se piden siempre los de la 1 para ver si funciona
+        Cursor cursor = mDbHelper.fetchHabitacion(idHab);
         cursor.moveToFirst();
 
         //meter datos en cada casilla de texto
