@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,7 +49,11 @@ public class CrearReserva2 extends AppCompatActivity {
     private ListView HabsList;
 
     //Hashmap con las habitaciones que ha elegido el usuario
-    protected static HashMap<Integer, Integer> habitacionesElegidas; // El primer campo es la posicion en la lista y el segundo el id de la hab
+    /*
+    * Se utiliza un único hashMap en el que se va a almacenar el id, numero de ocupantes
+    * Este numero de ocupantes se actualizará cuando el usuario lo modifique en el Spinner
+    * Si el usuario deselecciona la habitación se borrará del hashmap*/
+    protected static HashMap<Integer, Integer> habitacionesElegidas;
 
     /**
      * Se llama cuando se crea la actividad
@@ -126,18 +131,38 @@ public class CrearReserva2 extends AppCompatActivity {
                 //Se pone el titulo correspondiente
                 viewHolder.title.setText("Habitación " + habsInt.get(position));
                 viewHolder.switchA = (Switch) convertView.findViewById(R.id.switch2);
-
+                viewHolder.spinner = (Spinner) convertView.findViewById(R.id.spinnerocups);
                 viewHolder.switchA.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //Se ha activado el switch
                         if(viewHolder.switchA.isChecked()){
-                            habitacionesElegidas.put(position,habsInt.get(position));
+                            Integer numMaxOcupantes = Integer.parseInt(viewHolder.spinner.getSelectedItem().toString());
+                            habitacionesElegidas.put(habsInt.get(position), numMaxOcupantes);
                             System.out.println("El numero de habs es " + habitacionesElegidas.size());
+                            System.out.println("y los ocupantes es  " + habitacionesElegidas.get(habsInt.get(position)));
                         }else{
-                            habitacionesElegidas.remove(position);
+                            habitacionesElegidas.remove(habsInt.get(position));
                             System.out.println("El numero de habs es " + habitacionesElegidas.size());
                         }
+                    }
+                });
+
+                viewHolder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        //Si se cambia un número de ocupantes de una habitacion seleccionada ya, se actualiza el valor
+                        if(habitacionesElegidas.get(habsInt.get(position)) != null){
+                            Integer numMaxOcupantes = Integer.parseInt(viewHolder.spinner.getSelectedItem().toString());
+                            habitacionesElegidas.put(habsInt.get(position),numMaxOcupantes);
+                            System.out.println("El numero de habs es " + habitacionesElegidas.size());
+                            System.out.println("y los ocupantes es  " + habitacionesElegidas.get(habsInt.get(position)));
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
                     }
                 });
 
