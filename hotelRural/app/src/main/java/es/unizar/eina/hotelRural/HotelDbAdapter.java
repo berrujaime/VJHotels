@@ -176,6 +176,10 @@ public class HotelDbAdapter {
         return mDb.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
+    public Cursor fetchReserva(int id){
+        return mDb.query(DATABASE_RES, new String[] {RES_ID, RES_FENT, RES_FSAL, RES_MOVIL, RES_NOMBRE}, RES_ID+"="+id, null, null, null, null);
+    }
+
     public Cursor fetchHabitacion(int id){
         return mDb.query(DATABASE_HAB, new String[] {HAB_ID, HAB_DESC, HAB_OCUP, HAB_PRECIO,
                 HAB_REC}, HAB_ID+"="+id, null, null, null, null);
@@ -220,6 +224,25 @@ public class HotelDbAdapter {
         // Cierra el cursor y la base de datos
         cursor.close();
         return habitaciones;
+    }
+
+    public List<String> fetchResevasDeHabitacion(String id) {
+        List<String> reservas = new ArrayList<>();
+        // Especifica la consulta SQL
+        String query = "SELECT " + HAB_RES_RES + " FROM " + DATABASE_HAB_RES + " WHERE " + HAB_RES_HAB + "=" + id;
+
+        // Ejecuta la consulta y obtiene el cursor con los resultados
+        Cursor cursor = mDb.rawQuery(query, null);
+
+        // Recorre el cursor y procesa los resultados
+        while (cursor.moveToNext()) {
+            String res = cursor.getString(cursor.getColumnIndex(HAB_RES_RES));
+            reservas.add(res);
+        }
+
+        // Cierra el cursor y la base de datos
+        cursor.close();
+        return reservas;
     }
 
     //Metodo que devuelve un Cursor con los datos de las resevas del sistema. Los ordena según el
