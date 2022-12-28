@@ -101,16 +101,11 @@ public class fragmentHab extends Fragment  {
         }
         habsCursor.close();
 
-
-
         ArrayAdapter<String> adapter= new ArrayAdapter<>(getActivity(), R.layout.list_itemhab, R.id.textCelda, habsString);
         HabsList.setAdapter(adapter);
 
-
-
-
     }
-
+    //Clase para hacer los botones de cada fila de la lista clickables
     private class MyListAdapter extends ArrayAdapter<String> {
         private int layout;
         private ArrayList<String> habsString;

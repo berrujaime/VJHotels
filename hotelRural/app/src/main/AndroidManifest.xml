@@ -47,6 +47,8 @@
         <activity
             android:name=".CrearReserva"
             android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".CrearReserva2"/>
         <activity android:name=".ConsultarReserva2" />
 
         <meta-data
