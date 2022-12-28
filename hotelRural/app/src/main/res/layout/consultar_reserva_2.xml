@@ -23,7 +23,7 @@
         android:id="@+id/btnMensaje"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="60dp"
         android:backgroundTint="#11185B"
         android:fontFamily="sans-serif-black"
         android:text="ENVIAR MENSAJE"
@@ -50,9 +50,23 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.976"
+        app:layout_constraintVertical_bias="0.992"
         app:strokeColor="#000000"
         app:strokeWidth="3dp" />
+
+    <TextView
+        android:id="@+id/textPrecio"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:gravity="center"
+        android:textColor="#11185B"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.802" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -91,8 +105,14 @@
             android:id="@+id/listaHabitaciones"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:foregroundGravity="center_vertical|center|center_horizontal"
+            android:gravity="center"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="311dp"></ListView>
+            tools:layout_editor_absoluteY="311dp">
+
+        </ListView>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
