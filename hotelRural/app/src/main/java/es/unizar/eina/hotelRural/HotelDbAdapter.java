@@ -163,6 +163,16 @@ public class HotelDbAdapter {
         return mDb.insert(DATABASE_RES, null, initialValues);
     }
 
+    public long createHabitacionesReservadas(Integer resId, Integer habId, Integer numOcups) {
+        ContentValues initialValues = new ContentValues();
+        //ID AUTOINCREMENT
+        initialValues.put(HAB_RES_RES, resId);
+        initialValues.put(HAB_RES_HAB, habId);
+        initialValues.put(HAB_RES_OCUP,numOcups);
+
+
+        return mDb.insert(DATABASE_HAB_RES, null, initialValues);
+    }
     public boolean updateReserva(String id, String nombre, String tel, String fent, String fsal){
         ContentValues args = new ContentValues();
         args.put(RES_ID, id);
@@ -323,5 +333,10 @@ public class HotelDbAdapter {
     public boolean deleteRes(long rowId) {
 
         return mDb.delete(DATABASE_RES, RES_ID + "=" + rowId, null) > 0;
+    }
+
+    public boolean deleteHabsRes(long rowId) {
+
+        return mDb.delete(DATABASE_HAB_RES, HAB_RES_RES + "=" + rowId, null) > 0;
     }
 }

@@ -45,7 +45,9 @@ public class ModificarReserva1 extends AppCompatActivity {
         btn_sig = findViewById(R.id.siguiente);
 
         //recoger datos de la base de datos
-        Cursor cursor = mDbHelper.fetchReserva(1);
+        Bundle extras = getIntent().getExtras();
+        int idRes = extras.getInt("idRes");
+        Cursor cursor = mDbHelper.fetchHabitacion(idRes);
         cursor.moveToFirst();
 
         //recoger datos de los campos de texto y el spinner

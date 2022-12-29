@@ -63,7 +63,7 @@ public class fragmentRes extends Fragment  {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getActivity(), ConsultarHabitacion.class);
-                i.putExtra("idHab", resInt.get(position));
+                i.putExtra("idRes", resInt.get(position));
                 startActivity(i);
             }
         });

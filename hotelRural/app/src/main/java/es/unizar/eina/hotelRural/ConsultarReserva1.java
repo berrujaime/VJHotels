@@ -53,7 +53,9 @@ public class ConsultarReserva1 extends AppCompatActivity {
         btn_sig = findViewById(R.id.sig);
 
         //recoger datos de la base de datos
-        Cursor cursor = mDbHelper.fetchReserva(1);
+        Bundle extras = getIntent().getExtras();
+        int idRes = extras.getInt("idRes");
+        Cursor cursor = mDbHelper.fetchHabitacion(idRes);
         cursor.moveToFirst();
 
         //meter datos en cada casilla de texto

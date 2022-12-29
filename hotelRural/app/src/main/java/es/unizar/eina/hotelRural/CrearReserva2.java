@@ -26,14 +26,15 @@ import java.util.List;
 
 import es.unizar.eina.hotelRural.fragments.adapterPopUp;
 import es.unizar.eina.hotelRural.fragments.fragmentHab;
+import es.unizar.eina.hotelRural.ui.main.ComprobarSolapes;
 
 /** Clase para la actividad crear habitacion
  * @author Víctor Gallardo y Jaime Berruete
  */
 public class CrearReserva2 extends AppCompatActivity {
 
-    /* Boton que al clicarlo avanza en el proceso de crear una reserva */
-    private Button btn_sig;
+    /* Boton que al clicarlo completa la creacion del a reserva */
+    private Button btn_crear;
 
     /* Adaptador de la base de datos */
     private HotelDbAdapter mDbHelper;
@@ -46,7 +47,11 @@ public class CrearReserva2 extends AppCompatActivity {
 
     ArrayList<String> habsString; // String con los nombres de las habitaciones para mostrarlas en la lista
     ArrayList<Integer> habsInt; // Lista de los ids de las habitaciones mostradas
+    ArrayList<Integer> habsOcup; //Lista de los ocupantes de cada habitacion. Estan ordenados en el mismo orden que habsInt.
     private ListView HabsList;
+
+    //Id de la reserva que se esta creando
+    private Integer idReserva;
 
     //Hashmap con las habitaciones que ha elegido el usuario
     /*
@@ -67,12 +72,31 @@ public class CrearReserva2 extends AppCompatActivity {
         mDbHelper = new HotelDbAdapter(this);
         mDbHelper.open();
         habitacionesElegidas = new HashMap<Integer,Integer>();
-        btn_sig = findViewById(R.id.crear);
+        btn_crear = findViewById(R.id.crear);
 
 
         HabsList = (ListView) findViewById(R.id.listaHabitaciones);
         fillData();
         HabsList.setAdapter(new CrearReserva2.MyListAdapter(this,R.layout.list_crearres,habsString));
+
+        btn_crear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(habitacionesElegidas.size() == 0){
+                    //Hay que seleccionar una habitación
+                }else{
+                    //mDbHelper.createHabitacionesReservadas()
+                }
+                ComprobarSolapes func = new ComprobarSolapes(mDbHelper,1);
+                boolean haySolapes = func.execute();
+                if(haySolapes){
+                    System.out.println("########################Hay solapes");
+                }
+                else{
+                    System.out.println("########################No hay solapes");
+                }
+            }
+        });
 
         /** Funcion que se activa cuando el botón de crear habitación se pulsa  */
 
@@ -94,10 +118,13 @@ public class CrearReserva2 extends AppCompatActivity {
 
         habsString = new ArrayList<String>();
         habsInt = new ArrayList<Integer>();
+        habsOcup = new ArrayList<Integer>();
         while (!habsCursor.isAfterLast()) {
             //Se muestra la palabra habitacion junto al id de la misma
             habsInt.add(habsCursor.getInt(habsCursor.getColumnIndex("id")));
             habsString.add("Habitación " + habsCursor.getString(habsCursor.getColumnIndex("id")));
+            //Se obtiene los ocupantes de cada habitación para usarlos mas tarde en el spinner.
+            habsOcup.add(habsCursor.getInt(habsCursor.getColumnIndex("nummaxocupantes")));
             habsCursor.moveToNext();
         }
         habsCursor.close();
@@ -132,6 +159,20 @@ public class CrearReserva2 extends AppCompatActivity {
                 viewHolder.title.setText("Habitación " + habsInt.get(position));
                 viewHolder.switchA = (Switch) convertView.findViewById(R.id.switch2);
                 viewHolder.spinner = (Spinner) convertView.findViewById(R.id.spinnerocups);
+
+                /* La parte que hay a continuación sirve para validar la capacidad de las habitaciones dinámicamente*/
+                //Se configura el spinner para que su número de ocupantes correspondientes
+                String opcionesPop[] = new String[habsOcup.get(position)];
+                //Se crea un array con los ocupantes que puede tener esa hab
+                for(int i=0; i < habsOcup.get(position); i++){
+                    opcionesPop[i]= Integer.toString(i+1);
+                }
+                //Se añaden al adapter para que se muestren
+                ArrayAdapter<String> adapterOcups = new ArrayAdapter<>(getContext(),
+                        android.R.layout.simple_spinner_dropdown_item,opcionesPop);
+                viewHolder.spinner.setAdapter(adapterOcups);
+
+
                 viewHolder.switchA.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -139,24 +180,22 @@ public class CrearReserva2 extends AppCompatActivity {
                         if(viewHolder.switchA.isChecked()){
                             Integer numMaxOcupantes = Integer.parseInt(viewHolder.spinner.getSelectedItem().toString());
                             habitacionesElegidas.put(habsInt.get(position), numMaxOcupantes);
-                            System.out.println("El numero de habs es " + habitacionesElegidas.size());
-                            System.out.println("y los ocupantes es  " + habitacionesElegidas.get(habsInt.get(position)));
                         }else{
                             habitacionesElegidas.remove(habsInt.get(position));
-                            System.out.println("El numero de habs es " + habitacionesElegidas.size());
                         }
                     }
                 });
 
                 viewHolder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                    int posicionFila = position;
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                         //Si se cambia un número de ocupantes de una habitacion seleccionada ya, se actualiza el valor
-                        if(habitacionesElegidas.get(habsInt.get(position)) != null){
+                        if(habitacionesElegidas.get(habsInt.get(posicionFila)) != null){
                             Integer numMaxOcupantes = Integer.parseInt(viewHolder.spinner.getSelectedItem().toString());
-                            habitacionesElegidas.put(habsInt.get(position),numMaxOcupantes);
-                            System.out.println("El numero de habs es " + habitacionesElegidas.size());
-                            System.out.println("y los ocupantes es  " + habitacionesElegidas.get(habsInt.get(position)));
+                            habitacionesElegidas.put(habsInt.get(posicionFila),numMaxOcupantes);
                         }
                     }
 
@@ -165,6 +204,10 @@ public class CrearReserva2 extends AppCompatActivity {
 
                     }
                 });
+
+
+
+
 
 
                 convertView.setTag(viewHolder);
