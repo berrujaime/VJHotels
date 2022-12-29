@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.viewpager.widget.ViewPager;
@@ -12,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
-import es.unizar.eina.hotelRural.ui.main.PlaceholderFragment;
 import es.unizar.eina.hotelRural.ui.main.SectionsPagerAdapterRes;
 import es.unizar.eina.hotelRural.databinding.ActivityTabsResBinding;
 
@@ -42,7 +40,7 @@ public class ReservasList extends AppCompatActivity{
             public void onClick(View view) {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //      .setAction("Action", null).show();
-                Intent i = new Intent(getApplicationContext(),CrearReserva.class);
+                Intent i = new Intent(getApplicationContext(), CrearReserva1.class);
                 startActivity(i);
             }
         });

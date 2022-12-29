@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 /** Clase para la actividad crear habitacion
  * @author Víctor Gallardo y Jaime Berruete
  */
-public class CrearReserva extends AppCompatActivity {
+public class CrearReserva1 extends AppCompatActivity {
 
     /* Boton que al clicarlo avanza en el proceso de crear una reserva */
     private Button btn_sig;

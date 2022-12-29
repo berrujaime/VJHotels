@@ -45,12 +45,13 @@
         <activity android:name=".ConsultarHabitacion" />
         <activity android:name=".ModificarHabitacion" />
         <activity
-            android:name=".CrearReserva"
+            android:name=".CrearReserva1"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".CrearReserva2"/>
         <activity android:name=".ConsultarReserva1" />
         <activity android:name=".ConsultarReserva2" />
+        <activity android:name=".ModificarReserva1" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -163,7 +163,16 @@ public class HotelDbAdapter {
         return mDb.insert(DATABASE_RES, null, initialValues);
     }
 
+    public boolean updateReserva(String id, String nombre, String tel, String fent, String fsal){
+        ContentValues args = new ContentValues();
+        args.put(RES_ID, id);
+        args.put(RES_NOMBRE, nombre);
+        args.put(RES_MOVIL, tel);
+        args.put(RES_FENT, fent);
+        args.put(RES_FSAL, fsal);
 
+        return mDb.update(DATABASE_RES, args, RES_ID + "=" + id, null) > 0;
+    }
 
     /**
      * Delete the note with the given rowId
