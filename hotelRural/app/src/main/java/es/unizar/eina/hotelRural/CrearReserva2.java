@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -84,17 +86,27 @@ public class CrearReserva2 extends AppCompatActivity {
             public void onClick(View v) {
                 if(habitacionesElegidas.size() == 0){
                     //Hay que seleccionar una habitación
+                    Context context = CrearReserva2.this;
+                    CharSequence text = "Seleccione al menos una habitación" ;
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context,text,duration);
+
+                    View view = toast.getView();
+                    view.setBackgroundColor(Color.parseColor("#FF0000"));
+                    toast.show();
                 }else{
                     //mDbHelper.createHabitacionesReservadas()
+                    ComprobarSolapes func = new ComprobarSolapes(mDbHelper,1);
+                    boolean haySolapes = func.execute();
+                    if(haySolapes){
+                        System.out.println("########################Hay solapes");
+                    }
+                    else{
+                        System.out.println("########################No hay solapes");
+                    }
                 }
-                ComprobarSolapes func = new ComprobarSolapes(mDbHelper,1);
-                boolean haySolapes = func.execute();
-                if(haySolapes){
-                    System.out.println("########################Hay solapes");
-                }
-                else{
-                    System.out.println("########################No hay solapes");
-                }
+
             }
         });
 
