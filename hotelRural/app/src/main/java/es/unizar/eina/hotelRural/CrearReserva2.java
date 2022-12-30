@@ -35,6 +35,8 @@ import es.unizar.eina.hotelRural.ui.main.ComprobarSolapes;
  */
 public class CrearReserva2 extends AppCompatActivity {
 
+    public static final String HAB_OCUP = "nummaxocupantes";
+
     /* Boton que al clicarlo completa la creacion del a reserva */
     private Button btn_crear;
 
@@ -95,18 +97,9 @@ public class CrearReserva2 extends AppCompatActivity {
                     View view = toast.getView();
                     view.setBackgroundColor(Color.parseColor("#FF0000"));
                     toast.show();
-                }else{
+                }//else{
                     //mDbHelper.createHabitacionesReservadas()
-                    ComprobarSolapes func = new ComprobarSolapes(mDbHelper,1);
-                    boolean haySolapes = func.execute();
-                    if(haySolapes){
-                        System.out.println("########################Hay solapes");
-                    }
-                    else{
-                        System.out.println("########################No hay solapes");
-                    }
-                }
-
+                //}
             }
         });
 
@@ -122,24 +115,24 @@ public class CrearReserva2 extends AppCompatActivity {
      */
     @SuppressLint("Range")
     private void fillData() {
-
-
-        // Get all of the habs ordered by "id"
-        Cursor habsCursor = mDbHelper.fetchAllHabitacionesBy("id");
-        habsCursor.moveToFirst();
+        /*Se hace un control de errores preventivo listando solo las habitaciones que no tendrían
+          problema de solapamiento.
+          */
+        ComprobarSolapes func = new ComprobarSolapes(mDbHelper,6);
+        habsInt = (ArrayList<Integer>) func.execute();
 
         habsString = new ArrayList<String>();
-        habsInt = new ArrayList<Integer>();
         habsOcup = new ArrayList<Integer>();
-        while (!habsCursor.isAfterLast()) {
+        for (int habitacion : habsInt) {
             //Se muestra la palabra habitacion junto al id de la misma
-            habsInt.add(habsCursor.getInt(habsCursor.getColumnIndex("id")));
-            habsString.add("Habitación " + habsCursor.getString(habsCursor.getColumnIndex("id")));
+            habsString.add("Habitación " + String.valueOf(habitacion));
             //Se obtiene los ocupantes de cada habitación para usarlos mas tarde en el spinner.
-            habsOcup.add(habsCursor.getInt(habsCursor.getColumnIndex("nummaxocupantes")));
-            habsCursor.moveToNext();
+
+            Cursor cursor = mDbHelper.fetchHabitacion(habitacion);
+            cursor.moveToFirst();
+            habsOcup.add(cursor.getInt(cursor.getColumnIndex(HAB_OCUP)));
+            cursor.close();
         }
-        habsCursor.close();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_crearres, R.id.textCelda, habsString);
         HabsList.setAdapter(adapter);
