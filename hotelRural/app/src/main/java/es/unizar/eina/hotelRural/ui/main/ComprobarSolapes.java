@@ -71,15 +71,16 @@ public class ComprobarSolapes {
 
         //se sacan todas las habitaciones que hay
         Cursor habsCursor = mDbHelper.fetchAllHabitacionesBy("id");
-        habsCursor.moveToFirst();
         while (habsCursor.moveToNext()) {
             String hab = habsCursor.getString(habsCursor.getColumnIndex(HAB_ID));
             habitaciones.add(hab);
+            System.out.println("El valor de hab es "+ hab);
         }
 
         //Por cada habitación se comprueba si estaría disponible
         for (String habitacion : habitaciones){
             reservas = mDbHelper.fetchResevasDeHabitacion(habitacion);
+            //Caso si que hay reservas que tienen habitaciones asociadas
             if(!reservas.isEmpty()){
                 //Por cada reserva que tenga asociada esa habitación sin incluir la actual
                 for(String res : reservas){
@@ -101,6 +102,9 @@ public class ComprobarSolapes {
                         }
                     }
                 }
+            }else{
+                //No hay reservas con habitaciones asociadas
+                habitacionesDisp.add(Integer.parseInt(habitacion));
             }
         }
         //se devuelven las habitaciones disponibles para reservar

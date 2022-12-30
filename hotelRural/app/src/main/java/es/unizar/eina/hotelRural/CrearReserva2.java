@@ -101,10 +101,20 @@ public class CrearReserva2 extends AppCompatActivity {
                 }else{
                     //Se obtienen el id de la reserva y se van añadiendo las habitacionesReservadas
                     Cursor lastId = mDbHelper.fetchLastReserva();
-                    int lastId_ = lastId.getInt(lastId.getColumnIndex("id"));
+                    lastId.moveToFirst();
+                    int lastId_ = lastId.getInt(lastId.getColumnIndex("seq"));
                     for(Map.Entry<Integer,Integer> set:habitacionesElegidas.entrySet()){
                         mDbHelper.createHabitacionesReservadas(lastId_,set.getKey(),set.getValue());
                     }
+                    Context context = CrearReserva2.this;
+                    CharSequence text = "Reserva creada con id " + lastId_ ;
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context,text,duration);
+
+                    toast.show();
+                    Intent i = new Intent(getApplicationContext(), ReservasList.class);
+                    startActivity(i);
                 }
             }
         });
@@ -124,7 +134,11 @@ public class CrearReserva2 extends AppCompatActivity {
         /*Se hace un control de errores preventivo listando solo las habitaciones que no tendrían
           problema de solapamiento.
           */
-        ComprobarSolapes func = new ComprobarSolapes(mDbHelper,6);
+        Cursor lastId = mDbHelper.fetchLastReserva();
+        lastId.moveToFirst();
+        int lastId_ = lastId.getInt(lastId.getColumnIndex("seq"));
+        System.out.println("El id recuperado es " + lastId_);
+        ComprobarSolapes func = new ComprobarSolapes(mDbHelper,lastId_);
         habsInt = (ArrayList<Integer>) func.execute();
 
         habsString = new ArrayList<String>();

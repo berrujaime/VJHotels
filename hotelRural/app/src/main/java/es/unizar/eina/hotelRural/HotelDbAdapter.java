@@ -344,7 +344,6 @@ public class HotelDbAdapter {
 
     //Obtiene la ultima reserva creada
     public Cursor fetchLastReserva() {
-            return mDb.query(sequence_sqlite, new String[] {RES_ID, RES_NOMBRE, RES_MOVIL, RES_FENT,
-                    RES_FSAL}, "name=Reserva", null, null, null, null);
+            return mDb.query(sequence_sqlite, new String[] {"seq"}, "name='Reserva'", null, null, null, null);
     }
 }
