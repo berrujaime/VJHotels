@@ -78,7 +78,9 @@ public class ConsultarReserva2 extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.listaHabitaciones);
         //aquí habría que pasarle la reserva que se haya pulsado, ponemos la 1 para probar
-        List<Pair<Integer,Integer>> elementos = mDbHelper.fetchHabitacionesReservadas("1");
+        Bundle extras = getIntent().getExtras();
+        int idRes = extras.getInt("idRes");
+        List<Pair<Integer,Integer>> elementos = mDbHelper.fetchHabitacionesReservadas(String.valueOf(idRes));
         List<String> habitaciones = new ArrayList<>();
         List<String>  ocupantes = new ArrayList<>();
         List<String> mostrar = new ArrayList<>();
@@ -106,7 +108,9 @@ public class ConsultarReserva2 extends AppCompatActivity {
                 mDbHelper = new HotelDbAdapter(ConsultarReserva2.this);
                 mDbHelper.open();
 
-                Cursor cursor = mDbHelper.fetchReserva(1); //se piden siempre los de la 1 para ver si funciona
+                Bundle extras = getIntent().getExtras();
+                int idRes = extras.getInt("idRes");
+                Cursor cursor = mDbHelper.fetchReserva(idRes); //se piden siempre los de la 1 para ver si funciona
                 cursor.moveToFirst();
                 nombre = cursor.getString(cursor.getColumnIndex(RES_NOMBRE));
                 fent = cursor.getString(cursor.getColumnIndex(RES_FENT));
@@ -126,7 +130,7 @@ public class ConsultarReserva2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //esto tendrá que llevar a ListaReservas
-                Intent i = new Intent(getApplicationContext(), HabitationsList.class);
+                Intent i = new Intent(getApplicationContext(), Home.class);
                 startActivity(i);
             }
         });

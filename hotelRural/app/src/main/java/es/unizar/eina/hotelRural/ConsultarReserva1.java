@@ -69,6 +69,7 @@ public class ConsultarReserva1 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), ConsultarReserva2.class);
+                i.putExtra("idRes",idRes);
                 startActivity(i);
             }
         });
