@@ -44,6 +44,8 @@ public class HotelDbAdapter {
     public static final String HAB_RES_HAB = "habitacion";
     public static final String HAB_RES_OCUP = "ocupantes";
 
+    public static final String sequence_sqlite = "sqlite_sequence";
+
 
     //Base de datos
     private DatabaseHelper mDbHelper;
@@ -338,5 +340,11 @@ public class HotelDbAdapter {
     public boolean deleteHabsRes(long rowId) {
 
         return mDb.delete(DATABASE_HAB_RES, HAB_RES_RES + "=" + rowId, null) > 0;
+    }
+
+    //Obtiene la ultima reserva creada
+    public Cursor fetchLastReserva() {
+            return mDb.query(sequence_sqlite, new String[] {RES_ID, RES_NOMBRE, RES_MOVIL, RES_FENT,
+                    RES_FSAL}, "name=Reserva", null, null, null, null);
     }
 }

@@ -59,7 +59,7 @@ public class CrearReserva1 extends AppCompatActivity {
                     telefono = telefonoEdit.getText().toString();
                     fechaEntrada = fechaEntradaEdit.getText().toString();
                     fechaSalida = fechaSalidaEdit.getText().toString();
-                    mDbHelper.createReserva(nombre, telefono, fechaEntrada, fechaSalida);
+                    //mDbHelper.createReserva(nombre, telefono, fechaEntrada, fechaSalida);
                     Intent i = new Intent(getApplicationContext(), CrearReserva2.class);
                     startActivity(i);
 

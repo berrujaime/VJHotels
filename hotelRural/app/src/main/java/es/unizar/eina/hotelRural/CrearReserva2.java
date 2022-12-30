@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import es.unizar.eina.hotelRural.fragments.adapterPopUp;
 import es.unizar.eina.hotelRural.fragments.fragmentHab;
@@ -97,9 +98,14 @@ public class CrearReserva2 extends AppCompatActivity {
                     View view = toast.getView();
                     view.setBackgroundColor(Color.parseColor("#FF0000"));
                     toast.show();
-                }//else{
-                    //mDbHelper.createHabitacionesReservadas()
-                //}
+                }else{
+                    //Se obtienen el id de la reserva y se van añadiendo las habitacionesReservadas
+                    Cursor lastId = mDbHelper.fetchLastReserva();
+                    int lastId_ = lastId.getInt(lastId.getColumnIndex("id"));
+                    for(Map.Entry<Integer,Integer> set:habitacionesElegidas.entrySet()){
+                        mDbHelper.createHabitacionesReservadas(lastId_,set.getKey(),set.getValue());
+                    }
+                }
             }
         });
 
@@ -123,6 +129,7 @@ public class CrearReserva2 extends AppCompatActivity {
 
         habsString = new ArrayList<String>();
         habsOcup = new ArrayList<Integer>();
+        System.out.println("El numero de habitacioens disponibles es " + habsInt.size());
         for (int habitacion : habsInt) {
             //Se muestra la palabra habitacion junto al id de la misma
             habsString.add("Habitación " + String.valueOf(habitacion));

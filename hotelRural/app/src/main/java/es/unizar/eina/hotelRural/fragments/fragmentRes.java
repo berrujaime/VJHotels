@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.unizar.eina.hotelRural.ConsultarHabitacion;
+import es.unizar.eina.hotelRural.ConsultarReserva1;
 import es.unizar.eina.hotelRural.HotelDbAdapter;
 import es.unizar.eina.hotelRural.ModificarHabitacion;
 import es.unizar.eina.hotelRural.R;
@@ -62,7 +63,8 @@ public class fragmentRes extends Fragment  {
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getActivity(), ConsultarHabitacion.class);
+                Intent i = new Intent(getActivity(), ConsultarReserva1.class);
+                System.out.println("Le vamos a añadir el id " + resInt.get(position));
                 i.putExtra("idRes", resInt.get(position));
                 startActivity(i);
             }
