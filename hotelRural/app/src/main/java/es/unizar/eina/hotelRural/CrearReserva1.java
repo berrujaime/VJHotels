@@ -53,7 +53,7 @@ public class CrearReserva1 extends AppCompatActivity {
                 fechaEntradaEdit.getText().toString().isEmpty() || fechaSalidaEdit.getText().toString().isEmpty()){
                     System.out.println("Algun campo vacio");
                 }
-
+                else {
                     //se avanza en el proceso de reserva
                     nombre = nombreEdit.getText().toString();
                     telefono = telefonoEdit.getText().toString();
@@ -62,7 +62,7 @@ public class CrearReserva1 extends AppCompatActivity {
                     mDbHelper.createReserva(nombre, telefono, fechaEntrada, fechaSalida);
                     Intent i = new Intent(getApplicationContext(), CrearReserva2.class);
                     startActivity(i);
-
+                }
 
             }
         });

@@ -77,6 +77,7 @@ public class ModificarReserva1 extends AppCompatActivity {
                 fechaEntradaEdit.getText().toString().isEmpty() || fechaSalidaEdit.getText().toString().isEmpty()){
                     System.out.println("Algun campo vacio");
                 }
+                else {
                     //se avanza en el proceso de reserva
                     //no comprobamos si se ha modificado alguno, ejecutamos update directamente
                     nombre = nombreEdit.getText().toString();
@@ -84,15 +85,15 @@ public class ModificarReserva1 extends AppCompatActivity {
                     fechaEntrada = fechaEntradaEdit.getText().toString();
                     fechaSalida = fechaSalidaEdit.getText().toString();
                     boolean haIdoBien = mDbHelper.updateReserva(id, nombre, telefono, fechaEntrada, fechaSalida);
-                    if(haIdoBien){
+                    if (haIdoBien) {
                         //esto tendrá que ir a ModificarReserva2
                         Intent i = new Intent(getApplicationContext(), ModificarReserva2.class);
-                        i.putExtra("idRes",idRes);
+                        i.putExtra("idRes", idRes);
                         startActivity(i);
-                    }
-                    else{
+                    } else {
                         System.out.println("Error en el update");
                     }
+                }
             }
         });
     }
