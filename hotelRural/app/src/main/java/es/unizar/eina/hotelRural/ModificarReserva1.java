@@ -47,7 +47,7 @@ public class ModificarReserva1 extends AppCompatActivity {
         //recoger datos de la base de datos
         Bundle extras = getIntent().getExtras();
         int idRes = extras.getInt("idRes");
-        Cursor cursor = mDbHelper.fetchHabitacion(idRes);
+        Cursor cursor = mDbHelper.fetchReserva(idRes);
         cursor.moveToFirst();
 
         //recoger datos de los campos de texto y el spinner
@@ -86,7 +86,8 @@ public class ModificarReserva1 extends AppCompatActivity {
                     boolean haIdoBien = mDbHelper.updateReserva(id, nombre, telefono, fechaEntrada, fechaSalida);
                     if(haIdoBien){
                         //esto tendrá que ir a ModificarReserva2
-                        Intent i = new Intent(getApplicationContext(), Home.class);
+                        Intent i = new Intent(getApplicationContext(), ModificarReserva2.class);
+                        i.putExtra("idRes",idRes);
                         startActivity(i);
                     }
                     else{

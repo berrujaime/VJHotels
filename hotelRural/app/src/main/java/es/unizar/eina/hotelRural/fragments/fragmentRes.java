@@ -25,6 +25,7 @@ import es.unizar.eina.hotelRural.ConsultarHabitacion;
 import es.unizar.eina.hotelRural.ConsultarReserva1;
 import es.unizar.eina.hotelRural.HotelDbAdapter;
 import es.unizar.eina.hotelRural.ModificarHabitacion;
+import es.unizar.eina.hotelRural.ModificarReserva1;
 import es.unizar.eina.hotelRural.R;
 
 
@@ -134,7 +135,7 @@ public class fragmentRes extends Fragment  {
                 viewHolder.editButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getActivity(), ModificarHabitacion.class);
+                        Intent i = new Intent(getActivity(), ModificarReserva1.class);
                         i.putExtra("idRes", resInt.get(position));
                         startActivity(i);
                     }

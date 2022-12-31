@@ -266,6 +266,8 @@ public class HotelDbAdapter {
         return reservas;
     }
 
+
+
     //Metodo que devuelve un Cursor con los datos de las resevas del sistema. Los ordena según el
     //campo method
     public Cursor fetchAllReservasBy(String method) {
