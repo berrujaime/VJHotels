@@ -63,6 +63,9 @@ public class ModificarReserva2 extends AppCompatActivity {
     * Si el usuario deselecciona la habitación se borrará del hashmap*/
     protected static HashMap<Integer, Integer> habitacionesElegidas;
 
+    private int preSelectedRooms = 0;
+    private int idRes = -1;
+
     /**
      * Se llama cuando se crea la actividad
      */
@@ -85,7 +88,36 @@ public class ModificarReserva2 extends AppCompatActivity {
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(habitacionesElegidas.size() == 0){
+                    //Hay que seleccionar una habitación
+                    Context context = ModificarReserva2.this;
+                    CharSequence text = "Seleccione al menos una habitación" ;
+                    int duration = Toast.LENGTH_SHORT;
 
+                    Toast toast = Toast.makeText(context,text,duration);
+
+                    View view = toast.getView();
+                    view.setBackgroundColor(Color.parseColor("#FF0000"));
+                    toast.show();
+                }else{
+
+                    //Se elimina la anterior entrada que habia de habitacionesReservadas
+                    mDbHelper.deleteHabsRes(idRes);
+                    //Se obtienen el id de la reserva y se van añadiendo las habitacionesReservadas
+
+                    for(Map.Entry<Integer,Integer> set:habitacionesElegidas.entrySet()){
+                        mDbHelper.createHabitacionesReservadas(idRes,set.getKey(),set.getValue());
+                    }
+                    Context context = ModificarReserva2.this;
+                    CharSequence text = "Reserva modificada con id " + idRes ;
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context,text,duration);
+
+                    toast.show();
+                    Intent i = new Intent(getApplicationContext(), ReservasList.class);
+                    startActivity(i);
+                }
             }
         });
 
@@ -108,13 +140,34 @@ public class ModificarReserva2 extends AppCompatActivity {
         habsString = new ArrayList<String>();
         habsOcup = new ArrayList<Integer>();
         Bundle extras = getIntent().getExtras();
-        int idRes = extras.getInt("idRes");
-        List<Pair<Integer,Integer>> elementos = mDbHelper.fetchHabitacionesReservadas(String.valueOf(idRes));
+        idRes = extras.getInt("idRes");
         String prefix = "Habitación ";
+        //Obtenemos las habitaciones que se seleccionaron
+        List<Pair<Integer,Integer>> elementos = mDbHelper.fetchHabitacionesReservadas(String.valueOf(idRes));
         for (Pair<Integer, Integer> pair : elementos) {
             habsString.add(prefix.concat(pair.first.toString()));
             habsOcup.add(pair.second);
             habsInt.add(pair.first);
+            preSelectedRooms++;
+            habitacionesElegidas.put(pair.first,pair.second);
+        }
+
+        //Obtenemos el resto de habitaciones disponibles
+
+        ComprobarSolapes func = new ComprobarSolapes(mDbHelper,idRes);
+        ArrayList<Integer> habsInt_conc = (ArrayList<Integer>) func.execute();
+
+
+        System.out.println("El numero de habitacioens disponibles es " + habsInt.size());
+        for (int habitacion : habsInt_conc) {
+            //Se muestra la palabra habitacion junto al id de la misma
+            habsString.add("Habitación " + String.valueOf(habitacion));
+            //Se obtiene los ocupantes de cada habitación para usarlos mas tarde en el spinner.
+            habsInt.add(habitacion);
+            Cursor cursor = mDbHelper.fetchHabitacion(habitacion);
+            cursor.moveToFirst();
+            habsOcup.add(cursor.getInt(cursor.getColumnIndex(HAB_OCUP)));
+            cursor.close();
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_crearres, R.id.textCelda, habsString);
@@ -148,7 +201,13 @@ public class ModificarReserva2 extends AppCompatActivity {
                 //Se pone el titulo correspondiente
                 viewHolder.title.setText("Habitación " + habsInt.get(position));
                 viewHolder.switchA = (Switch) convertView.findViewById(R.id.switch2);
-                viewHolder.switchA.setChecked(true);
+                //Si se seleccionaron anteriormente se pone a true el switch
+                if (position < preSelectedRooms){
+                    viewHolder.switchA.setChecked(true);
+                }else{
+                    viewHolder.switchA.setChecked(false);
+                }
+
                 viewHolder.spinner = (Spinner) convertView.findViewById(R.id.spinnerocups);
 
                 //Comportamiento
@@ -158,7 +217,12 @@ public class ModificarReserva2 extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //Se ha activado el switch
-                        viewHolder.switchA.setChecked(true);
+                        if(viewHolder.switchA.isChecked()){
+                            Integer numMaxOcupantes = Integer.parseInt(viewHolder.spinner.getSelectedItem().toString());
+                            habitacionesElegidas.put(habsInt.get(position), numMaxOcupantes);
+                        }else{
+                            habitacionesElegidas.remove(habsInt.get(position));
+                        }
                     }
                 });
 
@@ -173,8 +237,11 @@ public class ModificarReserva2 extends AppCompatActivity {
                 ArrayAdapter<String> adapterOcups = new ArrayAdapter<>(getContext(),
                         android.R.layout.simple_spinner_dropdown_item,opcionesPop);
                 viewHolder.spinner.setAdapter(adapterOcups);
-
-
+                //Se preselecciona el numero de ocupantes
+                if(position < preSelectedRooms){
+                    int spinnerPos = adapterOcups.getPosition(String.valueOf(habsOcup.get(position)));
+                    viewHolder.spinner.setSelection(spinnerPos);
+                }
 
                 viewHolder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -185,6 +252,7 @@ public class ModificarReserva2 extends AppCompatActivity {
                         //Si se cambia un número de ocupantes de una habitacion seleccionada ya, se actualiza el valor
                         if(habitacionesElegidas.get(habsInt.get(posicionFila)) != null){
                             Integer numMaxOcupantes = Integer.parseInt(viewHolder.spinner.getSelectedItem().toString());
+                            System.out.println("Entro aqui y el num ocupantes nuevo es " + numMaxOcupantes);
                             habitacionesElegidas.put(habsInt.get(posicionFila),numMaxOcupantes);
                         }
                     }

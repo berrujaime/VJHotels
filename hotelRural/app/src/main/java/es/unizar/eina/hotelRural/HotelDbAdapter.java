@@ -339,6 +339,7 @@ public class HotelDbAdapter {
         return mDb.delete(DATABASE_RES, RES_ID + "=" + rowId, null) > 0;
     }
 
+    //Borra las habitaciones asociadas a una reserva
     public boolean deleteHabsRes(long rowId) {
 
         return mDb.delete(DATABASE_HAB_RES, HAB_RES_RES + "=" + rowId, null) > 0;
