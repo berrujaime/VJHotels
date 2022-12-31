@@ -97,7 +97,7 @@ public class ComprobarSolapes {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        if(!ocupado){
+                        if(!ocupado && !habitacionesDisp.contains(Integer.parseInt(habitacion))){
                             habitacionesDisp.add(Integer.parseInt(habitacion));
                         }
                     }

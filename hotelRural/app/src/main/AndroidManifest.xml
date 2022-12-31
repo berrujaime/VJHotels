@@ -41,18 +41,22 @@
         <activity android:name=".NoteEdit" />
         <activity
             android:name=".CrearHabitacion"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ConsultarHabitacion" />
-        <activity android:name=".ModificarHabitacion" />
+        <activity android:name=".ModificarHabitacion"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".CrearReserva1"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".CrearReserva2"/>
+            android:name=".CrearReserva2"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".ConsultarReserva1" />
         <activity android:name=".ConsultarReserva2" />
-        <activity android:name=".ModificarReserva1" />
-        <activity android:name=".ModificarReserva2" />
+        <activity android:name=".ModificarReserva1"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ModificarReserva2"
+            android:windowSoftInputMode="adjustNothing" />
 
         <meta-data
             android:name="preloaded_fonts"
