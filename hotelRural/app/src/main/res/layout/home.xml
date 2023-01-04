@@ -31,13 +31,14 @@
         android:id="@+id/button_hab"
         android:layout_width="232dp"
         android:layout_height="105dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="68dp"
         android:backgroundTint="#11185B"
         android:fontFamily="sans-serif-black"
         android:text="HABITACIONES"
         android:textSize="24sp"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:strokeColor="#000000"
@@ -47,7 +48,7 @@
         android:id="@+id/button_res"
         android:layout_width="232dp"
         android:layout_height="105dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#11185B"
         android:fontFamily="sans-serif-black"
         android:text="RESERVAS"
@@ -57,6 +58,24 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_hab"
+        app:strokeColor="#000000"
+        app:strokeWidth="3dp" />
+
+    <Button
+        android:id="@+id/button_pVol"
+        android:layout_width="107dp"
+        android:layout_height="102dp"
+        android:backgroundTint="#11185B"
+        android:fontFamily="sans-serif-black"
+        android:text="PR VOL"
+        android:textSize="24sp"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.296"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_res"
+        app:layout_constraintVertical_bias="0.071"
         app:strokeColor="#000000"
         app:strokeWidth="3dp" />
 
@@ -82,8 +101,9 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_res"
-        app:layout_constraintVertical_bias="0.328" />
+        app:layout_constraintVertical_bias="0.725" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

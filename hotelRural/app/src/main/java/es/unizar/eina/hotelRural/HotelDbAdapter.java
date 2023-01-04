@@ -349,4 +349,11 @@ public class HotelDbAdapter {
     public Cursor fetchLastReserva() {
             return mDb.query(sequence_sqlite, new String[] {"seq"}, "name='Reserva'", null, null, null, null);
     }
+
+    public void deleteAll(){
+        mDb.delete(DATABASE_HAB_RES, null, null);
+        mDb.delete(DATABASE_HAB, null, null);
+        mDb.delete(DATABASE_RES, null, null);
+
+    }
 }

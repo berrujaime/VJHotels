@@ -3,10 +3,12 @@ package es.unizar.eina.hotelRural;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 /** Clase para la actividad de la pantalla de inicio
  * @author Víctor Gallardo y Jaime Berruete
@@ -26,8 +28,7 @@ public class Home extends AppCompatActivity {
     private ListView mList;
 
     //Botones para pasar a la pantalla de listar reservas o listar habitaciones
-    private Button btn_reserva;
-    private Button btn_habitaciones;
+    private Button btn_reserva, btn_habitaciones, btn_pvol;
 
 
     /** Se llama cuando se crea la actividad */
@@ -37,6 +38,7 @@ public class Home extends AppCompatActivity {
 
         mDbHelper = new HotelDbAdapter(this);
         mDbHelper.open();
+        mDbHelper.deleteAll();
         //mDbHelper.createHabitacion(3,"hola", 2,20, 10.1f);
         //mDbHelper.createHabitacion(33,"hab 33", 2,123, 10.1f);
         //long id = mDbHelper.createHabitacion(7,"primera habitacion", 1,10.0f, 6);
@@ -46,6 +48,7 @@ public class Home extends AppCompatActivity {
 
         btn_habitaciones = findViewById(R.id.button_hab);
         btn_reserva = findViewById(R.id.button_res);
+        btn_pvol = findViewById(R.id.button_pVol);
 
         /** Función que se ejecuta cuando se clica el botón de gestionar habitaciones */
         btn_habitaciones.setOnClickListener(new View.OnClickListener() {
@@ -68,94 +71,29 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        /*
-        mDbHelper = new NotesDbAdapter(this);
-        mDbHelper.open();
-        //mList = (ListView)findViewById(R.id.list);
-        fillData();
+        /** Función que se ejecuta cuando se clica el botón de prueba de volumen */
+        btn_pvol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDbHelper = new HotelDbAdapter(Home.this);
+                mDbHelper.open();
+                mDbHelper.deleteAll();
+                //Creamos 100 habitaciones
+                for(int i=0; i<100; i++){
+                    mDbHelper.createHabitacion(i,"desc "+i, 6,72, 7.2f);
+                }
+                //Creamos 1000 reservas
+                for(int i=0; i<1000; i++){
+                    mDbHelper.createReserva("res "+i,"666666666", "04/01/2023", "05/01/2023");
+                }
+                int duration = Toast.LENGTH_SHORT;
 
-        //registerForContextMenu(mList);
-        */
+                Toast toast = Toast.makeText(Home.this,"Habitaciones y reservas creadas",duration);
+
+                View view2 = toast.getView();
+                view2.setBackgroundColor(Color.parseColor("#FF0000"));
+                toast.show();
+            }
+        });
     }
-
-    /*
-    private void fillData() {
-        // Get all of the notes from the database and create the item list
-        Cursor notesCursor = mDbHelper.fetchAllNotes();
-
-        // Create an array to specify the fields we want to display in the list (only TITLE)
-        String[] from = new String[] { NotesDbAdapter.KEY_TITLE };
-
-        // and an array of the fields we want to bind those fields to (in this case just text1)
-        int[] to = new int[] { R.id.text1 };
-
-        // Now create an array adapter and set it to display using our row
-        SimpleCursorAdapter notes =
-                new SimpleCursorAdapter(this, R.layout.notes_row, notesCursor, from, to);
-        mList.setAdapter(notes);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        boolean result = super.onCreateOptionsMenu(menu);
-        menu.add(Menu.NONE, INSERT_ID, Menu.NONE, R.string.menu_insert);
-        return result;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case INSERT_ID:
-                createNote();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add(Menu.NONE, DELETE_ID, Menu.NONE, R.string.menu_delete);
-        menu.add(Menu.NONE, EDIT_ID, Menu.NONE, R.string.menu_edit);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case DELETE_ID:
-                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-                mDbHelper.deleteNote(info.id);
-                fillData();
-                return true;
-            case EDIT_ID:
-                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-                editNote(info.position, info.id);
-                return true;
-        }
-        return super.onContextItemSelected(item);
-    }
-
-    private void createNote() {
-        Intent i = new Intent(this, NoteEdit.class);
-        startActivityForResult(i, ACTIVITY_CREATE);
-    }
-
-
-    protected void editNote(int position, long id) {
-        Intent i = new Intent(this, NoteEdit.class);
-        i.putExtra(NotesDbAdapter.KEY_ROWID, id);
-        startActivityForResult(i, ACTIVITY_EDIT);
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-        fillData();
-    }
-
-     */
-
 }
