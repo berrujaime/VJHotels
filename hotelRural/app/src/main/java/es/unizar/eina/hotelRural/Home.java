@@ -28,7 +28,7 @@ public class Home extends AppCompatActivity {
     private ListView mList;
 
     //Botones para pasar a la pantalla de listar reservas o listar habitaciones
-    private Button btn_reserva, btn_habitaciones, btn_pvol;
+    private Button btn_reserva, btn_habitaciones, btn_pvol, btn_pruebas;
 
 
     /** Se llama cuando se crea la actividad */
@@ -49,6 +49,8 @@ public class Home extends AppCompatActivity {
         btn_habitaciones = findViewById(R.id.button_hab);
         btn_reserva = findViewById(R.id.button_res);
         btn_pvol = findViewById(R.id.button_pVol);
+
+        btn_pruebas = findViewById(R.id.button_pruebas);
 
         /** Función que se ejecuta cuando se clica el botón de gestionar habitaciones */
         btn_habitaciones.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +95,14 @@ public class Home extends AppCompatActivity {
                 View view2 = toast.getView();
                 view2.setBackgroundColor(Color.parseColor("#FF0000"));
                 toast.show();
+            }
+        });
+
+        btn_pruebas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Home.this, Test.class);
+                startActivity(i);
             }
         });
     }

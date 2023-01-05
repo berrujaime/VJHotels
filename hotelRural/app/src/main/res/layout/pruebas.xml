@@ -24,101 +24,81 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20px"
                 app:srcCompat="@drawable/logo_transparent" />
+
         </com.google.android.material.navigation.NavigationView>
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_hab"
+        android:id="@+id/button_CNegra"
         android:layout_width="232dp"
         android:layout_height="105dp"
-        android:layout_marginTop="68dp"
         android:backgroundTint="#11185B"
         android:fontFamily="sans-serif-black"
-        android:text="HABITACIONES"
+        android:text="Pruebas Caja Negra"
         android:textSize="24sp"
         app:cornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintBottom_toTopOf="@+id/button_pVol"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0"
+        app:strokeColor="#000000"
+        app:strokeWidth="3dp" />
+
+
+    <Button
+        android:id="@+id/button_sobrecarga"
+        android:layout_width="232dp"
+        android:layout_height="105dp"
+        android:backgroundTint="#11185B"
+        android:fontFamily="sans-serif-black"
+        android:text="Pruebas Sobrecarga"
+        android:textSize="24sp"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_pVol"
+        app:layout_constraintVertical_bias="0.109"
         app:strokeColor="#000000"
         app:strokeWidth="3dp" />
 
     <Button
-        android:id="@+id/button_res"
-        android:layout_width="232dp"
-        android:layout_height="105dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/button_home"
+        android:layout_width="196dp"
+        android:layout_height="68dp"
         android:backgroundTint="#11185B"
         android:fontFamily="sans-serif-black"
-        android:text="RESERVAS"
+        android:text="HOME"
         android:textSize="24sp"
         app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_hab"
+        app:layout_constraintTop_toBottomOf="@+id/button_sobrecarga"
+        app:layout_constraintVertical_bias="0.621"
         app:strokeColor="#000000"
         app:strokeWidth="3dp" />
 
     <Button
         android:id="@+id/button_pVol"
-        android:layout_width="165dp"
-        android:layout_height="52dp"
+        android:layout_width="232dp"
+        android:layout_height="105dp"
         android:backgroundTint="#11185B"
         android:fontFamily="sans-serif-black"
-        android:text="PR VOL"
+        android:text="Pruebas Volumen"
         android:textSize="24sp"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_res"
-        app:layout_constraintVertical_bias="0.147"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.525"
         app:strokeColor="#000000"
         app:strokeWidth="3dp" />
-    <Button
-        android:id="@+id/button_pruebas"
-        android:layout_width="165dp"
-        android:layout_height="52dp"
-        android:backgroundTint="#11185B"
-        android:fontFamily="sans-serif-black"
-        android:text="PRUEBAS"
-        android:textSize="24sp"
-        app:cornerRadius="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_res"
-        app:layout_constraintVertical_bias="0.147"
-        app:strokeColor="#000000"
-        app:strokeWidth="3dp" />
-
-    <TextView
-        android:id="@+id/textCelda"
-        android:layout_width="262dp"
-        android:layout_height="42dp"
-        android:text="¿Qué quieres gestionar?"
-        android:textColor="#11185B"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_hab"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.311" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="320dp"
-        android:layout_height="28dp"
-        android:text="La tranquilidad es lo que mas se busca"
-        android:textColor="#11185B"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_res"
-        app:layout_constraintVertical_bias="0.725" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

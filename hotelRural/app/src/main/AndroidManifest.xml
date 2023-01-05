@@ -53,6 +53,7 @@
             android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".ConsultarReserva1" />
         <activity android:name=".ConsultarReserva2" />
+        <activity android:name=".Test" />
         <activity android:name=".ModificarReserva1"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ModificarReserva2"

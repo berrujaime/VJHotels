@@ -123,16 +123,34 @@ public class HotelDbAdapter {
      * @return rowId o -1 si falla
      */
     public long createHabitacion(int id, String desc, int ocups, float precio , float porcentaje) {
-        ContentValues initialValues = new ContentValues();
-        initialValues.put(HAB_ID, id);
-        initialValues.put(HAB_DESC, desc);
-        initialValues.put(HAB_OCUP, ocups);
-        initialValues.put(HAB_PRECIO, precio);
-        initialValues.put(HAB_REC, porcentaje);
 
-        return mDb.insert(DATABASE_HAB, null, initialValues);
+        if(id < 0 || ocups < 0 || precio < 0.0f || porcentaje < 0.0f || porcentaje > 100.0 || ocups > 6) {
+            return -1;
+        }else{
+            ContentValues initialValues = new ContentValues();
+            initialValues.put(HAB_ID, id);
+            initialValues.put(HAB_DESC, desc);
+            initialValues.put(HAB_OCUP, ocups);
+            initialValues.put(HAB_PRECIO, precio);
+            initialValues.put(HAB_REC, porcentaje);
+            return mDb.insert(DATABASE_HAB, null, initialValues);
+        }
+
     }
 
+
+    public static boolean isNumeric(String cadena) {
+
+        boolean resultado;
+
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+        return resultado;
+    }
     /**
      * Actualiza los parámetros de una Habitación en la base de datos. La habitación que se
      * actualiza es la especificada utilizando el id (su clave primaria).
@@ -144,14 +162,22 @@ public class HotelDbAdapter {
      * @param porcentaje porcentaje de recargo de la habitación
      */
     public boolean updateHabitacion(String idAntes, int id, String desc, int ocups, float precio , float porcentaje) {
-        ContentValues args = new ContentValues();
-        args.put(HAB_ID, id);
-        args.put(HAB_DESC, desc);
-        args.put(HAB_OCUP, ocups);
-        args.put(HAB_PRECIO, precio);
-        args.put(HAB_REC, porcentaje);
+        System.out.println(isNumeric(idAntes));
+        if(Integer.parseInt(idAntes) <= 0) {
+            return false;
+        }else if(isNumeric(idAntes) != true || id <= 0 || ocups < 0 || precio < 0.0f || porcentaje < 0.0f || porcentaje > 100.0 || ocups > 6 ){
+            return false;
+        }else{
+            ContentValues args = new ContentValues();
+            args.put(HAB_ID, id);
+            args.put(HAB_DESC, desc);
+            args.put(HAB_OCUP, ocups);
+            args.put(HAB_PRECIO, precio);
+            args.put(HAB_REC, porcentaje);
 
-        return mDb.update(DATABASE_HAB, args, HAB_ID + "=" + idAntes, null) > 0;
+            return mDb.update(DATABASE_HAB, args, HAB_ID + "=" + idAntes, null) > 0;
+        }
+
     }
 
     public long createReserva(String nombre, String telefono, String fechaEntrada, String fechaSalida) {
@@ -330,7 +356,13 @@ public class HotelDbAdapter {
 
     public boolean deleteHab(long rowId) {
 
-        return mDb.delete(DATABASE_HAB, HAB_ID + "=" + rowId, null) > 0;
+        if(rowId <= 0 ){
+            return false;
+        }else{
+            return mDb.delete(DATABASE_HAB, HAB_ID + "=" + rowId, null) > 0;
+        }
+
+
     }
 
 
