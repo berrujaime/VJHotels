@@ -9,6 +9,8 @@ import android.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Clase que ayuda a acceder a la base de datos de HotelRural. Define las operaciones CRUD básicas
@@ -162,8 +164,9 @@ public class HotelDbAdapter {
      * @param porcentaje porcentaje de recargo de la habitación
      */
     public boolean updateHabitacion(String idAntes, int id, String desc, int ocups, float precio , float porcentaje) {
-        System.out.println(isNumeric(idAntes));
-        if(Integer.parseInt(idAntes) <= 0) {
+        if(idAntes.length() == 0){
+            return false;
+        }else if(Integer.parseInt(idAntes) <= 0) {
             return false;
         }else if(isNumeric(idAntes) != true || id <= 0 || ocups < 0 || precio < 0.0f || porcentaje < 0.0f || porcentaje > 100.0 || ocups > 6 ){
             return false;
@@ -181,35 +184,66 @@ public class HotelDbAdapter {
     }
 
     public long createReserva(String nombre, String telefono, String fechaEntrada, String fechaSalida) {
-        ContentValues initialValues = new ContentValues();
-        //ID AUTOINCREMENT
-        initialValues.put(RES_NOMBRE, nombre);
-        initialValues.put(RES_MOVIL, telefono);
-        initialValues.put(RES_FENT, fechaEntrada);
-        initialValues.put(RES_FSAL, fechaSalida);
+        Pattern p = Pattern.compile("\\d{2}/\\d{2}/\\d{2}");
+        Matcher matcher  = p.matcher(fechaEntrada);
+        Matcher matcherFSal  = p.matcher(fechaSalida);
 
-        return mDb.insert(DATABASE_RES, null, initialValues);
+        if(nombre.length() == 0 || telefono.length() == 0 || fechaEntrada.length() != 8 || fechaSalida.length() != 8 ){
+            return -1;
+        }else if(isNumeric(telefono) == false){
+            return -1;
+        }else if(matcher.find() == false || matcherFSal.find() == false){
+            return -1;
+
+        }else {
+
+            ContentValues initialValues = new ContentValues();
+            //ID AUTOINCREMENT
+            initialValues.put(RES_NOMBRE, nombre);
+            initialValues.put(RES_MOVIL, telefono);
+            initialValues.put(RES_FENT, fechaEntrada);
+            initialValues.put(RES_FSAL, fechaSalida);
+
+            return mDb.insert(DATABASE_RES, null, initialValues);
+        }
     }
 
     public long createHabitacionesReservadas(Integer resId, Integer habId, Integer numOcups) {
-        ContentValues initialValues = new ContentValues();
-        //ID AUTOINCREMENT
-        initialValues.put(HAB_RES_RES, resId);
-        initialValues.put(HAB_RES_HAB, habId);
-        initialValues.put(HAB_RES_OCUP,numOcups);
+        if(resId <=0 || habId <= 0 || numOcups <= 0 || numOcups > 6){
+            return -1;
+        }else{
+            ContentValues initialValues = new ContentValues();
+            //ID AUTOINCREMENT
+            initialValues.put(HAB_RES_RES, resId);
+            initialValues.put(HAB_RES_HAB, habId);
+            initialValues.put(HAB_RES_OCUP,numOcups);
+            return mDb.insert(DATABASE_HAB_RES, null, initialValues);
+        }
 
-
-        return mDb.insert(DATABASE_HAB_RES, null, initialValues);
     }
     public boolean updateReserva(String id, String nombre, String tel, String fent, String fsal){
-        ContentValues args = new ContentValues();
-        args.put(RES_ID, id);
-        args.put(RES_NOMBRE, nombre);
-        args.put(RES_MOVIL, tel);
-        args.put(RES_FENT, fent);
-        args.put(RES_FSAL, fsal);
+        Pattern p = Pattern.compile("\\d{2}/\\d{2}/\\d{2}");
+        Matcher matcher  = p.matcher(fent);
+        Matcher matcherFSal  = p.matcher(fsal);
 
-        return mDb.update(DATABASE_RES, args, RES_ID + "=" + id, null) > 0;
+        if(id.length() <= 0 || nombre.length() == 0 || tel.length() == 0 || fent.length() != 8 || fsal.length() != 8 ){
+            return false;
+        }else if(isNumeric(tel) == false || isNumeric(id) == false){
+            return false;
+        }else if(matcher.find() == false || matcherFSal.find() == false){
+            return false;
+
+        }else {
+
+            ContentValues args = new ContentValues();
+            args.put(RES_ID, id);
+            args.put(RES_NOMBRE, nombre);
+            args.put(RES_MOVIL, tel);
+            args.put(RES_FENT, fent);
+            args.put(RES_FSAL, fsal);
+
+            return mDb.update(DATABASE_RES, args, RES_ID + "=" + id, null) > 0;
+        }
     }
 
     /**
@@ -368,13 +402,23 @@ public class HotelDbAdapter {
 
     public boolean deleteRes(long rowId) {
 
-        return mDb.delete(DATABASE_RES, RES_ID + "=" + rowId, null) > 0;
+        if(rowId <= 0 ){
+            return false;
+        }else{
+            return mDb.delete(DATABASE_RES, RES_ID + "=" + rowId, null) > 0;
+        }
+
     }
 
     //Borra las habitaciones asociadas a una reserva
     public boolean deleteHabsRes(long rowId) {
 
-        return mDb.delete(DATABASE_HAB_RES, HAB_RES_RES + "=" + rowId, null) > 0;
+        if(rowId <= 0 ){
+            return false;
+        }else{
+            return mDb.delete(DATABASE_HAB_RES, HAB_RES_RES + "=" + rowId, null) > 0;
+        }
+
     }
 
     //Obtiene la ultima reserva creada

@@ -1,5 +1,6 @@
 package es.unizar.eina.hotelRural;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,11 +34,7 @@ public class Test extends AppCompatActivity {
         btn_cajaNegra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    pruebasCajaNegra();
-                }catch (Throwable e) {
-                    e.printStackTrace();
-                } ;
+                pruebasCajaNegra();
 
             }
         });
@@ -45,7 +42,7 @@ public class Test extends AppCompatActivity {
 
     }
 
-    public static void pruebasCajaNegra() throws Throwable{
+    public static void pruebasCajaNegra() {
         //Pruebas de habitaciones...
 
         //Prueba correcta
@@ -84,9 +81,14 @@ public class Test extends AppCompatActivity {
         mDbHelper.deleteHab(999);
 
         //Pruebas no válidas
-        salida =  mDbHelper.updateHabitacion("h1d", 999,"prueba",-1,10.0f,15.0f);
-        System.out.println("El resultado tiene que ser false y es  " + salida);
 
+
+        try {
+            salida = mDbHelper.updateHabitacion("h1d", 999, "prueba", -1, 10.0f, 15.0f);
+            System.out.println("El resultado tiene que ser false y es  " + salida);
+        }catch (Throwable e){
+            e.printStackTrace();
+        }
         salida =  mDbHelper.updateHabitacion("" , 999,"prueba",8,10.0f,15.0f);
         System.out.println("El resultado tiene que ser false y es  " + salida);
 
@@ -121,5 +123,140 @@ public class Test extends AppCompatActivity {
 
         salida =  mDbHelper.deleteHab(-1);
         System.out.println("El resultado tiene que ser false y es  " + salida);
+
+
+
+        //Pruebas de reservas
+        System.out.println("Empezando pruebas de reservas...");
+
+        System.out.println("CreateReserva...");
+        rowId = mDbHelper.createReserva("test1","68523","27/03/12","30/03/12");
+
+        System.out.println("El resultado tiene que ser distinto de -1 y es " + rowId);
+
+        mDbHelper.deleteRes(rowId);
+
+        //Pruebas no válidas
+
+        rowId = mDbHelper.createReserva("","68523","27/03/12","30/03/12");
+        System.out.println("El resultado tiene que ser -1 y es " + rowId);
+
+        rowId = mDbHelper.createReserva("test1","","27/03/12","30/03/12");
+        System.out.println("El resultado tiene que ser -1 y es " + rowId);
+
+        rowId = mDbHelper.createReserva("test1","9h3","27/03/12","30/03/12");
+        System.out.println("El resultado tiene que ser -1 y es " + rowId);
+
+        rowId = mDbHelper.createReserva("test1","6847","27","30/03/12");
+        System.out.println("El resultado tiene que ser -1 y es " + rowId);
+
+        rowId = mDbHelper.createReserva("test1","6847","27/03/1212","30/03/12");
+        System.out.println("El resultado tiene que ser -1 y es " + rowId);
+
+        rowId = mDbHelper.createReserva("test1","6847","aa/bb/cc","30/03/12");
+        System.out.println("El resultado tiene que ser -1 y es " + rowId);
+
+        rowId = mDbHelper.createReserva("test1","6847","27/03/12","30");
+        System.out.println("El resultado tiene que ser -1 y es " + rowId);
+
+        rowId = mDbHelper.createReserva("test1","6847","27/03/12","30/03/1212");
+        System.out.println("El resultado tiene que ser -1 y es " + rowId);
+
+        rowId = mDbHelper.createReserva("test1","6847","27/03/12","aa/bb/cc");
+        System.out.println("El resultado tiene que ser -1 y es " + rowId);
+
+
+        System.out.println("UpdateReserva...");
+
+        rowId = mDbHelper.createReserva("test1","68523","27/03/12","30/03/12");
+
+        salida = mDbHelper.updateReserva(String.valueOf(rowId),"test1","6853","27/03/12","30/03/12");
+        System.out.println("El resultado tiene que ser true y es " + salida);
+
+        salida = mDbHelper.updateReserva("","test1","6853","27/03/12","30/03/12");
+        System.out.println("El resultado tiene que ser false y es " + salida);
+
+        salida = mDbHelper.updateReserva("8h3","test1","6853","27/03/12","30/03/12");
+        System.out.println("El resultado tiene que ser false y es " + salida);
+
+        salida = mDbHelper.updateReserva(String.valueOf(rowId),"","6853","27/03/12","30/03/12");
+        System.out.println("El resultado tiene que ser false y es " + salida);
+
+        salida = mDbHelper.updateReserva(String.valueOf(rowId),"test1","","27/03/12","30/03/12");
+        System.out.println("El resultado tiene que ser false y es " + salida);
+
+        salida = mDbHelper.updateReserva(String.valueOf(rowId),"test1","9h3","27/03/12","30/03/12");
+        System.out.println("El resultado tiene que ser false y es " + salida);
+
+        salida = mDbHelper.updateReserva(String.valueOf(rowId),"test1","9346","27","30/03/12");
+        System.out.println("El resultado tiene que ser false y es " + salida);
+
+        salida = mDbHelper.updateReserva(String.valueOf(rowId),"test1","9346","27/03/1212","30/03/12");
+        System.out.println("El resultado tiene que ser false y es " + salida);
+
+        salida = mDbHelper.updateReserva(String.valueOf(rowId),"test1","9346","aa/bb/cc","30/03/12");
+        System.out.println("El resultado tiene que ser false y es " + salida);
+
+        salida = mDbHelper.updateReserva(String.valueOf(rowId),"test1","9346","27/03/12","30");
+        System.out.println("El resultado tiene que ser false y es " + salida);
+
+        salida = mDbHelper.updateReserva(String.valueOf(rowId),"test1","9346","27/03/12","30/03/1212");
+        System.out.println("El resultado tiene que ser false y es " + salida);
+
+        salida = mDbHelper.updateReserva(String.valueOf(rowId),"test1","9346","27/03/12","aa/bb/cc");
+        System.out.println("El resultado tiene que ser false y es " + salida);
+
+
+
+
+        System.out.println("BorrarReserva...");
+        salida =mDbHelper.deleteRes(rowId);
+        System.out.println("El resultado tiene que ser true y es  " + salida);
+
+        //No válidas
+
+        salida =  mDbHelper.deleteRes(-1);
+        System.out.println("El resultado tiene que ser false y es  " + salida);
+
+
+        System.out.println("Empezando pruebas de HabitacionesReservadas");
+        System.out.println("CreateHabitacionesReservadas...");
+
+        rowId = mDbHelper.createReserva("test1","68523","27/03/12","30/03/12");
+
+        salida = mDbHelper.updateReserva(String.valueOf(998),"test1","6853","27/03/12","30/03/12");
+
+        mDbHelper.createHabitacion(999,"test1",5,10.0f,15.0f);
+
+        rowId = mDbHelper.createHabitacionesReservadas(998,999,2);
+        System.out.println("El resultado tiene que ser distinto de -1 y es  " + rowId);
+
+        //No válidas
+        rowId = mDbHelper.createHabitacionesReservadas(-1,999,2);
+        System.out.println("El resultado tiene que ser -1 y es  " + rowId);
+
+        rowId = mDbHelper.createHabitacionesReservadas(998,-1,2);
+        System.out.println("El resultado tiene que ser -1 y es  " + rowId);
+
+        rowId = mDbHelper.createHabitacionesReservadas(998,999,0);
+        System.out.println("El resultado tiene que ser -1 y es  " + rowId);
+
+        mDbHelper.deleteRes(998);
+        mDbHelper.deleteHab(999);
+
+
+
+        rowId = mDbHelper.createHabitacionesReservadas(998,999,10);
+        System.out.println("El resultado tiene que ser -1 y es  " + rowId);
+
+
+        System.out.println("Pasando a deleteHabsRes...");
+
+        salida = mDbHelper.deleteHabsRes(998);
+        System.out.println("El resultado tiene que ser true y es  " + salida);
+
+        salida = mDbHelper.deleteHabsRes(-1);
+        System.out.println("El resultado tiene que ser false y es  " + salida);
+
     }
 }
