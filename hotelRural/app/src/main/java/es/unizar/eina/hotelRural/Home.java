@@ -73,30 +73,8 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        /** Función que se ejecuta cuando se clica el botón de prueba de volumen */
-        btn_pvol.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDbHelper = new HotelDbAdapter(Home.this);
-                mDbHelper.open();
-                mDbHelper.deleteAll();
-                //Creamos 100 habitaciones
-                for(int i=0; i<100; i++){
-                    mDbHelper.createHabitacion(i,"desc "+i, 6,72, 7.2f);
-                }
-                //Creamos 1000 reservas
-                for(int i=0; i<1000; i++){
-                    mDbHelper.createReserva("res "+i,"666666666", "04/01/2023", "05/01/2023");
-                }
-                int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(Home.this,"Habitaciones y reservas creadas",duration);
 
-                View view2 = toast.getView();
-                view2.setBackgroundColor(Color.parseColor("#FF0000"));
-                toast.show();
-            }
-        });
 
         btn_pruebas.setOnClickListener(new View.OnClickListener() {
             @Override

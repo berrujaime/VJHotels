@@ -1,9 +1,12 @@
 package es.unizar.eina.hotelRural;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +20,8 @@ public class Test extends AppCompatActivity {
     private int reserva;
 
     private Button btn_cajaNegra;
+    private Button btn_pvol;
+    private Button btn_home;
 
 
     @Override
@@ -31,10 +36,47 @@ public class Test extends AppCompatActivity {
 
         btn_cajaNegra = findViewById(R.id.button_CNegra);
 
+        btn_pvol = findViewById(R.id.button_pVol);
+
+        btn_home = findViewById(R.id.button_home);
+
+        btn_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Test.this, Home.class);
+                startActivity(i);
+            }
+        });
+
+
+
         btn_cajaNegra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pruebasCajaNegra();
+
+            }
+        });
+
+        btn_pvol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    mDbHelper = new HotelDbAdapter(Test.this);
+                    mDbHelper.open();
+                    //mDbHelper.deleteAll();
+                    //Creamos 100 habitaciones
+                    for(int i=0; i<100; i++){
+                        mDbHelper.createHabitacion(i,"desc "+i, 6,72, 7.2f);
+                    }
+                    //Creamos 1000 reservas
+                    for(int i=0; i<1000; i++){
+                        mDbHelper.createReserva("res "+i,"666666666", "04/01/2023", "05/01/2023");
+                    }
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(Test.this,"Habitaciones y reservas creadas",duration);
+
+                    toast.show();
 
             }
         });
