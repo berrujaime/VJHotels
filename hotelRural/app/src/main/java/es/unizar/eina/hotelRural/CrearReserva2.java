@@ -113,7 +113,7 @@ public class CrearReserva2 extends AppCompatActivity {
                     Toast toast = Toast.makeText(context,text,duration);
 
                     toast.show();
-                    Intent i = new Intent(getApplicationContext(), ReservasList.class);
+                    Intent i = new Intent(getApplicationContext(), Home.class);
                     startActivity(i);
                 }
             }

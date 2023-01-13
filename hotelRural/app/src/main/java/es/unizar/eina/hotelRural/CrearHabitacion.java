@@ -67,7 +67,7 @@ public class CrearHabitacion extends AppCompatActivity {
                     precioNoche = Float.parseFloat(precioEdit.getText().toString());
                     numMaxOcupantes = Integer.parseInt(numMaxOcupEdit.getSelectedItem().toString());
                     mDbHelper.createHabitacion(id,desc, numMaxOcupantes,precioNoche, porcentajeRecarga);
-                    Intent i = new Intent(getApplicationContext(), HabitationsList.class);
+                    Intent i = new Intent(getApplicationContext(), Home.class);
                     startActivity(i);
                 }
 

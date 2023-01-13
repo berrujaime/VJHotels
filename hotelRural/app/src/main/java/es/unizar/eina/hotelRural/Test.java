@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ public class Test extends AppCompatActivity {
 
     private Button btn_cajaNegra;
     private Button btn_pvol;
+    private Button btn_sobrecarga;
     private Button btn_home;
 
 
@@ -40,11 +42,30 @@ public class Test extends AppCompatActivity {
 
         btn_home = findViewById(R.id.button_home);
 
+        btn_sobrecarga = findViewById(R.id.button_sobrecarga);
+
         btn_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Test.this, Home.class);
                 startActivity(i);
+            }
+        });
+
+        btn_sobrecarga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDbHelper.deleteAll();
+                int i = 0;
+                String desc = "..";
+                //DANGER ZONE
+                while(true){
+                    mDbHelper.createHabitacion(i,desc,4,10.0f,21.0f);
+                    i++;
+                    //Se va incrementando exponencialmente el tamaño de la cadena para que no tarde demasiado
+                    desc = desc + desc;
+                    Log.d("sobrecarga", "El valor limite es " + desc.length());
+                }
             }
         });
 
@@ -83,6 +104,7 @@ public class Test extends AppCompatActivity {
 
 
     }
+
 
     public static void pruebasCajaNegra() {
         //Pruebas de habitaciones...
