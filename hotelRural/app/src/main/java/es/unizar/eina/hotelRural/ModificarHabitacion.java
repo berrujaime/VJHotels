@@ -72,7 +72,7 @@ public class ModificarHabitacion extends AppCompatActivity {
         descEdit.setText(cursor.getString(cursor.getColumnIndex(HAB_DESC)));
         porcentajeEdit.setText(cursor.getString(cursor.getColumnIndex(HAB_REC)));
         precioEdit.setText(cursor.getString(cursor.getColumnIndex(HAB_PRECIO)));
-        numMaxOcupEdit.setSelection(Integer.parseInt(cursor.getString(cursor.getColumnIndex(HAB_OCUP))));
+        numMaxOcupEdit.setSelection(Integer.parseInt(cursor.getString(cursor.getColumnIndex(HAB_OCUP)))-1);
 
         idAntes = idEdit.getText().toString();
         descAntes = descEdit.getText().toString();

@@ -20,9 +20,6 @@ public class HabitationsList extends AppCompatActivity{
 
     private ActivityTabsHabBinding binding;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

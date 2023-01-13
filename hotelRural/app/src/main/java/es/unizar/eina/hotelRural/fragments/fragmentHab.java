@@ -86,7 +86,6 @@ public class fragmentHab extends Fragment  {
     @SuppressLint("Range")
     private void fillData() {
 
-
         // Get all of the habs ordered by "id"
         Cursor habsCursor = mDbHelper.fetchAllHabitacionesBy("id");
         habsCursor.moveToFirst();
