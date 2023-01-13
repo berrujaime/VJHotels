@@ -82,6 +82,7 @@ public class HotelDbAdapter {
         System.out.println("Entro a open");
         mDbHelper = new DatabaseHelper(mCtx);
         mDb = mDbHelper.getWritableDatabase();
+        mDb.execSQL("PRAGMA foreign_keys=ON;");
         System.out.println("Salgo de open");
         return this;
     }
@@ -184,11 +185,11 @@ public class HotelDbAdapter {
     }
 
     public long createReserva(String nombre, String telefono, String fechaEntrada, String fechaSalida) {
-        Pattern p = Pattern.compile("\\d{2}/\\d{2}/\\d{2}");
+        Pattern p = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
         Matcher matcher  = p.matcher(fechaEntrada);
         Matcher matcherFSal  = p.matcher(fechaSalida);
 
-        if(nombre.length() == 0 || telefono.length() == 0 || fechaEntrada.length() != 8 || fechaSalida.length() != 8 ){
+        if(nombre.length() == 0 || telefono.length() == 0 || fechaEntrada.length() != 10 || fechaSalida.length() != 10 ){
             return -1;
         }else if(isNumeric(telefono) == false){
             return -1;
@@ -222,11 +223,11 @@ public class HotelDbAdapter {
 
     }
     public boolean updateReserva(String id, String nombre, String tel, String fent, String fsal){
-        Pattern p = Pattern.compile("\\d{2}/\\d{2}/\\d{2}");
+        Pattern p = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
         Matcher matcher  = p.matcher(fent);
         Matcher matcherFSal  = p.matcher(fsal);
 
-        if(id.length() <= 0 || nombre.length() == 0 || tel.length() == 0 || fent.length() != 8 || fsal.length() != 8 ){
+        if(id.length() <= 0 || nombre.length() == 0 || tel.length() == 0 || fent.length() != 10 || fsal.length() != 10 ){
             return false;
         }else if(isNumeric(tel) == false || isNumeric(id) == false){
             return false;
