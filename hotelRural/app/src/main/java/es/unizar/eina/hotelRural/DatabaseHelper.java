@@ -44,7 +44,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         System.out.println("Voy a crear las tablas");
-        //db.execSQL(DATABASE_CREATE);
+        db.execSQL("PRAGMA foreign_keys=ON;");
         db.execSQL(DATABASE_CREATE_HAB);
         db.execSQL(DATABASE_CREATE_RES);
         db.execSQL(DATABASE_CREATE_HAB_RES);

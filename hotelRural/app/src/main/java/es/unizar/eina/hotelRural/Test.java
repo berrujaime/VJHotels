@@ -63,7 +63,7 @@ public class Test extends AppCompatActivity {
             public void onClick(View v) {
                     mDbHelper = new HotelDbAdapter(Test.this);
                     mDbHelper.open();
-                    //mDbHelper.deleteAll();
+                    mDbHelper.deleteAll();
                     //Creamos 100 habitaciones
                     for(int i=0; i<100; i++){
                         mDbHelper.createHabitacion(i,"desc "+i, 6,72, 7.2f);

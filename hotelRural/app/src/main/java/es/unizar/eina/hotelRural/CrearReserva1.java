@@ -63,7 +63,6 @@ public class CrearReserva1 extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), CrearReserva2.class);
                     startActivity(i);
                 }
-
             }
         });
     }
