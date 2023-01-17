@@ -150,9 +150,4 @@ public class fragmentHab extends Fragment  {
         ImageButton editButton;
         ImageButton deleteButton;
     }
-
-
-
-
-
 }
