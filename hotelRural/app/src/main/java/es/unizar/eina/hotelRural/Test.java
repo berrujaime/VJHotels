@@ -89,8 +89,8 @@ public class Test extends AppCompatActivity {
                     for(int i=0; i<100; i++){
                         mDbHelper.createHabitacion(i,"desc "+i, 6,72, 7.2f);
                     }
-                    //Creamos 1000 reservas
-                    for(int i=0; i<1000; i++){
+                    //Creamos 2000 reservas
+                    for(int i=0; i<2000; i++){
                         mDbHelper.createReserva("res "+i,"666666666", "04/01/2023", "05/01/2023");
                     }
                     int duration = Toast.LENGTH_SHORT;

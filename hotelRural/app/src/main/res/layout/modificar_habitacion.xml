@@ -63,7 +63,7 @@
         android:layout_width="297dp"
         android:layout_height="52dp"
         android:ems="10"
-        android:hint="ID: XXXX"
+        android:hint="XXXX"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"

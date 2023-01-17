@@ -141,9 +141,14 @@ public class HotelDbAdapter {
 
     }
 
-
+    /**
+     * Función que comprueba si la String que se le pasa representa un número entero o no
+     *
+     * @param cadena String que se va a comprobar si es un número entero o no
+     *
+     * @return true si representa un número entero, false si no lo hace
+     */
     public static boolean isNumeric(String cadena) {
-
         boolean resultado;
 
         try {
@@ -154,6 +159,7 @@ public class HotelDbAdapter {
         }
         return resultado;
     }
+
     /**
      * Actualiza los parámetros de una Habitación en la base de datos. La habitación que se
      * actualiza es la especificada utilizando el id (su clave primaria).
@@ -163,6 +169,9 @@ public class HotelDbAdapter {
      * @param ocups número máximo de ocupantes de la habitación
      * @param precio precio por ocupante de la habitación
      * @param porcentaje porcentaje de recargo de la habitación
+     *
+     * @return false si no se pueden actualizar los parámetros de una habitacióncon los parámetros
+     * dados al método. true si se puede.
      */
     public boolean updateHabitacion(String idAntes, int id, String desc, int ocups, float precio , float porcentaje) {
         if(idAntes.length() == 0){
@@ -184,6 +193,16 @@ public class HotelDbAdapter {
 
     }
 
+    /**
+     * Función para insertar una reserva en la base de datos.
+     *
+     * @param nombre nombre del cliente que hace la reserva
+     * @param telefono teléfono del cliente que hace la reserva
+     * @param fechaEntrada fecha de entrada de la reserva
+     * @param fechaSalida fecha de salida de la reserva
+     *
+     * @return -1 si no se puede insertar la reserva. 0 si se puede crear la reserva.
+     */
     public long createReserva(String nombre, String telefono, String fechaEntrada, String fechaSalida) {
         Pattern p = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
         Matcher matcher  = p.matcher(fechaEntrada);
@@ -209,6 +228,16 @@ public class HotelDbAdapter {
         }
     }
 
+    /**
+     * Función para insertar a la base de datos una tupla que contiene información sobre una
+     * habitación que ha sido asociada a una reserva existente con el número de ocupantes.
+     *
+     * @param resId el id de la reserva
+     * @param habId el id de la habitación
+     * @param numOcups número de ocupantes de la habitación reservada
+     *
+     * @return -1 si no se puede inserta la habitación reservada, 0 si se inserta
+     */
     public long createHabitacionesReservadas(Integer resId, Integer habId, Integer numOcups) {
         if(resId <=0 || habId <= 0 || numOcups <= 0 || numOcups > 6){
             return -1;
@@ -222,6 +251,18 @@ public class HotelDbAdapter {
         }
 
     }
+
+    /**
+     * Función para actualizar los valores de una reserva en la base de datos.
+     *
+     * @param id el id de la reserva
+     * @param nombre nombre del cliente que hace la reserva
+     * @param telefono teléfono del cliente que hace la reserva
+     * @param fechaEntrada fecha de entrada de la reserva
+     * @param fechaSalida fecha de salida de la reserva
+     *
+     * @return -1 si no se puede actualizar la reserva, 0 si se actualiza
+     */
     public boolean updateReserva(String id, String nombre, String tel, String fent, String fsal){
         Pattern p = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
         Matcher matcher  = p.matcher(fent);
@@ -248,24 +289,26 @@ public class HotelDbAdapter {
     }
 
     /**
-     * Delete the note with the given rowId
+     * Devuelve un cursor sobre una reserva dado su identificador
+     * @param id identificador de la reserva
      *
-     * @param rowId id of note to delete
-     * @return true if deleted, false otherwise
+     * @return Cursor sobre la reserva
      */
-    public boolean deleteNote(long rowId) {
-
-        return mDb.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
-    }
-
     public Cursor fetchReserva(int id){
         return mDb.query(DATABASE_RES, new String[] {RES_ID, RES_FENT, RES_FSAL, RES_MOVIL, RES_NOMBRE}, RES_ID+"="+id, null, null, null, null);
     }
 
+    /**
+     * Devuelve un cursor sobre una habitación dado su identificador
+     * @param id identificador de la habitación
+     *
+     * @return Cursor sobre la habitación
+     */
     public Cursor fetchHabitacion(int id){
         return mDb.query(DATABASE_HAB, new String[] {HAB_ID, HAB_DESC, HAB_OCUP, HAB_PRECIO,
                 HAB_REC}, HAB_ID+"="+id, null, null, null, null);
     }
+
     /**
      * Devuelve un cursor sobre la lista de habitación de la base de datos
      * @param method indica el método a listar las habitaciones que puede ser:
@@ -288,6 +331,14 @@ public class HotelDbAdapter {
         return null;
     }
 
+    /**
+     * Devuelve un cursor sobre la lista de habitación de la base de datos
+     * @param method indica el método a listar las habitaciones que puede ser:
+     *               por id, por número máximo de ocupantes o por precio por ocupante.
+     *
+     * @return Si el método de listar es uno de los permitidos devuelve un cursor sobre la lista
+     *               de habitaciones, en caso contrario devuelve null.
+     */
     public List<Pair<Integer, Integer>> fetchHabitacionesReservadas(String id) {
         List<Pair<Integer, Integer>> habitaciones = new ArrayList<>();
         // Especifica la consulta SQL

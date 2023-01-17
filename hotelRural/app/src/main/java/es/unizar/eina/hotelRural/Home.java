@@ -14,14 +14,6 @@ import android.widget.Toast;
  * @author Víctor Gallardo y Jaime Berruete
  */
 public class Home extends AppCompatActivity {
-/*
-    private static final int ACTIVITY_CREATE=0;
-    private static final int ACTIVITY_EDIT=1;
-
-    private static final int INSERT_ID = Menu.FIRST;
-    private static final int DELETE_ID = Menu.FIRST + 1;
-    private static final int EDIT_ID = Menu.FIRST + 2;
-*/
     //Adaptador de la base de datos
     private HotelDbAdapter mDbHelper;
 
