@@ -42,6 +42,12 @@ public class ConsultarReserva2 extends AppCompatActivity {
     /* Adaptador de la base de datos */
     private HotelDbAdapter mDbHelper;
 
+    /**
+     * 
+     * @param mDbHelper
+     * @param elementos
+     * @return
+     */
     private double calcularPrecio(HotelDbAdapter mDbHelper, List<Pair<Integer,Integer>> elementos){
         String precio, recargo;
         int ocup;

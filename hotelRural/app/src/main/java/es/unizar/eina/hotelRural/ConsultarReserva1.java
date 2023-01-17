@@ -32,7 +32,7 @@ public class ConsultarReserva1 extends AppCompatActivity {
 
     private Button btn_sig;
 
-    /* Adaptador de la base de datos */
+    // Adaptador de la base de datos
     private HotelDbAdapter mDbHelper;
 
     private EditText nombreEdit, telEdit, fentEdit, fsalEdit;
