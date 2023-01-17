@@ -2,57 +2,32 @@ package es.unizar.eina.hotelRural.fragments;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.crypto.AEADBadTagException;
-
 import es.unizar.eina.hotelRural.ConsultarHabitacion;
-import es.unizar.eina.hotelRural.HabitationsList;
-import es.unizar.eina.hotelRural.Home;
 import es.unizar.eina.hotelRural.HotelDbAdapter;
 import es.unizar.eina.hotelRural.ModificarHabitacion;
 import es.unizar.eina.hotelRural.R;
 
-/**
- * Clase que gestiona la lista de habitaciones ordenadas por id. Esta clase hereda
- * de la clase Fragment
- *
- *
- * @author Víctor Gallardo y Jaime Berruete
- */
+
 public class fragmentHab extends Fragment  {
     private HotelDbAdapter mDbHelper;
 
@@ -89,11 +64,7 @@ public class fragmentHab extends Fragment  {
 
 
 
-    /**
-     * Este método recupera la lista de habitaciones ordenadas por id y las prepara para ser mostradas
-     * en la actividad correspondiente.
-     *
-     */
+    /** Función que obtiene las habitaciones para mostrarlas en la lista */
     @SuppressLint("Range")
     private void fillData() {
 
@@ -130,7 +101,7 @@ public class fragmentHab extends Fragment  {
             layout = resource;
             habsString = (ArrayList<String>) objects;
         }
-        /**Método que se llama cuando se genera un elemento de la lista */
+
         @Override
         public View getView(int position,View convertView, ViewGroup parent){
             ViewHolder mainViewHolder = null;
@@ -144,7 +115,6 @@ public class fragmentHab extends Fragment  {
                 viewHolder.title.setText("Habitación "+ habsInt.get(position));
                 viewHolder.editButton = (ImageButton)convertView.findViewById(R.id.ButtonEdit);
                 viewHolder.deleteButton = (ImageButton)convertView.findViewById(R.id.ButtonDelete);
-                //Cuando se clicka el botón de editar se lanza la actividad de editar una hab.
                 viewHolder.editButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -153,11 +123,16 @@ public class fragmentHab extends Fragment  {
                         startActivity(i);
                     }
                 });
+                //PopupMenu popupBorrar = new PopupMenu(getActivity(),convertView);
+                //popupBorrar.setOnMenuItemClickListener((PopupMenu.OnMenuItemClickListener) getActivity());
+                //popupBorrar.inflate(R.layout.popup_borrarhab);
+
                 View finalConvertView = convertView;
                 viewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Se muestra un pop-up para confirmar el borrado
+                        //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        //AlertDialog dialog = builder.create();
                         Intent i = new Intent(getActivity(), adapterPopUp.class);
                         i.putExtra("idHab", habsInt.get(position));
                         startActivity(i);
@@ -181,9 +156,4 @@ public class fragmentHab extends Fragment  {
         ImageButton editButton;
         ImageButton deleteButton;
     }
-
-
-
-
-
 }

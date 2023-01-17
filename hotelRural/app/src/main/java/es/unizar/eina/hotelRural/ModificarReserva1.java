@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-/** Clase para la actividad crear habitacion
+/** Clase para la actividad modificar reserva
  * @author Víctor Gallardo y Jaime Berruete
  */
 public class ModificarReserva1 extends AppCompatActivity {
@@ -56,14 +56,14 @@ public class ModificarReserva1 extends AppCompatActivity {
         fechaEntradaEdit = (EditText)findViewById(R.id.fechaEntradaForm);
         fechaSalidaEdit = (EditText)findViewById(R.id.fechaSalidaForm);
 
-        //meter datos en cada casilla de texto
+        //meter datos en cada casillas de texto
         nombreEdit.setText(cursor.getString(cursor.getColumnIndex(RES_NOMBRE)));
         telefonoEdit.setText(cursor.getString(cursor.getColumnIndex(RES_MOVIL)));
         fechaEntradaEdit.setText(cursor.getString(cursor.getColumnIndex(RES_FENT)));
         fechaSalidaEdit.setText(cursor.getString(cursor.getColumnIndex(RES_FSAL)));
         id = cursor.getString(cursor.getColumnIndex(RES_ID));
 
-        /** Funcion que se activa cuando el botón de crear habitación se pulsa  */
+        /** Funcion que se activa cuando el botón de siguiente se pulsa  */
         btn_sig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +86,7 @@ public class ModificarReserva1 extends AppCompatActivity {
                     fechaSalida = fechaSalidaEdit.getText().toString();
                     boolean haIdoBien = mDbHelper.updateReserva(id, nombre, telefono, fechaEntrada, fechaSalida);
                     if (haIdoBien) {
-                        //esto tendrá que ir a ModificarReserva2
+                        //Se va a la pantalla de modificar reserva 2
                         Intent i = new Intent(getApplicationContext(), ModificarReserva2.class);
                         i.putExtra("idRes", idRes);
                         startActivity(i);

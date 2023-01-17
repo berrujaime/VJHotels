@@ -82,7 +82,7 @@ public class HotelDbAdapter {
         System.out.println("Entro a open");
         mDbHelper = new DatabaseHelper(mCtx);
         mDb = mDbHelper.getWritableDatabase();
-        mDb.execSQL("PRAGMA foreign_keys=ON;");
+        mDb.execSQL("PRAGMA foreign_keys=ON;"); //Para que reconozca claves foráneas
         System.out.println("Salgo de open");
         return this;
     }

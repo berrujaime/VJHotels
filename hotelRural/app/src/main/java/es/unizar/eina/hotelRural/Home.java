@@ -3,12 +3,10 @@ package es.unizar.eina.hotelRural;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /** Clase para la actividad de la pantalla de inicio
  * @author Víctor Gallardo y Jaime Berruete
@@ -49,7 +47,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(Home.this, HabitationsList.class);
+                Intent i = new Intent(Home.this, RoomsList.class);
                 startActivity(i);
             }
         });

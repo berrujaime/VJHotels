@@ -19,7 +19,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".HabitationsList"
+            android:name=".RoomsList"
             android:exported="false"
             android:label="@string/title_activity_tabs_hab"
             android:theme="@style/Theme.hotelRural.NoActionBar">
