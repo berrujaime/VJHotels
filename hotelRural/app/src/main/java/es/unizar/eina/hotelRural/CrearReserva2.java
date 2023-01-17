@@ -84,6 +84,7 @@ public class CrearReserva2 extends AppCompatActivity {
         fillData();
         HabsList.setAdapter(new CrearReserva2.MyListAdapter(this,R.layout.list_crearres,habsString));
 
+        /** Funcion que se activa cuando el botón de crear habitación se pulsa  */
         btn_crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,12 +119,7 @@ public class CrearReserva2 extends AppCompatActivity {
                 }
             }
         });
-
-        /** Funcion que se activa cuando el botón de crear habitación se pulsa  */
-
     }
-
-    ;
 
 
     /**
@@ -143,9 +139,9 @@ public class CrearReserva2 extends AppCompatActivity {
 
         habsString = new ArrayList<String>();
         habsOcup = new ArrayList<Integer>();
-        System.out.println("El numero de habitacioens disponibles es " + habsInt.size());
+        System.out.println("El numero de habitaciones disponibles es " + habsInt.size());
         for (int habitacion : habsInt) {
-            //Se muestra la palabra habitacion junto al id de la misma
+            //Se muestra la palabra Habitación junto al id de la misma
             habsString.add("Habitación " + String.valueOf(habitacion));
             //Se obtiene los ocupantes de cada habitación para usarlos mas tarde en el spinner.
 
@@ -160,7 +156,7 @@ public class CrearReserva2 extends AppCompatActivity {
 
     }
 
-
+    
     private class MyListAdapter extends ArrayAdapter<String> {
         private int layout;
         private ArrayList<String> habsString;
@@ -231,11 +227,6 @@ public class CrearReserva2 extends AppCompatActivity {
                     }
                 });
 
-
-
-
-
-
                 convertView.setTag(viewHolder);
             } else {
                 mainViewHolder = (CrearReserva2.ViewHolder) convertView.getTag();
@@ -245,7 +236,6 @@ public class CrearReserva2 extends AppCompatActivity {
         }
 
     }
-
 
     public class ViewHolder {
         TextView title;

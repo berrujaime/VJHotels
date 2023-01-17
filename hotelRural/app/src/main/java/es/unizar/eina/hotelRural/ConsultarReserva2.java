@@ -43,10 +43,12 @@ public class ConsultarReserva2 extends AppCompatActivity {
     private HotelDbAdapter mDbHelper;
 
     /**
-     * 
-     * @param mDbHelper
-     * @param elementos
-     * @return
+     * Función que calcula el precio de una reserva para mostrarlo en la pantalla.
+     *
+     * @param mDbHelper adaptador para conexión con la base de datos de la clase HotelDbAdapter
+     * @param elementos lista de pares de enteros que representan [id de la habitación,ocupantes]
+     *
+     * @return precio total de la reserva en euros con decimales
      */
     private double calcularPrecio(HotelDbAdapter mDbHelper, List<Pair<Integer,Integer>> elementos){
         String precio, recargo;
@@ -83,7 +85,9 @@ public class ConsultarReserva2 extends AppCompatActivity {
         btn_mensaje = findViewById(R.id.btnMensaje);
 
         ListView listView = findViewById(R.id.listaHabitaciones);
-        //aquí habría que pasarle la reserva que se haya pulsado, ponemos la 1 para probar
+
+        //Se obtiene el identificador de la reserva que se está consultando
+
         Bundle extras = getIntent().getExtras();
         int idRes = extras.getInt("idRes");
         List<Pair<Integer,Integer>> elementos = mDbHelper.fetchHabitacionesReservadas(String.valueOf(idRes));
@@ -100,7 +104,7 @@ public class ConsultarReserva2 extends AppCompatActivity {
             mostrar.add(hab.concat(" - ").concat(ocupantes.get(i)));
             i++;
         }
-        //recoger datos de la base de datos
+        //Recoger datos de la base de datos
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mostrar);
         listView.setAdapter(adapter);
         precio = calcularPrecio(mDbHelper, elementos);
@@ -116,13 +120,14 @@ public class ConsultarReserva2 extends AppCompatActivity {
 
                 Bundle extras = getIntent().getExtras();
                 int idRes = extras.getInt("idRes");
-                Cursor cursor = mDbHelper.fetchReserva(idRes); //se piden siempre los de la 1 para ver si funciona
+                Cursor cursor = mDbHelper.fetchReserva(idRes);
                 cursor.moveToFirst();
                 nombre = cursor.getString(cursor.getColumnIndex(RES_NOMBRE));
                 fent = cursor.getString(cursor.getColumnIndex(RES_FENT));
                 fsal = cursor.getString(cursor.getColumnIndex(RES_FSAL));
                 telefono = cursor.getString(cursor.getColumnIndex(RES_MOVIL));
 
+                //Definimos el mensaje que se va a enviar
                 datos = "Hola, " + nombre + ". Su reserva con entrada el día " + fent + " y salida el día " +
                         fsal + " tiene un precio de " + String.format("%.2f", precio) + "€." + " Deseamos que pase una agradable estancia en VJHotels.";
 
@@ -135,7 +140,7 @@ public class ConsultarReserva2 extends AppCompatActivity {
         btn_salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //esto tendrá que llevar a ListaReservas
+                //Lleva al usuario a la pantalla Home
                 Intent i = new Intent(getApplicationContext(), Home.class);
                 startActivity(i);
             }
