@@ -31,7 +31,7 @@ import es.unizar.eina.hotelRural.fragments.adapterPopUp;
 import es.unizar.eina.hotelRural.fragments.fragmentHab;
 import es.unizar.eina.hotelRural.ui.main.ComprobarSolapes;
 
-/** Clase para la actividad crear habitacion
+/** Clase para la actividad crear reserva 2
  * @author Víctor Gallardo y Jaime Berruete
  */
 public class CrearReserva2 extends AppCompatActivity {

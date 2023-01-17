@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-/** Clase para la actividad modificar reserva
+/** Clase para la actividad modificar reserva 1
  * @author Víctor Gallardo y Jaime Berruete
  */
 public class ModificarReserva1 extends AppCompatActivity {

@@ -9,7 +9,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-/** Clase para la actividad crear habitacion
+/** Clase para la actividad de la primera pantalla de crear reserva
  * @author Víctor Gallardo y Jaime Berruete
  */
 public class CrearReserva1 extends AppCompatActivity {

@@ -19,7 +19,7 @@ import es.unizar.eina.send.SMSImplementor;
 import es.unizar.eina.send.SendAbstraction;
 import es.unizar.eina.send.SendAbstractionImpl;
 import es.unizar.eina.hotelRural.ui.main.ComprobarSolapes;
-/** Clase para la actividad consultar habitacion
+/** Clase para la actividad consultar reserva 2
  * @author Víctor Gallardo y Jaime Berruete
  */
 public class ConsultarReserva2 extends AppCompatActivity {
