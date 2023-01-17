@@ -28,7 +28,13 @@ import es.unizar.eina.hotelRural.ModificarHabitacion;
 import es.unizar.eina.hotelRural.ModificarReserva1;
 import es.unizar.eina.hotelRural.R;
 
-
+/**
+ * Clase que configura cada fila de la lista y muestra las reservas. Permite clickar los botones tanto de editar como
+ * de borrar y realiza las acciones correspondientes a estos.
+ *
+ *
+ * @author Víctor Gallardo y Jaime Berruete
+ */
 public class fragmentRes extends Fragment  {
     private HotelDbAdapter mDbHelper;
 
@@ -109,7 +115,14 @@ public class fragmentRes extends Fragment  {
 
 
     }
-
+    /**
+     * Clase que configura cada fila de la lista y muestra la fila de la reserva correspondiente.
+     *  Permite clickar los botones tanto de editar como
+     * de borrar y realiza las acciones correspondientes a estos.
+     *
+     *
+     * @author Víctor Gallardo y Jaime Berruete
+     */
     private class MyListAdapter extends ArrayAdapter<String> {
         private int layout;
         private ArrayList<String> resString;
@@ -140,16 +153,11 @@ public class fragmentRes extends Fragment  {
                         startActivity(i);
                     }
                 });
-                //PopupMenu popupBorrar = new PopupMenu(getActivity(),convertView);
-                //popupBorrar.setOnMenuItemClickListener((PopupMenu.OnMenuItemClickListener) getActivity());
-                //popupBorrar.inflate(R.layout.popup_borrarhab);
 
                 View finalConvertView = convertView;
                 viewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        //AlertDialog dialog = builder.create();
                         Intent i = new Intent(getActivity(), adapterPopUpRes.class);
                         i.putExtra("idRes", resInt.get(position));
                         startActivity(i);
