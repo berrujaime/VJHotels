@@ -68,6 +68,10 @@ public class ConsultarReserva1 extends AppCompatActivity {
         btn_sig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
+                Lleva al usuario a la pantalla ConsultarReserva2 pasándole el id de la reserva
+                consultada
+                */
                 Intent i = new Intent(getApplicationContext(), ConsultarReserva2.class);
                 i.putExtra("idRes",idRes);
                 startActivity(i);

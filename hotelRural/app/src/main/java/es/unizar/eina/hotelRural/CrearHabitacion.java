@@ -43,7 +43,7 @@ public class CrearHabitacion extends AppCompatActivity {
 
         btn_crear = findViewById(R.id.crear);
 
-        /** Funcion que se activa cuando el botón de crear habitación se pulsa  */
+        /** Función que se activa cuando el botón de crear habitación se pulsa  */
         btn_crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +60,7 @@ public class CrearHabitacion extends AppCompatActivity {
                     System.out.println("Algun campo vacio");
                 }
                 else{
-                    //se crea la habitacion en la base de datos
+                    //se crea la habitación en la base de datos
                     id = Integer.parseInt(idEdit.getText().toString());
                     desc = descEdit.getText().toString();
                     porcentajeRecarga = Float.parseFloat(porcentajeEdit.getText().toString());
