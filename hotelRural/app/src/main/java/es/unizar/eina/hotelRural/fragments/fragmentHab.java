@@ -120,7 +120,7 @@ public class fragmentHab extends Fragment  {
      * de borrar y realiza las acciones correspondientes a estos.
      *
      *
-     * @author Víctor Gallardo y Jaime Berruete
+     * @author Víctor Gallardo y Jaime Berruete.
      */
     private class MyListAdapter extends ArrayAdapter<String> {
         private int layout;
