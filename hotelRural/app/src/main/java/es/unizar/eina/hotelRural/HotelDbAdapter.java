@@ -94,26 +94,8 @@ public class HotelDbAdapter {
         mDbHelper.close();
     }
 
-
     /**
-     * Create a new note using the title and body provided. If the note is
-     * successfully created return the new rowId for that note, otherwise return
-     * a -1 to indicate failure.
-     *
-     * @param title the title of the note
-     * @param body the body of the note
-     * @return rowId or -1 if failed
-     */
-    public long createNote(String title, String body) {
-        ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_TITLE, title);
-        initialValues.put(KEY_BODY, body);
-
-        return mDb.insert(DATABASE_TABLE, null, initialValues);
-    }
-
-    /**
-     * Crea una nueva habitación con los valores proprocionados. Si la habitación
+     * Función que crea una nueva habitación con los valores proprocionados. Si la habitación
      * se crea correctamente devuelve su rowId, en caso contrario devuelve un -1 indicando
      * que ha fallado.
      *
@@ -161,7 +143,7 @@ public class HotelDbAdapter {
     }
 
     /**
-     * Actualiza los parámetros de una Habitación en la base de datos. La habitación que se
+     * Función que actualiza los parámetros de una Habitación en la base de datos. La habitación que se
      * actualiza es la especificada utilizando el id (su clave primaria).
      *
      * @param id el id de la habitación
@@ -289,7 +271,8 @@ public class HotelDbAdapter {
     }
 
     /**
-     * Devuelve un cursor sobre una reserva dado su identificador
+     * Función que devuelve un cursor sobre una reserva dado su identificador
+     *
      * @param id identificador de la reserva
      *
      * @return Cursor sobre la reserva
@@ -299,7 +282,8 @@ public class HotelDbAdapter {
     }
 
     /**
-     * Devuelve un cursor sobre una habitación dado su identificador
+     * Función que devuelve un cursor sobre una habitación dado su identificador
+     *
      * @param id identificador de la habitación
      *
      * @return Cursor sobre la habitación
@@ -310,7 +294,8 @@ public class HotelDbAdapter {
     }
 
     /**
-     * Devuelve un cursor sobre la lista de habitación de la base de datos
+     * Función que devuelve un cursor sobre la lista de habitación de la base de datos
+     *
      * @param method indica el método a listar las habitaciones que puede ser:
      *               por id, por número máximo de ocupantes o por precio por ocupante.
      *
@@ -332,12 +317,12 @@ public class HotelDbAdapter {
     }
 
     /**
-     * Devuelve un cursor sobre la lista de habitación de la base de datos
-     * @param method indica el método a listar las habitaciones que puede ser:
-     *               por id, por número máximo de ocupantes o por precio por ocupante.
+     * Función para obtener una lista de habitaciones reservadas junto a sus ocupantes dado el
+     * identificador de una reserva.
      *
-     * @return Si el método de listar es uno de los permitidos devuelve un cursor sobre la lista
-     *               de habitaciones, en caso contrario devuelve null.
+     * @param id identificador de una reserva
+     *
+     * @return lista de pares de enteros que representan [id de la habitación,ocupantes]
      */
     public List<Pair<Integer, Integer>> fetchHabitacionesReservadas(String id) {
         List<Pair<Integer, Integer>> habitaciones = new ArrayList<>();
@@ -359,6 +344,14 @@ public class HotelDbAdapter {
         return habitaciones;
     }
 
+    /**
+     * Función para obtener una lista de reservas que tienen asociada una habitación en concreto.
+     *
+     * @param id identificador de una habitación
+     *
+     * @return lista de enteros que representan identificadores de reservas que tienen asociada
+     * a la habitación dada como el parámetro id
+     */
     public List<String> fetchResevasDeHabitacion(String id) {
         List<String> reservas = new ArrayList<>();
         // Especifica la consulta SQL
@@ -380,8 +373,15 @@ public class HotelDbAdapter {
 
 
 
-    //Metodo que devuelve un Cursor con los datos de las resevas del sistema. Los ordena según el
-    //campo method
+    /**
+     * Función que devuelve un cursor sobre la lista de reservas de la base de datos
+     *
+     * @param method indica el método a listar las habitaciones que puede ser:
+     *               por nombre del cliente, por teléfono móvil del ciente o por fecha de entrada.
+     *
+     * @return Si el método de listar es uno de los permitidos devuelve un cursor sobre la lista
+     *               de reservas, en caso contrario devuelve null.
+     */
     public Cursor fetchAllReservasBy(String method) {
         if(method == RES_NOMBRE){
             return mDb.query(DATABASE_RES, new String[] {RES_ID, RES_NOMBRE, RES_MOVIL, RES_FENT,
@@ -397,49 +397,12 @@ public class HotelDbAdapter {
     }
 
     /**
-     * Return a Cursor positioned at the note that matches the given rowId
+     * Función que borra una habitación de la base de datos.
      *
-     * @param rowId id of note to retrieve
-     * @return Cursor positioned to matching note, if found
-     * @throws SQLException if note could not be found/retrieved
-     */
-    public Cursor fetchNote(long rowId) throws SQLException {
-
-        Cursor mCursor =
-
-                mDb.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,
-                                KEY_TITLE, KEY_BODY}, KEY_ROWID + "=" + rowId, null,
-                        null, null, null, null);
-        if (mCursor != null) {
-            mCursor.moveToFirst();
-        }
-        return mCursor;
-
-    }
-
-    /**
-     * Update the note using the details provided. The note to be updated is
-     * specified using the rowId, and it is altered to use the title and body
-     * values passed in
+     * @param rowId identificador de la habitación
      *
-     * @param rowId id of note to update
-     * @param title value to set note title to
-     * @param body value to set note body to
-     * @return true if the note was successfully updated, false otherwise
+     * @return true si la ha eliminado, 0 si no se ha podido eliminar
      */
-    public boolean updateNote(long rowId, String title, String body) {
-        ContentValues args = new ContentValues();
-        args.put(KEY_TITLE, title);
-        args.put(KEY_BODY, body);
-
-        return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
-    }
-
-    public Cursor fetchAllNotes() {
-        return null;
-    }
-
-
     public boolean deleteHab(long rowId) {
 
         if(rowId <= 0 ){
@@ -451,7 +414,13 @@ public class HotelDbAdapter {
 
     }
 
-
+    /**
+     * Función que borra una reserva de la base de datos.
+     *
+     * @param rowId identificador de la reserva
+     *
+     * @return true si la ha eliminado, 0 si no se ha podido eliminar
+     */
     public boolean deleteRes(long rowId) {
 
         if(rowId <= 0 ){
@@ -462,7 +431,13 @@ public class HotelDbAdapter {
 
     }
 
-    //Borra las habitaciones asociadas a una reserva
+    /**
+     * Función que borra las habitaciones asociadas a una reserva
+     *
+     * @param rowId identificador de la reserva
+     *
+     * @return true si la ha eliminado, 0 si no se ha podido eliminar
+     */
     public boolean deleteHabsRes(long rowId) {
 
         if(rowId <= 0 ){
@@ -473,11 +448,18 @@ public class HotelDbAdapter {
 
     }
 
-    //Obtiene la ultima reserva creada
+    /**
+     * Función que busca la última reserva creada en la base de datos
+     *
+     * @return Cursor que apunta a la última reserva creada en la base de datos
+     */
     public Cursor fetchLastReserva() {
             return mDb.query(sequence_sqlite, new String[] {"seq"}, "name='Reserva'", null, null, null, null);
     }
 
+    /**
+     * Función que borra todas las tablas de la base de datos
+     */
     public void deleteAll(){
         mDb.delete(DATABASE_HAB_RES, null, null);
         mDb.delete(DATABASE_HAB, null, null);
