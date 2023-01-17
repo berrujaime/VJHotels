@@ -156,7 +156,7 @@ public class CrearReserva2 extends AppCompatActivity {
 
     }
 
-    
+
     private class MyListAdapter extends ArrayAdapter<String> {
         private int layout;
         private ArrayList<String> habsString;

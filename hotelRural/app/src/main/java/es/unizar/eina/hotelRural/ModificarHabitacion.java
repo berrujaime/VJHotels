@@ -106,7 +106,7 @@ public class ModificarHabitacion extends AppCompatActivity {
 
                         haIdoBien = mDbHelper.updateHabitacion(idAntes, id, desc, numMaxOcupantes, precioNoche, porcentajeRecarga);
                         if(haIdoBien){
-                            Intent i = new Intent(getApplicationContext(), HabitationsList.class);
+                            Intent i = new Intent(getApplicationContext(), RoomsList.class);
                             startActivity(i);
                         }
                         else{
@@ -114,7 +114,7 @@ public class ModificarHabitacion extends AppCompatActivity {
                         }
                     }
                     else{
-                        Intent i = new Intent(getApplicationContext(), HabitationsList.class);
+                        Intent i = new Intent(getApplicationContext(), RoomsList.class);
                         startActivity(i);
                     }
                 }

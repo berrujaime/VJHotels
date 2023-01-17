@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import es.unizar.eina.hotelRural.HabitationsList;
 import es.unizar.eina.hotelRural.HotelDbAdapter;
 import es.unizar.eina.hotelRural.R;
 import es.unizar.eina.hotelRural.ReservasList;

@@ -14,13 +14,15 @@ import android.view.View;
 import es.unizar.eina.hotelRural.ui.main.SectionsPagerAdapterRes;
 import es.unizar.eina.hotelRural.databinding.ActivityTabsResBinding;
 
+/** Clase para la actividad ReservasList
+ * En esta pantalla se muestra una lista de reservas que se puede ordenar por 3 opciones
+ * @author Víctor Gallardo y Jaime Berruete
+ */
 public class ReservasList extends AppCompatActivity{
 
     private ActivityTabsResBinding binding;
 
-
-
-
+    /** Método que se ejecuta al crearse la actividad */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +37,10 @@ public class ReservasList extends AppCompatActivity{
         tabs.setupWithViewPager(viewPager);
         MaterialButton fab = binding.fab;
 
+        /** Método que se ejecuta al pulsar el botón de crear reserva */
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //      .setAction("Action", null).show();
                 Intent i = new Intent(getApplicationContext(), CrearReserva1.class);
                 startActivity(i);
             }

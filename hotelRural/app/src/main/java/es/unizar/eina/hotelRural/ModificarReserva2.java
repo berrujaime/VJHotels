@@ -29,7 +29,7 @@ import java.util.Map;
 
 import es.unizar.eina.hotelRural.ui.main.ComprobarSolapes;
 
-/** Clase para la actividad crear habitacion
+/** Clase para la actividad modificar reserva 2
  * @author Víctor Gallardo y Jaime Berruete
  */
 public class ModificarReserva2 extends AppCompatActivity {
@@ -124,9 +124,6 @@ public class ModificarReserva2 extends AppCompatActivity {
         /** Funcion que se activa cuando el botón de crear habitación se pulsa  */
 
     }
-
-    ;
-
 
     /**
      * Función que obtiene las habitaciones para mostrarlas en la lista

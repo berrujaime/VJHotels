@@ -16,10 +16,15 @@ import es.unizar.eina.hotelRural.ui.main.PlaceholderFragment;
 import es.unizar.eina.hotelRural.ui.main.SectionsPagerAdapter;
 import es.unizar.eina.hotelRural.databinding.ActivityTabsHabBinding;
 
-public class HabitationsList extends AppCompatActivity{
+/** Clase para la actividad RoomsList
+ * En esta pantalla se muestra una lista de habitaciones que se puede ordenar por 3 opciones
+ * @author Víctor Gallardo y Jaime Berruete
+ */
+public class RoomsList extends AppCompatActivity{
 
     private ActivityTabsHabBinding binding;
 
+    /** Método que se ejecuta al crearse la actividad */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +39,10 @@ public class HabitationsList extends AppCompatActivity{
         tabs.setupWithViewPager(viewPager);
         MaterialButton fab = binding.fab;
 
+        /** Método que se ejecuta al pulsar el botón de crear habitación */
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                  //      .setAction("Action", null).show();
                 Intent i = new Intent(getApplicationContext(),CrearHabitacion.class);
                 startActivity(i);
             }
