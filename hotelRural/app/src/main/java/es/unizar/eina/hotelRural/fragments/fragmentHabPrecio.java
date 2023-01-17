@@ -45,7 +45,13 @@ import es.unizar.eina.hotelRural.HotelDbAdapter;
 import es.unizar.eina.hotelRural.ModificarHabitacion;
 import es.unizar.eina.hotelRural.R;
 
-
+/**
+ * Clase que gestiona la lista de habitaciones ordenadas por precio. Esta clase hereda
+ * de la clase Fragment
+ *
+ *
+ * @author Víctor Gallardo y Jaime Berruete
+ */
 public class fragmentHabPrecio extends Fragment  {
     private HotelDbAdapter mDbHelper;
 
@@ -82,7 +88,11 @@ public class fragmentHabPrecio extends Fragment  {
 
 
 
-    /** Función que obtiene las habitaciones para mostrarlas en la lista */
+    /**
+     * Este método recupera la lista de habitaciones ordenadas por precio y las prepara para ser mostradas
+     * en la actividad correspondiente.
+     *
+     */
     @SuppressLint("Range")
     private void fillData() {
 

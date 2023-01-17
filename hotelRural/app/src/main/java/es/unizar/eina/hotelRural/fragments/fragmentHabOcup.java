@@ -45,7 +45,13 @@ import es.unizar.eina.hotelRural.HotelDbAdapter;
 import es.unizar.eina.hotelRural.ModificarHabitacion;
 import es.unizar.eina.hotelRural.R;
 
-
+/**
+ * Clase que gestiona la lista de habitaciones ordenadas por numocupantes. Esta clase hereda
+ * de la clase Fragment
+ *
+ *
+ * @author Víctor Gallardo y Jaime Berruete
+ */
 public class fragmentHabOcup extends Fragment  {
     private HotelDbAdapter mDbHelper;
 
@@ -82,7 +88,11 @@ public class fragmentHabOcup extends Fragment  {
 
 
 
-    /** Función que obtiene las habitaciones para mostrarlas en la lista */
+    /**
+     * Este método recupera la lista de habitaciones ordenadas por numocupantes y las prepara para ser mostradas
+     * en la actividad correspondiente.
+     *
+     */
     @SuppressLint("Range")
     private void fillData() {
 
@@ -111,6 +121,13 @@ public class fragmentHabOcup extends Fragment  {
 
     }
 
+    /**
+     * Clase que configura cada fila de la lista y muestra las habitaciones. Permite clickar los botones tanto de editar como
+     * de borrar y realiza las acciones correspondientes a estos.
+     *
+     *
+     * @author Víctor Gallardo y Jaime Berruete
+     */
     private class MyListAdapter extends ArrayAdapter<String> {
         private int layout;
         private ArrayList<String> habsString;
@@ -141,16 +158,11 @@ public class fragmentHabOcup extends Fragment  {
                         startActivity(i);
                     }
                 });
-                //PopupMenu popupBorrar = new PopupMenu(getActivity(),convertView);
-                //popupBorrar.setOnMenuItemClickListener((PopupMenu.OnMenuItemClickListener) getActivity());
-                //popupBorrar.inflate(R.layout.popup_borrarhab);
 
                 View finalConvertView = convertView;
                 viewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        //AlertDialog dialog = builder.create();
                         Intent i = new Intent(getActivity(), adapterPopUp.class);
                         i.putExtra("idHab", habsInt.get(position));
                         startActivity(i);

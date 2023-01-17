@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -45,7 +46,13 @@ import es.unizar.eina.hotelRural.HotelDbAdapter;
 import es.unizar.eina.hotelRural.ModificarHabitacion;
 import es.unizar.eina.hotelRural.R;
 
-
+/**
+ * Clase que gestiona la lista de habitaciones ordenadas por id. Esta clase hereda
+ * de la clase Fragment
+ *
+ *
+ * @author Víctor Gallardo y Jaime Berruete
+ */
 public class fragmentHab extends Fragment  {
     private HotelDbAdapter mDbHelper;
 
@@ -82,7 +89,11 @@ public class fragmentHab extends Fragment  {
 
 
 
-    /** Función que obtiene las habitaciones para mostrarlas en la lista */
+    /**
+     * Este método recupera la lista de habitaciones ordenadas por id y las prepara para ser mostradas
+     * en la actividad correspondiente.
+     *
+     */
     @SuppressLint("Range")
     private void fillData() {
 
@@ -104,7 +115,13 @@ public class fragmentHab extends Fragment  {
         HabsList.setAdapter(adapter);
 
     }
-    //Clase para hacer los botones de cada fila de la lista clickables
+    /**
+     * Clase que configura cada fila de la lista y muestra las habitaciones. Permite clickar los botones tanto de editar como
+     * de borrar y realiza las acciones correspondientes a estos.
+     *
+     *
+     * @author Víctor Gallardo y Jaime Berruete
+     */
     private class MyListAdapter extends ArrayAdapter<String> {
         private int layout;
         private ArrayList<String> habsString;
@@ -113,7 +130,7 @@ public class fragmentHab extends Fragment  {
             layout = resource;
             habsString = (ArrayList<String>) objects;
         }
-
+        /**Método que se llama cuando se genera un elemento de la lista */
         @Override
         public View getView(int position,View convertView, ViewGroup parent){
             ViewHolder mainViewHolder = null;
@@ -127,6 +144,7 @@ public class fragmentHab extends Fragment  {
                 viewHolder.title.setText("Habitación "+ habsInt.get(position));
                 viewHolder.editButton = (ImageButton)convertView.findViewById(R.id.ButtonEdit);
                 viewHolder.deleteButton = (ImageButton)convertView.findViewById(R.id.ButtonDelete);
+                //Cuando se clicka el botón de editar se lanza la actividad de editar una hab.
                 viewHolder.editButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -135,16 +153,11 @@ public class fragmentHab extends Fragment  {
                         startActivity(i);
                     }
                 });
-                //PopupMenu popupBorrar = new PopupMenu(getActivity(),convertView);
-                //popupBorrar.setOnMenuItemClickListener((PopupMenu.OnMenuItemClickListener) getActivity());
-                //popupBorrar.inflate(R.layout.popup_borrarhab);
-
                 View finalConvertView = convertView;
                 viewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        //AlertDialog dialog = builder.create();
+                        //Se muestra un pop-up para confirmar el borrado
                         Intent i = new Intent(getActivity(), adapterPopUp.class);
                         i.putExtra("idHab", habsInt.get(position));
                         startActivity(i);
